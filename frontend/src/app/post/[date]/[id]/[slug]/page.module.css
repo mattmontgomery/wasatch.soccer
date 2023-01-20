@@ -1,0 +1,108 @@
+.main {
+    margin: auto;
+    display: grid;
+    background: white;
+    grid-template-columns: auto 300px;
+    max-width: 72rem;
+    column-gap: 2rem;
+}
+.post, .rightRail {
+    padding: 1rem;
+}
+.post {
+    padding: 1rem;
+}
+.rightRail {
+    height: 100%;
+}
+.rightRail h3 {
+    margin-bottom: 1rem;
+    background: var(--theme-primary);
+    padding: .5rem;
+    text-align: right;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.section {
+    max-width: 48rem;
+    display: grid;
+    row-gap: 1rem;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.body {
+    font-size: 115%;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+.body a {
+    color: var(--theme-primary);
+}
+.body h1, .body h2, .body h3, .body h4, .body h5, .body h6 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.body ul, .body ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+.body p {
+    margin-bottom: 1rem;
+}
+.headline {
+    font-size: 24pt;
+    font-weight: bold;
+}
+.summary {
+    font-size: 14pt;
+    font-style: italic;
+}
+.leadPhoto {
+    max-width: 100%;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+.date {
+    color: #555;
+}
+.details > span {
+    margin-right: .5rem;
+    padding-right: .5rem;
+    border-right: 1px solid #555;
+}
+.details > span:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+.postCard {
+    display: grid;
+    row-gap: .5rem;
+}
+.postCardImage {
+    position: relative;
+    height: 150px;
+}
+.postCardImage img {
+    object-fit: cover;
+}
+.postCard .postCardHeadline {
+    font-weight: bold;
+}
+.posts {
+    display: grid;
+    row-gap: 1.5rem;
+}
+.embed {
+    margin-bottom: 1rem;
+}
+.embed blockquote {
+    font-size: 90%;
+}
+.body blockquote {
+    border-left: 4px solid var(--theme-primary);
+    padding-left: 1rem;
+}
