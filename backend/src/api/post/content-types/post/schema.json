@@ -53,6 +53,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group"
+    },
+    "published": {
+      "type": "datetime"
     }
   }
 }

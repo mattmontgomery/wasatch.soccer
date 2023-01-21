@@ -48,7 +48,10 @@ export function getPhoto(
 }
 
 export function getPathname(post: App.Post): string {
-  const date = format(new Date(post.attributes.publishedAt), "yyyy-mm-dd");
+  const date = format(
+    new Date(post.attributes.published ?? post.attributes.publishedAt),
+    "yyyy-MM-dd"
+  );
   return `/post/${date}/${post.id}/${post.attributes.slug}`;
 }
 
