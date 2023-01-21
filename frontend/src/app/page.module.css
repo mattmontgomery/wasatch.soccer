@@ -58,6 +58,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: RGBA(0,0,0,.75);
+  background-color: RGBA(210,10,20,.75);
+  color: white;
   padding: .5rem 1rem;
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Alexandria } from "@next/font/google";
 import styles from "./page.module.css";
 import { getPathname, getPhoto, getPhotoPath, getPosts } from "./util/api";
 import Link from "next/link";
