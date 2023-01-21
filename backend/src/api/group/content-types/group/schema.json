@@ -22,6 +22,18 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "groups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group",
+      "mappedBy": "group"
+    },
+    "group": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::group.group",
+      "inversedBy": "groups"
     }
   }
 }

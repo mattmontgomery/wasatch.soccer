@@ -5,7 +5,7 @@ import styles from "./layout.module.css";
 
 const headlineFont = Alexandria({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["800"],
   variable: "--headline-font",
 });
 export default function RootLayout({
