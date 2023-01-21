@@ -56,5 +56,5 @@ export function getPathname(post: App.Post): string {
 }
 
 export function getPhotoPath(path: string) {
-  return `http://localhost:1337${path}`;
+  return path;
 }

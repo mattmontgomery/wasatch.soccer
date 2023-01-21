@@ -7,7 +7,7 @@ const nextConfig = {
     apiBase: "http://localhost:1337/api",
   },
   images: {
-    domains: ["localhost"],
+    domains: ["utah-soccer-blog.s3.us-west-1.amazonaws.com"],
   },
 };
 
