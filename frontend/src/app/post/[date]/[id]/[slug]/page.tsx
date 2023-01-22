@@ -1,10 +1,15 @@
-import postStyles from "./page.module.css";
+import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+
 import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { Redirect } from "./Redirect";
-import ReactMarkdown from "react-markdown";
 import { Embed } from "./Embed";
-import Published from "@/app/components/Published";
+import Published from "@/app/components/Post/Published";
+
+import postStyles from "./postPage.module.css";
+import textStyles from "@/app/text.module.css";
+import Authors from "@/app/components/Post/Author";
+
 export default async function PostPage({
   params: { id, slug },
 }: {
@@ -15,7 +20,7 @@ export default async function PostPage({
   const authors = getAuthors(data);
   const primaryGroup = data.attributes.primaryGroup?.data ?? null;
   return (
-    <main>
+    <section>
       <Redirect slugFromPath={slug} post={data} />
       <section className={postStyles.section}>
         {primaryGroup && (
@@ -27,7 +32,9 @@ export default async function PostPage({
         <p className={postStyles.summary}>{data.attributes.summary}</p>
         <p className={postStyles.details}>
           {authors.length ? (
-            <span className={postStyles.byline}>By {authors.join(", ")}</span>
+            <span className={postStyles.author}>
+              <Authors {...data} />
+            </span>
           ) : (
             <></>
           )}
@@ -35,8 +42,6 @@ export default async function PostPage({
             <Published {...data} />
           </span>
         </p>
-      </section>
-      <section className={postStyles.section}>
         {leadPhoto && (
           <div>
             <div className={postStyles.leadPhoto}>
@@ -52,7 +57,7 @@ export default async function PostPage({
             </div>
           </div>
         )}
-        <div className={postStyles.body}>
+        <div className={textStyles.body}>
           <ReactMarkdown
             components={{
               p({ node, children }) {
@@ -68,7 +73,7 @@ export default async function PostPage({
           </ReactMarkdown>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
 

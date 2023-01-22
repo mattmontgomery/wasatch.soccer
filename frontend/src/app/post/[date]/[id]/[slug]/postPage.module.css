@@ -1,9 +1,6 @@
 .main {
-    margin: auto;
     display: grid;
     grid-template-columns: auto 300px;
-    max-width: 72rem;
-    column-gap: 2rem;
 }
 .post, .rightRail {
     padding: 1rem;
@@ -30,28 +27,8 @@
     margin: auto;
     margin-bottom: 1rem;
 }
-.body {
-    font-size: 115%;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-.body a {
-    color: var(--theme-primary);
-}
-.body h1, .body h2, .body h3, .body h4, .body h5, .body h6 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-.body ul, .body ol {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-}
-.body p {
-    margin-bottom: 1rem;
-}
 .headline {
-    font-size: 36pt;
+    font-size: 48pt;
     font-weight: 900;
 }
 .summary {

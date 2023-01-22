@@ -2,16 +2,36 @@ import qs from "qs";
 import format from "date-fns/format";
 
 export async function getPosts({
-  sort = [],
+  sort = ["published:desc", "publishedAt:desc"],
   pagination = {},
-}: { sort?: string[]; pagination?: { pageSize?: number } } = {}): Promise<{
+  filters = {},
+}: {
+  sort?: string[];
+  pagination?: { pageSize?: number };
+  filters?: {
+    authors?: {
+      id: {
+        $eq: number;
+      };
+      slug: {
+        $eq: string;
+      };
+    };
+  };
+} = {}): Promise<{
   data: App.Post[];
 }> {
-  const queryString = qs.stringify({
-    populate: "*",
-    pagination,
-    sort,
-  });
+  const queryString = qs.stringify(
+    {
+      populate: "*",
+      pagination,
+      sort,
+      filters,
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
   const res = await fetch(`http://localhost:1337/api/posts?${queryString}`, {
     method: "GET",
     cache: "no-store",
@@ -57,4 +77,16 @@ export function getPathname(post: App.Post): string {
 
 export function getPhotoPath(path: string) {
   return path;
+}
+
+export async function getAuthor(
+  authorId: number
+): Promise<{ data: App.Author }> {
+  const res = await fetch(`http://localhost:1337/api/authors/${authorId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  return res.json();
 }

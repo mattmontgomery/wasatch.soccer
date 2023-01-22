@@ -1,5 +1,6 @@
 import { getPosts } from "@/app/util/api";
-import styles from "./page.module.css";
+import pageStyles from "@/app/page.module.css";
+import styles from "./postPage.module.css";
 import Posts from "./Posts";
 
 export default async function PostLayout({
@@ -12,12 +13,12 @@ export default async function PostLayout({
     pagination: { pageSize: 5 },
   });
   return (
-    <section className={styles.main}>
+    <main className={`${styles.main} ${pageStyles.main}`}>
       <div className={styles.post}>{children}</div>
       <div className={styles.rightRail}>
         <h3>Latest News</h3>
         <Posts posts={posts.data} />
       </div>
-    </section>
+    </main>
   );
 }

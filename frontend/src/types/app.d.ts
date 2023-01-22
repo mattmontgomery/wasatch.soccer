@@ -12,7 +12,10 @@ declare namespace App {
       body: string;
       leadPhoto: {
         data: {
-          attributes: { formats: Record<string, Photo>; caption: string };
+          attributes: {
+            formats: Record<string, Photo>;
+            caption: string;
+          };
         };
       };
       groups: {
@@ -32,14 +35,7 @@ declare namespace App {
         };
       };
       authors: {
-        data: {
-          id: number;
-          attributes: {
-            name: string;
-            createdAt: string;
-            updatedAt: string;
-          };
-        }[];
+        data: Author[];
       };
     };
   };
@@ -47,5 +43,21 @@ declare namespace App {
     height: number;
     width: number;
     url: string;
+  };
+  type Author = {
+    id: number;
+    attributes: {
+      name: string;
+      slug: string;
+      bio: string;
+      photo: {
+        attributes: {
+          formats: Record<string, Photo>;
+          caption: string;
+        };
+      };
+      createdAt: string;
+      updatedAt: string;
+    };
   };
 }

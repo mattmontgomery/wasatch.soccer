@@ -1,0 +1,32 @@
+.body {
+    font-size: 115%;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.body a {
+    color: var(--theme-primary);
+}
+
+.body h1,
+.body h2,
+.body h3,
+.body h4,
+.body h5,
+.body h6 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: var(--theme-primary);
+    font-size: 150%;
+}
+
+.body ul,
+.body ol {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+.body p {
+    margin-bottom: 1rem;
+}

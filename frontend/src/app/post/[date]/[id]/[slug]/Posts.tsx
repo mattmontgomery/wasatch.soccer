@@ -2,9 +2,9 @@
 import { getPathname, getPhoto, getPhotoPath, getPosts } from "@/app/util/api";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
-import styles from "./page.module.css";
+import styles from "./postPage.module.css";
 
 export default function Posts({
   posts,

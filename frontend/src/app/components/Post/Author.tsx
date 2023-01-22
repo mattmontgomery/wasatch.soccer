@@ -7,7 +7,10 @@ export default function Authors(props: App.Post) {
     <>
       By{" "}
       {authors.map((author, idx) => (
-        <Link href={`/authors/${author.id}`} key={idx}>
+        <Link
+          href={`/authors/${author.id}/${author.attributes.slug}`}
+          key={idx}
+        >
           {author.attributes.name}
         </Link>
       ))}
