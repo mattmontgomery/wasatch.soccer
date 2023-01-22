@@ -2,8 +2,8 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 
 import { getPhoto, getPhotoPath, getPost, getPosts } from "@/app/util/api";
-import { Redirect } from "./Redirect";
-import { Embed } from "./Embed";
+// import { Redirect } from "./Redirect";
+// import { Embed } from "./Embed";
 import Published from "@/app/components/Post/Published";
 
 import postStyles from "./postPage.module.css";
@@ -83,11 +83,11 @@ export default async function PostPage({
             <ReactMarkdown
               components={{
                 p({ node, children }) {
-                  if (children?.[0]?.toString().startsWith("https://")) {
-                    return <Embed url={children[0].toString()} />;
-                  } else {
-                    return <p>{children}</p>;
-                  }
+                  // if (children?.[0]?.toString().startsWith("https://")) {
+                  //   return <Embed url={children[0].toString()} />;
+                  // } else {
+                  return <p>{children}</p>;
+                  // }
                 },
               }}
             >
