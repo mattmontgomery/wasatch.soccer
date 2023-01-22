@@ -34,7 +34,7 @@ export default async function PostPage({
   return (
     <>
       <section className={postStyles.post}>
-        <Redirect slugFromPath={slug} post={data} />
+        {/* <Redirect slugFromPath={slug} post={data} /> */}
         <section className={postStyles.section}>
           <div>
             {primaryGroup && (
