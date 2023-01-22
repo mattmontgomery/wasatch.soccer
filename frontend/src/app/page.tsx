@@ -9,7 +9,7 @@ export default async function Home() {
   });
   return (
     <main className={`${styles.main}`}>
-      <Posts posts={posts.data ?? []} />
+      <Posts posts={posts.data ?? []} heroSlots={[0]} />
     </main>
   );
 }

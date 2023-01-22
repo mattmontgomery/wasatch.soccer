@@ -5,11 +5,11 @@ import Authors from "@/app/components/Post/Author";
 import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
 
-export function Post(props: App.Post) {
+export function Post(props: App.Post & { hero?: boolean }) {
   const photo = getPhoto(props, "medium");
   const primaryGroup = props.attributes.primaryGroup?.data ?? null;
   return (
-    <div className={styles.post}>
+    <div className={`${styles.post} ${props.hero ? styles.postHero : ""}`}>
       <Link
         href={getPathname(props)}
         className={photo ? styles.image : styles.noImage}
@@ -46,11 +46,17 @@ export function Post(props: App.Post) {
   );
 }
 
-export function Posts({ posts }: { posts: App.Post[] }) {
+export function Posts({
+  posts,
+  heroSlots = [],
+}: {
+  posts: App.Post[];
+  heroSlots?: number[];
+}) {
   return (
     <section className={styles.posts}>
       {posts?.map((post, idx) => (
-        <Post {...post} key={idx} />
+        <Post {...post} hero={heroSlots?.includes(idx)} key={idx} />
       ))}
     </section>
   );
