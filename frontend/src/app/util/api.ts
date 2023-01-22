@@ -11,6 +11,11 @@ export async function getPosts({
   sort?: string[];
   pagination?: { pageSize?: number };
   filters?: {
+    id?:
+      | {
+          $ne?: number;
+        }
+      | { $eq?: number };
     authors?: {
       id: {
         $eq: number;

@@ -11,14 +11,11 @@ export default function Posts({
 }: {
   posts: App.Post[];
 }): React.ReactElement {
-  const pathname = usePathname();
   return (
     <div className={styles.posts}>
-      {posts
-        ?.filter((post) => getPathname(post) !== pathname)
-        .map((post, idx) => (
-          <Post {...post} key={idx} />
-        ))}
+      {posts.map((post, idx) => (
+        <Post {...post} key={idx} />
+      ))}
     </div>
   );
 }
