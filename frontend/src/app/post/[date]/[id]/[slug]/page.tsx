@@ -93,3 +93,5 @@ function getAuthors(data: App.Post): string[] {
     data.attributes.authors?.data.map((author) => author.attributes.name) ?? []
   );
 }
+
+export const dynamic = "force-static";
