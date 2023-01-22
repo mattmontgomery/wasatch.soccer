@@ -6,7 +6,7 @@ import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
 
 export function Post(props: App.Post & { hero?: boolean }) {
-  const photo = getPhoto(props, "medium");
+  const photo = getPhoto(props, props.hero ? "large" : "medium");
   const primaryGroup = props.attributes.primaryGroup?.data ?? null;
   return (
     <div className={`${styles.post} ${props.hero ? styles.postHero : ""}`}>

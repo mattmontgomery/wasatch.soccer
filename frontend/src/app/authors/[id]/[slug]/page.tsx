@@ -6,7 +6,6 @@ import { getAuthor, getPosts } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
-import authorStyles from "./authorPage.module.css";
 
 export default async function AuthorsPage({
   params: { id, slug },
