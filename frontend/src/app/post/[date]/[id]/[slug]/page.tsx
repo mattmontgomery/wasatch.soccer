@@ -9,6 +9,7 @@ import Published from "@/app/components/Post/Published";
 import postStyles from "./postPage.module.css";
 import textStyles from "@/app/text.module.css";
 import Authors from "@/app/components/Post/Author";
+import Groups from "@/app/components/Post/Groups";
 
 export default async function PostPage({
   params: { id, slug },
@@ -18,17 +19,20 @@ export default async function PostPage({
   const { data } = await getPost(id);
   const leadPhoto = getPhoto(data);
   const authors = getAuthors(data);
+  const groups = data.attributes.groups?.data;
   const primaryGroup = data.attributes.primaryGroup?.data ?? null;
   return (
     <section>
       <Redirect slugFromPath={slug} post={data} />
       <section className={postStyles.section}>
-        {primaryGroup && (
-          <h5 className={postStyles.headline}>
-            {data.attributes.primaryGroup.data.attributes.name}
-          </h5>
-        )}
-        <h2 className={postStyles.headline}>{data.attributes.headline}</h2>
+        <div>
+          {primaryGroup && (
+            <h5 className={postStyles.groupTag}>
+              {data.attributes.primaryGroup.data.attributes.name}
+            </h5>
+          )}
+          <h2 className={postStyles.headline}>{data.attributes.headline}</h2>
+        </div>
         <p className={postStyles.summary}>{data.attributes.summary}</p>
         <p className={postStyles.details}>
           {authors.length ? (
@@ -41,6 +45,13 @@ export default async function PostPage({
           <span className={postStyles.date}>
             <Published {...data} />
           </span>
+          {groups.length ? (
+            <span className={postStyles.groups}>
+              <Groups {...data} />
+            </span>
+          ) : (
+            <></>
+          )}
         </p>
         {leadPhoto && (
           <div>

@@ -5,15 +5,17 @@ export default function Authors(props: App.Post) {
 
   return authors.length ? (
     <>
-      By{" "}
-      {authors.map((author, idx) => (
-        <Link
-          href={`/authors/${author.id}/${author.attributes.slug}`}
-          key={idx}
-        >
-          {author.attributes.name}
-        </Link>
-      ))}
+      <span>
+        by{" "}
+        {authors.map((author, idx) => (
+          <Link
+            href={`/authors/${author.id}/${author.attributes.slug}`}
+            key={idx}
+          >
+            {author.attributes.name}
+          </Link>
+        ))}
+      </span>
     </>
   ) : (
     <></>

@@ -50,15 +50,6 @@
 .date {
     color: #555;
 }
-.details > span {
-    margin-right: .5rem;
-    padding-right: .5rem;
-    border-right: 1px solid #555;
-}
-.details > span:last-child {
-    border-right: none;
-    padding-right: 0;
-}
 
 .postCard {
     display: grid;
@@ -89,4 +80,43 @@
 .body blockquote {
     border-left: 4px solid var(--theme-primary);
     padding-left: 1rem;
+}
+
+.groupTag {
+    color: var(--theme-primary);
+    font-weight: 900;
+    font-size: 18pt;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+
+
+/** Article Details */
+.groups a, .details a {
+    color: var(--theme-primary);
+    font-weight: bold;
+}
+.details {
+    text-transform: uppercase;
+}
+.details {
+    display: grid;
+    column-gap: 2rem;
+    grid-template-columns: repeat(3, max-content);
+}
+
+.details>span {
+    display: flex;
+    align-items: center;
+}
+
+.details>span:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+.groups > span {
+}
+.groups span:not(:empty):not(:last-child):after {
+    content: ", ";
 }

@@ -17,6 +17,11 @@ export async function getPosts({
         $eq: string;
       };
     };
+    groups?: {
+      id: {
+        $eq: number;
+      };
+    };
   };
 } = {}): Promise<{
   data: App.Post[];
@@ -45,8 +50,11 @@ export async function getPosts({
 export async function getPost(postId: number): Promise<{
   data: App.Post;
 }> {
+  const queryString = qs.stringify({
+    populate: ["leadPhoto", "authors", "groups", "primaryGroup"],
+  });
   const res = await fetch(
-    `http://localhost:1337/api/posts/${postId}?populate[0]=leadPhoto&populate[1]=authors`,
+    `http://localhost:1337/api/posts/${postId}?${queryString}`,
     {
       method: "GET",
       cache: "no-store",
@@ -83,6 +91,16 @@ export async function getAuthor(
   authorId: number
 ): Promise<{ data: App.Author }> {
   const res = await fetch(`http://localhost:1337/api/authors/${authorId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  return res.json();
+}
+
+export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
+  const res = await fetch(`http://localhost:1337/api/groups/${groupId}`, {
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,

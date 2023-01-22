@@ -34,6 +34,10 @@
       "relation": "manyToOne",
       "target": "api::group.group",
       "inversedBy": "groups"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }

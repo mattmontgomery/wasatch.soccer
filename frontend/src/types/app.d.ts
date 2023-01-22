@@ -19,12 +19,7 @@ declare namespace App {
         };
       };
       groups: {
-        data: {
-          id: number;
-          attributes: {
-            name: string;
-          };
-        }[];
+        data: Group[];
       };
       primaryGroup: {
         data: {
@@ -58,6 +53,13 @@ declare namespace App {
       };
       createdAt: string;
       updatedAt: string;
+    };
+  };
+  type Group = {
+    id: number;
+    attributes: {
+      name: string;
+      slug: string;
     };
   };
 }

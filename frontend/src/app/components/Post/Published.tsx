@@ -19,7 +19,7 @@ export function Relative(props: App.Post) {
   const thisYear = new Date().getFullYear() === date.getFullYear();
   const relative =
     hours > 24
-      ? format(date, thisYear ? `MMMM dd` : `MMMM dd, yyyy`)
+      ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`)
       : `${hours}h ago`;
   return <>{relative}</>;
 }
