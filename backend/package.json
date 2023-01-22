@@ -8,7 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "deploy": "git subtree push --prefix backend heroku main"
+    "deploy": "cd ../ && git subtree push --prefix backend heroku main"
   },
   "dependencies": {
     "@strapi/admin": "^4.5.6",
