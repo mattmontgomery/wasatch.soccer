@@ -6,8 +6,8 @@ export default function Groups(props: App.Post) {
   return groups.length ? (
     <span>
       {groups.map((group, idx) => (
-        <span>
-          <Link href={`/group/${group.id}/${group.attributes.slug}`} key={idx}>
+        <span key={idx}>
+          <Link href={`/group/${group.id}/${group.attributes.slug}`}>
             {group.attributes.name}
           </Link>
         </span>

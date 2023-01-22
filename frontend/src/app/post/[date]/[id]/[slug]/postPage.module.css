@@ -115,8 +115,6 @@
     padding-right: 0;
     border-right: none;
 }
-.groups > span {
-}
 .groups span:not(:empty):not(:last-child):after {
     content: ", ";
 }
