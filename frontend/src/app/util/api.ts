@@ -1,6 +1,8 @@
 import qs from "qs";
 import format from "date-fns/format";
 
+const API_BASE = process.env.API_BASE;
+
 export async function getPosts({
   sort = ["published:desc", "publishedAt:desc"],
   pagination = {},
@@ -37,7 +39,7 @@ export async function getPosts({
       encodeValuesOnly: true,
     }
   );
-  const res = await fetch(`http://localhost:1337/api/posts?${queryString}`, {
+  const res = await fetch(`${API_BASE}/api/posts?${queryString}`, {
     method: "GET",
     cache: "no-store",
     headers: {
@@ -53,16 +55,13 @@ export async function getPost(postId: number): Promise<{
   const queryString = qs.stringify({
     populate: ["leadPhoto", "authors", "groups", "primaryGroup"],
   });
-  const res = await fetch(
-    `http://localhost:1337/api/posts/${postId}?${queryString}`,
-    {
-      method: "GET",
-      cache: "no-store",
-      headers: {
-        Authorization: `bearer ${process.env.API_TOKEN}`,
-      },
-    }
-  );
+  const res = await fetch(`${API_BASE}/api/posts/${postId}?${queryString}`, {
+    method: "GET",
+    cache: "no-store",
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
   return res.json();
 }
 
@@ -90,7 +89,7 @@ export function getPhotoPath(path: string) {
 export async function getAuthor(
   authorId: number
 ): Promise<{ data: App.Author }> {
-  const res = await fetch(`http://localhost:1337/api/authors/${authorId}`, {
+  const res = await fetch(`${API_BASE}/api/authors/${authorId}`, {
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
@@ -100,7 +99,7 @@ export async function getAuthor(
 }
 
 export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
-  const res = await fetch(`http://localhost:1337/api/groups/${groupId}`, {
+  const res = await fetch(`${API_BASE}/api/groups/${groupId}`, {
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
