@@ -11,9 +11,9 @@ import postStyles from "@/app/styles/post.module.css";
 import textStyles from "@/app/text.module.css";
 import Authors from "@/app/components/Post/Author";
 import Groups from "@/app/components/Post/Groups";
+import Streams from "@/app/components/Post/Streams";
 
 import Posts from "./Posts";
-import Head from "next/head";
 
 export default async function PostPage({
   params: { id, slug },
@@ -23,7 +23,7 @@ export default async function PostPage({
   const { data } = await getPost(id);
   const leadPhoto = getPhoto(data);
   const authors = getAuthors(data);
-  const groups = data.attributes.groups?.data;
+  const groups = data.attributes.groups?.data ?? [];
   const primaryGroup = data.attributes.primaryGroup?.data ?? null;
   const posts = await getPosts({
     sort: ["publishedAt:desc"],
@@ -34,6 +34,7 @@ export default async function PostPage({
     },
     pagination: { pageSize: 5 },
   });
+  const streams = data.attributes.streams?.data ?? [];
   return (
     <>
       <article className={pageStyles.post}>
@@ -66,6 +67,17 @@ export default async function PostPage({
                 <></>
               )}
             </p>
+
+            {streams.length ? (
+              <div className={pageStyles.streams}>
+                <span>Filed under:</span>{" "}
+                <span className={pageStyles.streamsContent}>
+                  <Streams {...data} />
+                </span>
+              </div>
+            ) : (
+              <></>
+            )}
           </header>
           {leadPhoto && (
             <div className={pageStyles.leadPhotoContainer}>

@@ -43,6 +43,9 @@ declare namespace App {
       authors: {
         data: Author[];
       };
+      streams: {
+        data: Stream[];
+      };
     };
   };
   type Photo = {
@@ -71,6 +74,14 @@ declare namespace App {
     attributes: {
       name: string;
       slug: string;
+    };
+  };
+  type Stream = {
+    id: number;
+    attributes: {
+      name: string;
+      slug: string;
+      body: string;
     };
   };
 }

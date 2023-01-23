@@ -31,6 +31,11 @@ export async function getPosts({
     published?: {
       $gte: string;
     };
+    streams?: {
+      id: {
+        $eq: number;
+      };
+    };
   };
   pagination?: { pageSize?: number };
   populate?: string | string[];
@@ -65,7 +70,7 @@ export async function getPost(postId: number): Promise<{
   data: App.Post;
 }> {
   const queryString = qs.stringify({
-    populate: ["leadPhoto", "authors", "groups", "primaryGroup"],
+    populate: ["leadPhoto", "authors", "groups", "primaryGroup", "streams"],
   });
   const res = await fetch(`${API_BASE}/api/posts/${postId}?${queryString}`, {
     next: {
@@ -120,6 +125,17 @@ export async function getAuthor(
 
 export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
   const res = await fetch(`${API_BASE}/api/groups/${groupId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  return res.json();
+}
+export async function getStream(
+  streamId: number
+): Promise<{ data: App.Group }> {
+  const res = await fetch(`${API_BASE}/api/streams/${streamId}`, {
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,

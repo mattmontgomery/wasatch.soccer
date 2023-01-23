@@ -56,6 +56,12 @@
     },
     "published": {
       "type": "datetime"
+    },
+    "streams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::stream.stream",
+      "inversedBy": "posts"
     }
   }
 }

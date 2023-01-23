@@ -10,7 +10,8 @@
 
 /** Article Details */
 .groups a,
-.details a {
+.details a,
+.streams a {
   color: var(--theme-primary);
   font-weight: bold;
 }
@@ -65,6 +66,10 @@
 }
 .leadPhotoContainer {
   margin-bottom: 1rem;
+}
+
+.streamsContent span:not(:empty):not(:last-child):after {
+  content: ", ";
 }
 
 @media screen and (min-width: 56rem) {
