@@ -56,11 +56,6 @@
   font-size: 90%;
 }
 
-.body blockquote {
-  border-left: 4px solid var(--theme-primary);
-  padding-left: 1rem;
-}
-
 .groupTag {
   color: var(--theme-primary);
   font-weight: 900;

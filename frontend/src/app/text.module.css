@@ -45,3 +45,8 @@
 .body img {
   max-width: 100%;
 }
+
+.body blockquote {
+  border-left: 4px solid var(--theme-primary);
+  padding-left: 1rem;
+}
