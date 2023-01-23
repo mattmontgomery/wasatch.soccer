@@ -1,11 +1,11 @@
 .body {
-    font-size: 115%;
-    margin-bottom: 1rem;
-    line-height: 1.5;
+  font-size: 115%;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .body a {
-    color: var(--theme-primary);
+  color: var(--theme-primary);
 }
 
 .body h1,
@@ -14,19 +14,30 @@
 .body h4,
 .body h5,
 .body h6 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    color: var(--theme-primary);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--theme-primary);
+  font-size: 125%;
+}
+
+@media screen and (min-width: 80rem) {
+  .body h1,
+  .body h2,
+  .body h3,
+  .body h4,
+  .body h5,
+  .body h6 {
     font-size: 150%;
+  }
 }
 
 .body ul,
 .body ol {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
 }
 
 .body p {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }

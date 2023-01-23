@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import styles from "./postPage.module.css";
+import styles from "@/app/styles/post.module.css";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 

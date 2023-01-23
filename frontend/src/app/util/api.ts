@@ -46,7 +46,6 @@ export async function getPosts({
   );
   const res = await fetch(`${API_BASE}/api/posts?${queryString}`, {
     method: "GET",
-    cache: "no-store",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
     },
@@ -62,7 +61,6 @@ export async function getPost(postId: number): Promise<{
   });
   const res = await fetch(`${API_BASE}/api/posts/${postId}?${queryString}`, {
     method: "GET",
-    cache: "no-store",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
     },

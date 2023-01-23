@@ -1,7 +1,5 @@
-import { getPosts } from "@/app/util/api";
 import pageStyles from "@/app/page.module.css";
-import styles from "./postPage.module.css";
-import Posts from "./Posts";
+import styles from "./page.module.css";
 
 export default async function PostLayout({
   children,

@@ -1,13 +1,21 @@
 .main {
   min-height: 100vh;
   margin: auto;
-  max-width: 72rem;
   column-gap: 2rem;
+  padding: 1rem;
 }
 
 .pageHeader {
-  font-size: 48pt;
+  font-size: 24pt;
   padding-bottom: 1rem;
   margin-bottom: 2rem;
   border-bottom: 4px solid var(--theme-primary);
+}
+@media (min-width: 80rem) {
+  .main {
+    max-width: 72rem;
+  }
+  .pageHeader {
+    font-size: 48pt;
+  }
 }
