@@ -1,8 +1,6 @@
 .header {
   font-family: var(--headline-font);
-  max-width: 72rem;
   padding: 1rem;
-  margin: auto;
   margin-bottom: 4rem;
 }
 .header h1 {
@@ -24,4 +22,18 @@
   font-weight: 500;
   color: var(--theme-primary);
   text-transform: uppercase;
+}
+.footer {
+  margin-top: 4rem;
+  max-width: 72rem;
+  padding: 1rem;
+  font-size: 9pt;
+}
+.grid {
+  max-width: 72rem;
+  margin:auto;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
 }

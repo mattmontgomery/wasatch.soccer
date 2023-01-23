@@ -1,14 +1,12 @@
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
 
 import { Posts } from "@/app/components/PostGrid";
-import { getAuthor, getGroup, getPosts } from "@/app/util/api";
+import { getGroup, getPosts } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
-import textStyles from "@/app/text.module.css";
 
 export default async function AuthorsPage({
-  params: { id, slug },
+  params: { id },
 }: {
   params: { id: string; slug: string };
 }) {

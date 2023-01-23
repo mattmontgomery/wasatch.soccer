@@ -32,23 +32,28 @@ export default async function RootLayout({
       */}
       <head />
       <body className={`${headlineFont.variable} ${subtitleFont.variable}`}>
-        <header className={styles.header}>
-          <h1>
-            <Link href="/">{config.siteName}</Link>
-          </h1>
-          <h5>{config.siteDescription}</h5>
-          <nav className={styles.navigation}>
-            {config.navigationGroups.map((navItem, idx) => (
-              <Link
-                href={`/group/${navItem.id}/${navItem.attributes.slug}`}
-                key={idx}
-              >
-                {navItem.attributes.name}
-              </Link>
-            ))}
-          </nav>
-        </header>
-        {children}
+        <div className={styles.grid}>
+          <header className={styles.header}>
+            <h1>
+              <Link href="/">{config.siteName}</Link>
+            </h1>
+            <h5>{config.siteDescription}</h5>
+            <nav className={styles.navigation}>
+              {config.navigationGroups.map((navItem, idx) => (
+                <Link
+                  href={`/group/${navItem.id}/${navItem.attributes.slug}`}
+                  key={idx}
+                >
+                  {navItem.attributes.name}
+                </Link>
+              ))}
+            </nav>
+          </header>
+          {children}
+          <footer className={styles.footer}>
+            &copy; 2023 {config.siteName}
+          </footer>
+        </div>
       </body>
     </html>
   );
