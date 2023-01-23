@@ -4,6 +4,9 @@ declare namespace App {
       siteName: string;
       siteDescription: string;
       homepageTitleText: string;
+      navigationGroups: {
+        data: Group[];
+      };
     };
   };
   type Post = {

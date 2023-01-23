@@ -129,7 +129,7 @@ export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
 }
 
 export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
-  const res = await fetch(`${API_BASE}/api/site-config`, {
+  const res = await fetch(`${API_BASE}/api/site-config?populate=*`, {
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,

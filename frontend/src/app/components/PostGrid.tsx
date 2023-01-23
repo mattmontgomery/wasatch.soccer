@@ -53,9 +53,13 @@ export function Post(props: App.Post & { hero?: boolean }) {
         <h2 className={styles.headline}>{props.attributes.headline}</h2>
       </Link>
       <span className={styles.details}>
-        <span className={styles.author}>
-          <Authors {...props} />
-        </span>
+        {props.attributes.authors.data.length ? (
+          <span className={styles.author}>
+            <Authors {...props} />
+          </span>
+        ) : (
+          <></>
+        )}
         <span className={styles.published}>
           <Relative {...props} />
         </span>

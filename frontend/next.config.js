@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["utah-soccer-blog.s3.us-west-1.amazonaws.com"],
+    domains: [process.env.AWS_BUCKET],
   },
 };
 

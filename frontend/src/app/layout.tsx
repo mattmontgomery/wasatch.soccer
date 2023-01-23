@@ -2,17 +2,19 @@ import { Alexandria } from "@next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import styles from "./layout.module.css";
+import { getConfig } from "./util/config";
 
 const headlineFont = Alexandria({
   subsets: ["latin"],
   weight: ["800"],
   variable: "--headline-font",
 });
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const config = await getConfig();
   return (
     <html lang="en">
       {/*
@@ -22,7 +24,17 @@ export default function RootLayout({
       <head />
       <body className={`${headlineFont.variable}`}>
         <header className={styles.header}>
-          <Link href="/">RSL Soapbox</Link>
+          <Link href="/">{config.siteName}</Link>
+          <nav className={styles.navigation}>
+            {config.navigationGroups.map((navItem, idx) => (
+              <Link
+                href={`/group/${navItem.id}/${navItem.attributes.slug}`}
+                key={idx}
+              >
+                {navItem.attributes.name}
+              </Link>
+            ))}
+          </nav>
         </header>
         {children}
       </body>

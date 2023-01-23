@@ -20,6 +20,11 @@
     },
     "homepageTitleText": {
       "type": "string"
+    },
+    "navigationGroups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group"
     }
   }
 }
