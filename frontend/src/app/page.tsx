@@ -30,7 +30,14 @@ export default async function Home() {
                       <li key={idx}>{ep.title}</li>
                     ))}
                   </ul>
-                  <button>Subscribe</button>
+                  <a
+                    className={podcastStyles.subscribe}
+                    href={feed.meta.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Subscribe
+                  </a>
                 </Card>
               );
             },
