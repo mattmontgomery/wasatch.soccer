@@ -7,6 +7,7 @@ declare namespace App {
       navigationGroups: {
         data: Group[];
       };
+      podcastFeed: string;;
     };
   };
   type Post = {

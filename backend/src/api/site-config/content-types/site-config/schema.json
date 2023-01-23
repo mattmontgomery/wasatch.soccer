@@ -25,6 +25,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::group.group"
+    },
+    "podcastFeed": {
+      "type": "string"
     }
   }
 }
