@@ -25,7 +25,8 @@
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.5",
     "swr": "^2.0.1",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@types/qs": "^6.9.7",

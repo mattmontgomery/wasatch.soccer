@@ -7,9 +7,8 @@ export async function getPosts({
   sort = ["published:desc", "publishedAt:desc"],
   pagination = {},
   filters = {},
+  populate = "*",
 }: {
-  sort?: string[];
-  pagination?: { pageSize?: number };
   filters?: {
     id?:
       | {
@@ -29,13 +28,19 @@ export async function getPosts({
         $eq: number;
       };
     };
+    published?: {
+      $gte: string;
+    };
   };
+  pagination?: { pageSize?: number };
+  populate?: string | string[];
+  sort?: string[];
 } = {}): Promise<{
   data: App.Post[];
 }> {
   const queryString = qs.stringify(
     {
-      populate: "*",
+      populate,
       pagination,
       sort,
       filters,
@@ -89,6 +94,9 @@ export function getPathname(post: App.Post): string {
     "yyyy-MM-dd"
   );
   return `/post/${date}/${post.id}/${post.attributes.slug}`;
+}
+export function getFullPathname(post: App.Post): string {
+  return `${process.env.SITE_BASE}${getPathname(post)}`;
 }
 
 export function getPhotoPath(path: string) {
