@@ -1,7 +1,5 @@
 
 .postHero {
-  padding: 1rem;
-  background: var(--theme-hero);
 }
 .postHero .image {
   height: 300px;
@@ -93,8 +91,6 @@
   .postHero {
     grid-column: 1 / span 2;
     grid-row: span 2;
-    padding: 1rem;
-    background: var(--theme-hero);
   }
   .postHero .image {
     height: 550px;

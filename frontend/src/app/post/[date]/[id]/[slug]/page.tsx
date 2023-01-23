@@ -83,6 +83,8 @@ export default async function PostPage({
             <div className={pageStyles.leadPhotoContainer}>
               <div className={pageStyles.leadPhoto}>
                 <Image
+                  sizes="(max-width: 72rem) 100vw
+                  50vw"
                   priority
                   src={getPhotoPath(leadPhoto.url)}
                   fill

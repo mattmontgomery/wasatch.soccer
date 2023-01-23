@@ -25,6 +25,8 @@ function Post(props: App.Post): React.ReactElement {
       <div className={styles.postCardImage}>
         {photo && (
           <Image
+            sizes="(max-width: 72rem) 100vw
+            33vw"
             alt={props.attributes.headline}
             src={getPhotoPath(photo.url)}
             fill

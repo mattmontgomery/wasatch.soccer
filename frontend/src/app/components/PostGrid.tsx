@@ -36,6 +36,9 @@ export function Post(props: App.Post & { hero?: boolean }) {
         {photo && (
           <span>
             <Image
+              sizes="(max-width: 72rem) 100vw
+              33vw"
+              priority={!!props.hero}
               alt={props.attributes.headline}
               src={getPhotoPath(photo.url)}
               fill
