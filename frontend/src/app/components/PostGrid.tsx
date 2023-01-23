@@ -4,12 +4,30 @@ import { Relative } from "@/app/components/Post/Published";
 import Authors from "@/app/components/Post/Author";
 import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
+import React, { PropsWithChildren, useMemo } from "react";
+
+export function Card({
+  children,
+  className,
+  hero,
+}: PropsWithChildren & {
+  className?: string;
+  hero?: boolean;
+}): React.ReactElement {
+  return (
+    <div
+      className={`${styles.post} ${hero ? styles.postHero : ""} ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export function Post(props: App.Post & { hero?: boolean }) {
   const photo = getPhoto(props, props.hero ? "large" : "medium");
   const primaryGroup = props.attributes.primaryGroup?.data ?? null;
   return (
-    <div className={`${styles.post} ${props.hero ? styles.postHero : ""}`}>
+    <Card hero={props.hero}>
       <Link
         href={getPathname(props)}
         className={photo ? styles.image : styles.noImage}
@@ -42,22 +60,50 @@ export function Post(props: App.Post & { hero?: boolean }) {
           <Relative {...props} />
         </span>
       </span>
-    </div>
+    </Card>
   );
 }
 
 export function Posts({
   posts,
+  customSlots = [],
+  slots = 20,
   heroSlots = [],
 }: {
-  posts: App.Post[];
+  customSlots: {
+    slot: number;
+    renderCard: () => React.ReactElement;
+  }[];
   heroSlots?: number[];
+  posts: App.Post[];
+  slots: number;
 }) {
-  return (
-    <section className={styles.posts}>
-      {posts?.map((post, idx) => (
-        <Post {...post} hero={heroSlots?.includes(idx)} key={idx} />
-      ))}
-    </section>
-  );
+  const Slots = useMemo(() => {
+    const SlotsWithCustom = new Array(slots)
+      .fill(() => null)
+      .map((_, idx) => {
+        const customSlot = customSlots.find(
+          (customSlot) => customSlot.slot === idx
+        );
+        if (customSlot) {
+          return (
+            <React.Fragment key={idx}>{customSlot.renderCard()}</React.Fragment>
+          );
+        }
+      });
+    let lastUsedPostIdx = 0;
+    return SlotsWithCustom.map((slot, idx) => {
+      if (!slot && posts.length > lastUsedPostIdx) {
+        // find the next unused post
+        const post = posts.slice(lastUsedPostIdx, posts.length);
+        if (!post[0]) {
+          return <></>;
+        }
+        lastUsedPostIdx++;
+        return <Post {...post[0]} hero={heroSlots?.includes(idx)} key={idx} />;
+      }
+      return slot;
+    });
+  }, [slots, customSlots, heroSlots, posts]);
+  return <section className={styles.posts}>{Slots}</section>;
 }

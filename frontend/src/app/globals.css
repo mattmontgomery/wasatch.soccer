@@ -1,6 +1,9 @@
 :root {
 
   --theme-primary: #a21d12;
+  --theme-alternate: #fdb71a;
+  --theme-primary-contrast: #fafafa;
+  --theme-alternate-contrast: #000034;
   --theme-hero: #fafafa;
   --max-width: 1100px;
   --border-radius: 12px;
