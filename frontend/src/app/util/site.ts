@@ -1,4 +1,4 @@
-import Config, { getConfig } from "@/app/util/config";
+import { getConfig } from "@/app/util/config";
 
 export async function getSiteTitle(): Promise<string> {
   return (await getConfig()).siteName;
