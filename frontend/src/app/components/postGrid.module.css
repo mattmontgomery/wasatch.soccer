@@ -1,10 +1,4 @@
-.posts {
-  margin: auto;
-  display: grid;
-  row-gap: 1rem;
-  grid-template-columns: 100%;
-  grid-template-rows: auto;
-}
+
 .postHero {
   padding: 1rem;
   background: var(--theme-hero);
@@ -78,12 +72,19 @@
   padding: 0.5rem 1rem;
 }
 
+.posts {
+  margin: auto;
+  display: grid;
+  row-gap: 2rem;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+}
 @media screen and (min-width: 80rem) {
   .posts {
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 1rem;
+    column-gap: 2rem;
   }
   .postHero {
     grid-column: 1 / span 2;

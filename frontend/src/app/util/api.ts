@@ -45,6 +45,9 @@ export async function getPosts({
     }
   );
   const res = await fetch(`${API_BASE}/api/posts?${queryString}`, {
+    next: {
+      revalidate: 120,
+    },
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
@@ -60,6 +63,9 @@ export async function getPost(postId: number): Promise<{
     populate: ["leadPhoto", "authors", "groups", "primaryGroup"],
   });
   const res = await fetch(`${API_BASE}/api/posts/${postId}?${queryString}`, {
+    next: {
+      revalidate: 300,
+    },
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
@@ -93,6 +99,9 @@ export async function getAuthor(
   authorId: number
 ): Promise<{ data: App.Author }> {
   const res = await fetch(`${API_BASE}/api/authors/${authorId}`, {
+    next: {
+      revalidate: 60 * 60 * 8, // eight hours
+    },
     method: "GET",
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
