@@ -1,9 +1,13 @@
-import Config from "config";
+import Config, { getConfig } from "@/app/util/config";
 
-export function getSiteTitle(): string {
-  return Config.siteName;
+export async function getSiteTitle(): Promise<string> {
+  return (await getConfig()).siteName;
 }
 
-export function getTitle(elements: string[]): string {
-  return [...elements, getSiteTitle()].join(" | ");
+export async function getTitle(
+  elements: string[],
+  reverse?: boolean
+): Promise<string> {
+  const pieces = [...elements, await getSiteTitle()];
+  return (reverse ? [...pieces].reverse() : pieces).join(" | ");
 }

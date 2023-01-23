@@ -127,3 +127,13 @@ export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
   });
   return res.json();
 }
+
+export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
+  const res = await fetch(`${API_BASE}/api/site-config`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
+  return res.json();
+}

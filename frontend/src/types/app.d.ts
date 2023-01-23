@@ -1,4 +1,11 @@
 declare namespace App {
+  type SiteConfig = {
+    attributes: {
+      siteName: string;
+      siteDescription: string;
+      homepageTitleText: string;
+    };
+  };
   type Post = {
     id: number;
     attributes: {

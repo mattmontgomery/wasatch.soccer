@@ -9,7 +9,7 @@ export default async function Head({ params }: { params: { id: number } }) {
   return (
     <>
       <DefaultTags />
-      <title>{getTitle([post.data.attributes.headline])}</title>
+      <title>{await getTitle([post.data.attributes.headline])}</title>
 
       <meta name="description">{post.data.attributes.summary}</meta>
       <meta property="og:title" content={post.data.attributes.headline} />

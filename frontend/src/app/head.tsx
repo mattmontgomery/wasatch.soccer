@@ -1,11 +1,14 @@
-import Config from "config";
+import Config, { getConfig } from "@/app/util/config";
 import DefaultTags from "./DefaultTags";
+import { getTitle } from "./util/site";
 
-export default function Head() {
+export default async function Head() {
   return (
     <>
       <DefaultTags />
-      <title>{Config.siteName}</title>
+      <title>
+        {await getTitle([(await getConfig()).homepageTitleText], true)}
+      </title>
       <meta name="description" content={Config.siteDescription} />
     </>
   );
