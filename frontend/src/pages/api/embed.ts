@@ -8,7 +8,9 @@ export default async function embed(
 ): Promise<void> {
   try {
     const url = req.query.url?.toString();
-    const embedCode = url ? await extract(url, { maxwidth: 720 }) : null;
+    const embedCode = url
+      ? await extract(url, { maxwidth: 720, maxheight: 480 })
+      : null;
     res.json({ data: embedCode, meta: { url } });
   } catch (e) {
     res.status(500).json({
