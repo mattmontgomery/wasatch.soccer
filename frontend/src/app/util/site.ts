@@ -1,5 +1,7 @@
+import Config from "config";
+
 export function getSiteTitle(): string {
-  return process.env.SITE_TITLE ?? "RSL Soapbox Next";
+  return Config.siteName;
 }
 
 export function getTitle(elements: string[]): string {
