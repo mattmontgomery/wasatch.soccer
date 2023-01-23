@@ -79,7 +79,7 @@
   grid-template-columns: 100%;
   grid-template-rows: auto;
 }
-@media screen and (min-width: 80rem) {
+@media screen and (min-width: 72rem) {
   .posts {
     margin: auto;
     display: grid;

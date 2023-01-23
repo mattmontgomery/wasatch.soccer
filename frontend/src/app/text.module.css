@@ -20,7 +20,7 @@
   font-size: 125%;
 }
 
-@media screen and (min-width: 80rem) {
+@media screen and (min-width: 72rem) {
   .body h1,
   .body h2,
   .body h3,

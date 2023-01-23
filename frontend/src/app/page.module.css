@@ -9,7 +9,7 @@
   margin-bottom: 2rem;
   border-bottom: 4px solid var(--theme-primary);
 }
-@media (min-width: 80rem) {
+@media screen and (min-width: 72rem) {
   .main {
     max-width: 72rem;
   }
