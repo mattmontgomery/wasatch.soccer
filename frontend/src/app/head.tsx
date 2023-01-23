@@ -1,11 +1,12 @@
+import Config from "config";
 import DefaultTags from "./DefaultTags";
 
 export default function Head() {
   return (
     <>
       <DefaultTags />
-      <title>RSL Soapbox Next</title>
-      <meta name="description" content="utah soccer coverage!!!" />
+      <title>{Config.siteName}</title>
+      <meta name="description" content={Config.siteDescription} />
     </>
   );
 }
