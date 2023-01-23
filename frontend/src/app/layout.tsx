@@ -1,13 +1,22 @@
-import { Alexandria } from "@next/font/google";
+import { Montserrat } from "@next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
 
-const headlineFont = Alexandria({
+const headlineFont = Montserrat({
   subsets: ["latin"],
-  weight: ["800"],
+  style: ["normal"],
+  weight: ["900"],
   variable: "--headline-font",
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
+});
+const subtitleFont = Montserrat({
+  subsets: ["latin"],
+  style: ["normal"],
+  weight: ["500"],
+  variable: "--subtitle-font",
+  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
 });
 export default async function RootLayout({
   children,
@@ -22,9 +31,12 @@ export default async function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={`${headlineFont.variable}`}>
+      <body className={`${headlineFont.variable} ${subtitleFont.variable}`}>
         <header className={styles.header}>
-          <Link href="/">{config.siteName}</Link>
+          <h1>
+            <Link href="/">{config.siteName}</Link>
+          </h1>
+          <h5>{config.siteDescription}</h5>
           <nav className={styles.navigation}>
             {config.navigationGroups.map((navItem, idx) => (
               <Link
