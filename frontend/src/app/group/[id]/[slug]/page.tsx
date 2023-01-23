@@ -10,6 +10,10 @@ export default async function AuthorsPage({
 }: {
   params: { id: string; slug: string };
 }) {
+  const group = await getGroup(Number(id));
+  if (!group.data) {
+    notFound();
+  }
   const posts = await getPosts({
     filters: {
       groups: {
@@ -19,13 +23,9 @@ export default async function AuthorsPage({
       },
     },
   });
-  const author = await getGroup(Number(id));
-  if (!author.data) {
-    notFound();
-  }
   return (
     <main className={`${styles.main}`}>
-      <h2 className={styles.pageHeader}>{author.data.attributes.name}</h2>
+      <h2 className={styles.pageHeader}>{group.data.attributes.name}</h2>
       <Posts posts={posts.data ?? []} />
     </main>
   );

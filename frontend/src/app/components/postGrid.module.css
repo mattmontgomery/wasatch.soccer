@@ -14,7 +14,7 @@
 .post {
   display: grid;
   row-gap: 0.5rem;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr min-content;
   position: relative;
 }
 .post .image {
@@ -31,7 +31,11 @@
 .post .image img {
   object-fit: cover;
 }
-
+.post .streams {
+  font-size: 10pt;
+  color: var(--theme-primary);
+  font-weight: bold;
+}
 .post .headline {
   font-weight: bold;
   font-size: 24px;

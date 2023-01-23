@@ -134,7 +134,7 @@ export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
 }
 export async function getStream(
   streamId: number
-): Promise<{ data: App.Group }> {
+): Promise<{ data: App.Stream }> {
   const res = await fetch(`${API_BASE}/api/streams/${streamId}`, {
     method: "GET",
     headers: {

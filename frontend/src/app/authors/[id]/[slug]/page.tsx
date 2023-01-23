@@ -12,6 +12,10 @@ export default async function AuthorsPage({
 }: {
   params: { id: string; slug: string };
 }) {
+  const author = await getAuthor(Number(id));
+  if (!author.data) {
+    notFound();
+  }
   const posts = await getPosts({
     filters: {
       authors: {
@@ -24,10 +28,6 @@ export default async function AuthorsPage({
       },
     },
   });
-  const author = await getAuthor(Number(id));
-  if (!author.data) {
-    notFound();
-  }
   return (
     <main className={`${styles.main}`}>
       <h2 className={styles.pageHeader}>{author.data.attributes.name}</h2>

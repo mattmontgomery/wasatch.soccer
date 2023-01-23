@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Relative } from "@/app/components/Post/Published";
 import Authors from "@/app/components/Post/Author";
+import Streams from "@/app/components/Post/Streams";
 import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
-import React, { PropsWithChildren, useMemo } from "react";
+import { Fragment, PropsWithChildren, useMemo } from "react";
 
 export function Card({
   children,
@@ -52,18 +53,33 @@ export function Post(props: App.Post & { hero?: boolean }) {
       <Link href={getPathname(props)}>
         <h2 className={styles.headline}>{props.attributes.headline}</h2>
       </Link>
-      <span className={styles.details}>
-        {props.attributes.authors.data.length ? (
-          <span className={styles.author}>
-            <Authors {...props} />
+      <div>
+        <div
+          className={
+            props.attributes.streams?.data?.length
+              ? styles.streams
+              : styles.empty
+          }
+        >
+          {props.attributes.streams?.data?.length ? (
+            <Streams {...props} />
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className={styles.details}>
+          {props.attributes.authors.data.length ? (
+            <span className={styles.author}>
+              <Authors {...props} />
+            </span>
+          ) : (
+            <></>
+          )}
+          <span className={styles.published}>
+            <Relative {...props} />
           </span>
-        ) : (
-          <></>
-        )}
-        <span className={styles.published}>
-          <Relative {...props} />
-        </span>
-      </span>
+        </div>
+      </div>
     </Card>
   );
 }
@@ -90,9 +106,7 @@ export function Posts({
           (customSlot) => customSlot.slot === idx
         );
         if (customSlot) {
-          return (
-            <React.Fragment key={idx}>{customSlot.renderCard()}</React.Fragment>
-          );
+          return <Fragment key={idx}>{customSlot.renderCard()}</Fragment>;
         }
       });
     let lastUsedPostIdx = 0;
