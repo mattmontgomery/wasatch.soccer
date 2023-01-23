@@ -2,13 +2,13 @@ import format from "date-fns/format";
 import { differenceInDays, differenceInHours } from "date-fns";
 
 export default function Published(props: App.Post): React.ReactElement {
-  const date = format(
-    new Date(props.attributes.published ?? props.attributes.publishedAt),
-    "MMM dd, yyyy, hh:ii a"
-  )
+  const date = new Date(
+    props.attributes.published ?? props.attributes.publishedAt
+  );
+  const formattedDate = format(date, "MMM dd, yyyy, hh:ii a")
     .replace(/am/i, "a.m.")
     .replace(/pm/i, "p.m.");
-  return <>{date}</>;
+  return <time dateTime={date.toISOString()}>{formattedDate}</time>;
 }
 
 export function Relative(props: App.Post) {

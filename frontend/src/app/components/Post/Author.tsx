@@ -10,6 +10,7 @@ export default function Authors(props: App.Post) {
         {authors.map((author, idx) => (
           <Link
             href={`/authors/${author.id}/${author.attributes.slug}`}
+            rel="author"
             key={idx}
           >
             {author.attributes.name}

@@ -13,6 +13,7 @@ import Authors from "@/app/components/Post/Author";
 import Groups from "@/app/components/Post/Groups";
 
 import Posts from "./Posts";
+import Head from "next/head";
 
 export default async function PostPage({
   params: { id, slug },
@@ -35,37 +36,37 @@ export default async function PostPage({
   });
   return (
     <>
-      <section className={pageStyles.post}>
+      <article className={pageStyles.post}>
         <Redirect slugFromPath={slug} post={data} />
         <section className={pageStyles.section}>
-          <div>
+          <header>
             {primaryGroup && (
               <h5 className={postStyles.groupTag}>
                 {data.attributes.primaryGroup.data.attributes.name}
               </h5>
             )}
             <h2 className={pageStyles.headline}>{data.attributes.headline}</h2>
-          </div>
-          <p className={pageStyles.summary}>{data.attributes.summary}</p>
-          <p className={pageStyles.details}>
-            {authors.length ? (
-              <span className={postStyles.author}>
-                <Authors {...data} />
+            <p className={pageStyles.summary}>{data.attributes.summary}</p>
+            <p className={pageStyles.details}>
+              {authors.length ? (
+                <span className={postStyles.author}>
+                  <Authors {...data} />
+                </span>
+              ) : (
+                <></>
+              )}
+              <span className={postStyles.date}>
+                <Published {...data} />
               </span>
-            ) : (
-              <></>
-            )}
-            <span className={postStyles.date}>
-              <Published {...data} />
-            </span>
-            {groups.length ? (
-              <span className={postStyles.groups}>
-                <Groups {...data} />
-              </span>
-            ) : (
-              <></>
-            )}
-          </p>
+              {groups.length ? (
+                <span className={postStyles.groups}>
+                  <Groups {...data} />
+                </span>
+              ) : (
+                <></>
+              )}
+            </p>
+          </header>
           {leadPhoto && (
             <div className={pageStyles.leadPhotoContainer}>
               <div className={pageStyles.leadPhoto}>
@@ -97,7 +98,7 @@ export default async function PostPage({
             </ReactMarkdown>
           </div>
         </section>
-      </section>
+      </article>
       <div className={postStyles.rightRail}>
         <h3>Latest News</h3>
         <Posts posts={posts.data} />
