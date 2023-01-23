@@ -70,13 +70,13 @@ export function Posts({
   slots = 20,
   heroSlots = [],
 }: {
-  customSlots: {
+  customSlots?: {
     slot: number;
     renderCard: () => React.ReactElement;
   }[];
   heroSlots?: number[];
   posts: App.Post[];
-  slots: number;
+  slots?: number;
 }) {
   const Slots = useMemo(() => {
     const SlotsWithCustom = new Array(slots)
