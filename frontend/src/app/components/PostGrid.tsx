@@ -24,7 +24,7 @@ export function Card({
   );
 }
 
-export function Post(props: App.Post & { hero?: boolean }) {
+export function Post(props: App.Post & { hero?: boolean; slot: number }) {
   const photo = getPhoto(props, props.hero ? "large" : "medium");
   const primaryGroup = props.attributes.primaryGroup?.data ?? null;
   return (
@@ -119,7 +119,14 @@ export function Posts({
           return <></>;
         }
         lastUsedPostIdx++;
-        return <Post {...post[0]} hero={heroSlots?.includes(idx)} key={idx} />;
+        return (
+          <Post
+            {...post[0]}
+            hero={heroSlots?.includes(idx)}
+            key={idx}
+            slot={idx}
+          />
+        );
       }
       return slot;
     });
