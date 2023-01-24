@@ -10,7 +10,7 @@ export default async function Home({ searchParams: { page: _page = 1 } }) {
   const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const posts = await getPosts({
     sort: ["published:desc", "publishedAt:desc"],
-    pagination: { pageSize: 15, page },
+    pagination: { pageSize: 20, page },
   });
   const config = await getConfig();
   const feed = config.podcastFeed
