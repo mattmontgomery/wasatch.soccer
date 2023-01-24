@@ -1,5 +1,5 @@
 import format from "date-fns-tz/format";
-import { differenceInHours } from "date-fns";
+import { differenceInHours, differenceInMinutes } from "date-fns";
 
 export default function Published(props: App.Post): React.ReactElement {
   const date = new Date(
@@ -18,9 +18,12 @@ export function Relative(props: App.Post) {
     props.attributes.published ?? props.attributes.publishedAt
   );
   const hours = differenceInHours(new Date(), date);
+  const minutes = differenceInMinutes(new Date(), date);
   const thisYear = new Date().getFullYear() === date.getFullYear();
   const relative =
-    hours > 16
+    hours === 0
+      ? `${minutes}m ago`
+      : hours > 16
       ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`, {
           timeZone: process.env.TIMEZONE ?? "",
         })
