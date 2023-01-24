@@ -113,6 +113,9 @@ export function getPhotoPath(path: string) {
 export async function getAuthor(
   authorId: number
 ): Promise<{ data: App.Author }> {
+  if (typeof authorId !== "number") {
+    throw "Not a valid group";
+  }
   const res = await makeApiCall(`/api/authors/${authorId}`, {
     revalidate: 60 * 60 * 8, // eight hours
   });
@@ -120,12 +123,18 @@ export async function getAuthor(
 }
 
 export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
+  if (typeof groupId !== "number") {
+    throw "Not a valid group";
+  }
   const res = await makeApiCall(`/api/groups/${groupId}`);
   return res.json();
 }
 export async function getStream(
   streamId: number
 ): Promise<{ data: App.Stream }> {
+  if (typeof streamId !== "number") {
+    throw "Not a valid group";
+  }
   const res = await makeApiCall(`/api/streams/${streamId}`);
   return res.json();
 }
