@@ -36,7 +36,11 @@ export default async function AuthorsPage({
     },
   });
   return (
-    <main className={`${styles.main}`}>
+    <main
+      className={`${styles.main} ${
+        author.data.attributes.bio ? styles.main4 : ""
+      }`}
+    >
       <h2 className={styles.pageHeader}>{author.data.attributes.name}</h2>
       {author.data.attributes.bio && (
         <section className={textStyles.body}>
