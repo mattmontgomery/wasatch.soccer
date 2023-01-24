@@ -20,7 +20,7 @@ export function Relative(props: App.Post) {
   const hours = differenceInHours(new Date(), date);
   const thisYear = new Date().getFullYear() === date.getFullYear();
   const relative =
-    hours > 24
+    hours > 16
       ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`, {
           timeZone: process.env.TIMEZONE ?? "",
         })
