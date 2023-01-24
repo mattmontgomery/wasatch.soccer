@@ -39,6 +39,7 @@ export default async function RootLayout({
             </h1>
             <h5>{config.siteDescription}</h5>
             <nav className={styles.navigation}>
+              <Link href="/">Home</Link>{" "}
               {config.navigationGroups.map((navItem, idx) => (
                 <Link
                   href={`/group/${navItem.id}/${navItem.attributes.slug}`}
