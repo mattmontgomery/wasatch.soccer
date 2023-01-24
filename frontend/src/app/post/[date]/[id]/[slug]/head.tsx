@@ -1,9 +1,13 @@
 import DefaultTags from "@/app/DefaultTags";
 import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { getTitle } from "@/app/util/site";
+import { notFound } from "next/navigation";
 
 export default async function Head({ params }: { params: { id: number } }) {
   const post = await getPost(params.id);
+  if (!post.data) {
+    return notFound();
+  }
   const photo = getPhoto(post.data, "small");
   const photoPath = photo ? getPhotoPath(photo.url) : null;
   return (

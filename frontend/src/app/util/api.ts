@@ -3,6 +3,22 @@ import format from "date-fns/format";
 
 const API_BASE = process.env.API_BASE;
 
+async function makeApiCall(
+  path: string,
+  options: { revalidate: number } = { revalidate: 120 }
+): Promise<Response> {
+  return fetch(`${API_BASE}${path}`, {
+    method: "GET",
+    cache: "force-cache",
+    next: {
+      revalidate: options.revalidate,
+    },
+    headers: {
+      Authorization: `bearer ${process.env.API_TOKEN}`,
+    },
+  });
+}
+
 export async function getPosts({
   sort = ["published:desc", "publishedAt:desc"],
   pagination = {},
@@ -54,15 +70,7 @@ export async function getPosts({
       encodeValuesOnly: true,
     }
   );
-  const res = await fetch(`${API_BASE}/api/posts?${queryString}`, {
-    next: {
-      revalidate: 120,
-    },
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
-  });
+  const res = await makeApiCall(`/api/posts?${queryString}`);
   return res.json();
 }
 
@@ -72,14 +80,8 @@ export async function getPost(postId: number): Promise<{
   const queryString = qs.stringify({
     populate: ["leadPhoto", "authors", "groups", "primaryGroup", "streams"],
   });
-  const res = await fetch(`${API_BASE}/api/posts/${postId}?${queryString}`, {
-    next: {
-      revalidate: 300,
-    },
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
+  const res = await makeApiCall(`/api/posts/${postId}?${queryString}`, {
+    revalidate: 300,
   });
   return res.json();
 }
@@ -88,7 +90,7 @@ export function getPhoto(
   data: App.Post,
   format: string = "large"
 ): App.Photo | null {
-  return data.attributes.leadPhoto.data
+  return data?.attributes?.leadPhoto.data
     ? data.attributes.leadPhoto.data.attributes.formats[format]
     : null;
 }
@@ -111,45 +113,24 @@ export function getPhotoPath(path: string) {
 export async function getAuthor(
   authorId: number
 ): Promise<{ data: App.Author }> {
-  const res = await fetch(`${API_BASE}/api/authors/${authorId}`, {
-    next: {
-      revalidate: 60 * 60 * 8, // eight hours
-    },
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
+  const res = await makeApiCall(`/api/authors/${authorId}`, {
+    revalidate: 60 * 60 * 8, // eight hours
   });
   return res.json();
 }
 
 export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
-  const res = await fetch(`${API_BASE}/api/groups/${groupId}`, {
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
-  });
+  const res = await makeApiCall(`/api/groups/${groupId}`);
   return res.json();
 }
 export async function getStream(
   streamId: number
 ): Promise<{ data: App.Stream }> {
-  const res = await fetch(`${API_BASE}/api/streams/${streamId}`, {
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
-  });
+  const res = await makeApiCall(`/api/streams/${streamId}`);
   return res.json();
 }
 
 export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
-  const res = await fetch(`${API_BASE}/api/site-config?populate=*`, {
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
-  });
+  const res = await makeApiCall(`/api/site-config?populate=*`);
   return res.json();
 }

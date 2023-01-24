@@ -1,11 +1,15 @@
-import { getGroup } from "@/app/util/api";
+import { getGroup, getStream } from "@/app/util/api";
 import { getTitle } from "@/app/util/site";
+import { notFound } from "next/navigation";
 
 export default async function Head({ params }: { params: { id: number } }) {
-  const author = await getGroup(Number(params.id));
+  const stream = await getStream(Number(params.id));
+  if (!stream.data) {
+    return notFound();
+  }
   return (
     <>
-      <title>{await getTitle([author.data.attributes.name])}</title>
+      <title>{await getTitle([stream.data.attributes.name])}</title>
     </>
   );
 }

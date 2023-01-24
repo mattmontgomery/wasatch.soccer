@@ -14,7 +14,7 @@ export default async function AuthorsPage({
 }) {
   const stream = await getStream(Number(id));
   if (!stream.data) {
-    notFound();
+    return notFound();
   }
   const posts = await getPosts({
     filters: {

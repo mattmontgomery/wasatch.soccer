@@ -1,5 +1,42 @@
 export default function ({ env }) {
   return {
+    redis: {
+      config: {
+        connections: {
+          default: {
+            connection: {
+              host: process.env.REDIS_HOST,
+              port: process.env.REDIS_PORT,
+              db: 0,
+              user: process.env.REDIS_USERNAME,
+              password: process.env.REDIS_PASSWORD,
+            },
+          },
+        },
+      },
+    },
+    "rest-cache": {
+      config: {
+        provider: {
+          name: "redis",
+          options: {
+            max: 32767,
+            connection: "default",
+          },
+        },
+        strategy: {
+          keysPrefix: "strapi",
+          hitpass: false,
+          contentTypes: [
+            // list of Content-Types UID to cache
+            "api::post.post",
+            "api::group.group",
+            "api::author.author",
+            "api::site-config.site-config",
+          ],
+        },
+      },
+    },
     upload: {
       config: {
         provider: "aws-s3",

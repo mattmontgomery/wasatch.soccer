@@ -14,6 +14,7 @@ import Groups from "@/app/components/Post/Groups";
 import Streams from "@/app/components/Post/Streams";
 
 import Posts from "./Posts";
+import { notFound } from "next/navigation";
 
 export default async function PostPage({
   params: { id, slug },
@@ -21,6 +22,9 @@ export default async function PostPage({
   params: { id: number; slug: string };
 }) {
   const { data } = await getPost(id);
+  if (!data) {
+    return notFound();
+  }
   const leadPhoto = getPhoto(data);
   const authors = getAuthors(data);
   const groups = data.attributes.groups?.data ?? [];
