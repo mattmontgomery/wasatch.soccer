@@ -34,16 +34,14 @@ export function Post(props: App.Post & { hero?: boolean }) {
         className={photo ? styles.image : styles.noImage}
       >
         {photo && (
-          <span>
-            <Image
-              sizes="(max-width: 72rem) 100vw
+          <Image
+            sizes="(max-width: 72rem) 100vw
               33vw"
-              priority={!!props.hero}
-              alt={props.attributes.headline}
-              src={getPhotoPath(photo.url)}
-              fill
-            />
-          </span>
+            priority={!!props.hero}
+            alt={props.attributes.headline}
+            src={getPhotoPath(photo.url)}
+            fill
+          />
         )}
         {primaryGroup ? (
           <h5 className={styles.primaryGroup}>
