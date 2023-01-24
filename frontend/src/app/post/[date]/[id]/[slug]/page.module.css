@@ -6,6 +6,8 @@
 .section {
   margin: auto;
   margin-bottom: 1rem;
+  display: grid;
+  row-gap: 1rem;
 }
 
 /** Article Details */
@@ -77,10 +79,6 @@
     display: grid;
     grid-template-columns: auto 300px;
     column-gap: 2rem;
-  }
-  .section {
-    display: grid;
-    row-gap: 1rem;
   }
   .details {
     display: grid;
