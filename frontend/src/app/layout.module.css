@@ -1,7 +1,6 @@
 .header {
   font-family: var(--headline-font);
   padding: 1rem;
-  margin-bottom: 4rem;
 }
 .header h1 {
   font-family: var(--headline-font);
@@ -29,6 +28,9 @@
   font-size: 9pt;
 }
 @media screen and (min-width: 72rem) {
+  .header {
+    margin-bottom: 4rem;
+  }
   .grid {
     max-width: 72rem;
     margin: auto;
