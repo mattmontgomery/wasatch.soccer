@@ -15,7 +15,9 @@ export default function Pagination({
       {pagination.page > 1 ? (
         Array(pagination.page - 1)
           .fill(null)
-          .map((page, idx) => <span key={idx}>{renderLink(idx + 1)}</span>)
+          .map((_, idx) => idx)
+          .slice(pagination.page - 1 - 5)
+          .map((page, idx) => <span key={idx}>{renderLink(page + 1)}</span>)
       ) : (
         <></>
       )}

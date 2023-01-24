@@ -7,59 +7,61 @@ import podcastStyles from "@/app/styles/podcast.module.css";
 import { getConfig } from "./util/config";
 
 export default async function Home({
-  searchParams,
+  params: { page: _page },
 }: {
-  searchParams?: { page: string };
+  params: { page?: string };
 }) {
-  const page = isNaN(Number(searchParams?.page))
-    ? 1
-    : Number(searchParams?.page);
+  const page = isNaN(Number(_page)) ? 1 : Number(_page);
+  const config = await getConfig();
+  const slotCount = 18;
+  const customSlots = [
+    {
+      slot: 5,
+      renderCard: () => {
+        return (
+          <Card className={podcastStyles.card}>
+            <h2>Podcast</h2>
+            <h4>Latest episodes</h4>
+            <ul className={podcastStyles.list}>
+              {feed.episodes.slice(0, 5).map((ep, idx) => (
+                <li key={idx}>{ep.title}</li>
+              ))}
+            </ul>
+            <a
+              className={podcastStyles.subscribe}
+              href={feed.meta.link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Subscribe
+            </a>
+          </Card>
+        );
+      },
+    },
+  ];
+  const heroSlots = [0];
+  const heroSlotSize = 4;
   const posts = await getPosts({
     sort: ["published:desc", "publishedAt:desc"],
-    pagination: { pageSize: 20, page },
+    pagination: {
+      pageSize:
+        slotCount - customSlots.length - (heroSlots.length * heroSlotSize - 1),
+      page,
+    },
   });
-  const config = await getConfig();
   const feed = config.podcastFeed
     ? await getPodcastFeed(config.podcastFeed)
     : { episodes: [], meta: { link: "" } };
   return (
     <main className={`${styles.main}`}>
       <Posts
-        pageUrl="/"
+        pageUrl="/archive"
         pagination={posts.meta.pagination}
-        slots={18}
+        slots={slotCount}
         posts={posts.data ?? []}
-        heroSlots={page === 1 ? [0] : []}
-        customSlots={
-          config.podcastFeed && page === 1
-            ? [
-                {
-                  slot: 5,
-                  renderCard: () => {
-                    return (
-                      <Card className={podcastStyles.card}>
-                        <h2>Podcast</h2>
-                        <h4>Latest episodes</h4>
-                        <ul className={podcastStyles.list}>
-                          {feed.episodes.slice(0, 5).map((ep, idx) => (
-                            <li key={idx}>{ep.title}</li>
-                          ))}
-                        </ul>
-                        <a
-                          className={podcastStyles.subscribe}
-                          href={feed.meta.link}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Subscribe
-                        </a>
-                      </Card>
-                    );
-                  },
-                },
-              ]
-            : []
-        }
+        heroSlots={page === 1 ? heroSlots : []}
+        customSlots={page === 1 ? customSlots : []}
       />
     </main>
   );

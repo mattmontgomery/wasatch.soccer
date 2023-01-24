@@ -6,13 +6,12 @@ import { getGroup, getPosts } from "@/app/util/api";
 import styles from "@/app/page.module.css";
 
 export default async function AuthorsPage({
-  params: { id },
-  searchParams,
+  params: { id, slug: _slug },
 }: {
-  params: { id: string; slug: string };
-  searchParams?: { page: string };
+  params: { id: string; slug: string[] };
 }) {
-  const page = searchParams?.page ?? 1;
+  const [slug, _page] = _slug;
+  const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const group = await getGroup(Number(id));
   if (!group.data) {
     notFound();
@@ -27,7 +26,7 @@ export default async function AuthorsPage({
     },
     pagination: {
       pageSize: 9,
-      page: isNaN(Number(page)) ? 1 : Number(page),
+      page,
     },
   });
   return (

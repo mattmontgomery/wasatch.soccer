@@ -8,13 +8,12 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 
 export default async function AuthorsPage({
-  params: { id, slug },
-  searchParams,
+  params: { id, slug: _slug },
 }: {
-  params: { id: string; slug: string };
-  searchParams?: { page: string };
+  params: { id: string; slug: string[] };
 }) {
-  const page = searchParams?.page ?? 1;
+  const [slug, _page] = _slug;
+  const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const author = await getAuthor(Number(id));
   if (!author.data) {
     notFound();
@@ -32,7 +31,7 @@ export default async function AuthorsPage({
     },
     pagination: {
       pageSize: 9,
-      page: isNaN(Number(page)) ? 1 : Number(page),
+      page,
     },
   });
   return (

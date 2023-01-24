@@ -8,13 +8,12 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 
 export default async function AuthorsPage({
-  params: { id },
-  searchParams,
+  params: { id, slug: _slug },
 }: {
-  params: { id: string; slug: string };
-  searchParams?: { page: string };
+  params: { id: string; slug: string[] };
 }) {
-  const page = searchParams?.page ?? 1;
+  const [, _page] = _slug;
+  const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const stream = await getStream(Number(id));
   if (!stream.data) {
     return notFound();
@@ -43,7 +42,7 @@ export default async function AuthorsPage({
 
       <Posts
         posts={posts.data ?? []}
-        pageUrl={`/stream/${id}/${stream.data.attributes.slug}`}
+        pageUrl={`/streams/${id}/${stream.data.attributes.slug}`}
         pagination={posts.meta.pagination}
       />
     </main>
