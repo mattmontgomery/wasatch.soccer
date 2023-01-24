@@ -34,6 +34,11 @@
   background-color: var(--theme-primary);
   border-radius: 0.25rem;
 }
+@media screen and (max-width: 48rem) {
+  .postCardImage {
+    height: 300px;
+  }
+}
 
 .postCardImage img {
   object-fit: cover;

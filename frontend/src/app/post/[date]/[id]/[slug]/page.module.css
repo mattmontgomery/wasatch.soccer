@@ -77,7 +77,7 @@
 @media screen and (min-width: 56rem) {
   .main {
     display: grid;
-    grid-template-columns: auto 300px;
+    grid-template-columns: auto 200px;
     column-gap: 2rem;
   }
   .details {
@@ -97,5 +97,10 @@
   .headline,
   .details > span {
     margin-bottom: 0;
+  }
+}
+@media screen and (min-width: 60rem) {
+  .main {
+    grid-template-columns: auto 300px;
   }
 }
