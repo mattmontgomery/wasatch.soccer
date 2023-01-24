@@ -9,6 +9,7 @@ export default function Authors(props: App.Post) {
         by{" "}
         {authors.map((author, idx) => (
           <Link
+            prefetch={false}
             href={`/authors/${author.id}/${author.attributes.slug}`}
             rel="author"
             key={idx}
