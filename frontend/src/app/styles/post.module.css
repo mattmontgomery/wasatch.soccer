@@ -42,6 +42,7 @@
 
 .postCardImage img {
   object-fit: cover;
+  object-position: 50% 10%;
 }
 
 .postCard .postCardHeadline {

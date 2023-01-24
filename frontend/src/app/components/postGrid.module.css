@@ -26,6 +26,7 @@
 
 .post .image img {
   object-fit: cover;
+  object-position: 50% 10%;
 }
 .post .streams {
   font-size: 10pt;
