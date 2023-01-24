@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <main className={`${styles.main}`}>
       <Posts
-        slots={10}
+        slots={18}
         posts={posts.data ?? []}
         heroSlots={[0]}
         customSlots={
