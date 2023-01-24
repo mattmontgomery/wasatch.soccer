@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import "./globals.css";
 import styles from "./layout.module.css";
-import Loading from "./loading";
 import { getConfig } from "./util/config";
 
 const headlineFont = Montserrat({
