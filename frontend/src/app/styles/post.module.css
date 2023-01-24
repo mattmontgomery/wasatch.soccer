@@ -19,9 +19,6 @@
   font-style: italic;
 }
 
-.date {
-}
-
 .postCard {
   display: grid;
   row-gap: 0.5rem;

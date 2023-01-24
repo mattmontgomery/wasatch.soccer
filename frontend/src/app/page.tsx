@@ -6,10 +6,11 @@ import { getPodcastFeed } from "./util/podcast";
 import podcastStyles from "@/app/styles/podcast.module.css";
 import { getConfig } from "./util/config";
 
-export default async function Home() {
+export default async function Home({ searchParams: { page: _page = 1 } }) {
+  const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const posts = await getPosts({
     sort: ["published:desc", "publishedAt:desc"],
-    pagination: { pageSize: 25 },
+    pagination: { pageSize: 15, page },
   });
   const config = await getConfig();
   const feed = config.podcastFeed
@@ -18,11 +19,13 @@ export default async function Home() {
   return (
     <main className={`${styles.main}`}>
       <Posts
+        pageUrl="/"
+        pagination={posts.meta.pagination}
         slots={18}
         posts={posts.data ?? []}
-        heroSlots={[0]}
+        heroSlots={page === 1 ? [0] : []}
         customSlots={
-          config.podcastFeed
+          config.podcastFeed && page === 1
             ? [
                 {
                   slot: 5,

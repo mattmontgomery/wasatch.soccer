@@ -53,11 +53,16 @@ export async function getPosts({
       };
     };
   };
-  pagination?: { pageSize?: number };
+  pagination?: {
+    pageSize?: number;
+    page?: number;
+    withCount?: number;
+  };
   populate?: string | string[];
   sort?: string[];
 } = {}): Promise<{
   data: App.Post[];
+  meta: Required<App.Meta>;
 }> {
   const queryString = qs.stringify(
     {

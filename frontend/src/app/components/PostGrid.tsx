@@ -6,6 +6,7 @@ import Streams from "@/app/components/Post/Streams";
 import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
 import { Fragment, PropsWithChildren, useMemo } from "react";
+import Pagination from "./Pagination";
 
 export function Card({
   children,
@@ -86,16 +87,20 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
 }
 
 export function Posts({
-  posts,
   customSlots = [],
-  slots = 20,
   heroSlots = [],
+  pageUrl,
+  pagination,
+  posts,
+  slots = 20,
 }: {
   customSlots?: {
     slot: number;
     renderCard: () => React.ReactElement;
   }[];
   heroSlots?: number[];
+  pageUrl: string;
+  pagination?: App.Pagination;
   posts: App.Post[];
   slots?: number;
 }) {
@@ -131,5 +136,19 @@ export function Posts({
       return slot;
     });
   }, [slots, customSlots, heroSlots, posts]);
-  return <section className={styles.posts}>{Slots}</section>;
+  const showPagination =
+    pagination && (pagination.pageCount > 1 || pagination.page > 1);
+  return (
+    <>
+      <section className={styles.posts}>{Slots}</section>
+      {showPagination && (
+        <Pagination
+          pagination={pagination}
+          renderLink={(page, text) => (
+            <Link href={`${pageUrl}?page=${page}`}>{text ?? page}</Link>
+          )}
+        />
+      )}
+    </>
+  );
 }

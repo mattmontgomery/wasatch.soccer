@@ -4,7 +4,6 @@
 }
 
 .section {
-  margin: auto;
   margin-bottom: 1rem;
   display: grid;
   row-gap: 1rem;

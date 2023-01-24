@@ -9,8 +9,10 @@ import textStyles from "@/app/text.module.css";
 
 export default async function AuthorsPage({
   params: { id, slug },
+  searchParams: { page = 1 },
 }: {
   params: { id: string; slug: string };
+  searchParams: { page: number };
 }) {
   const author = await getAuthor(Number(id));
   if (!author.data) {
@@ -27,6 +29,10 @@ export default async function AuthorsPage({
         },
       },
     },
+    pagination: {
+      pageSize: 9,
+      page: isNaN(Number(page)) ? 1 : Number(page),
+    },
   });
   return (
     <main className={`${styles.main}`}>
@@ -36,7 +42,11 @@ export default async function AuthorsPage({
           <ReactMarkdown>{author.data.attributes.bio}</ReactMarkdown>
         </section>
       )}
-      <Posts posts={posts.data ?? []} />
+      <Posts
+        posts={posts.data ?? []}
+        pageUrl={`/author/${id}/${author.data.attributes.slug}`}
+        pagination={posts.meta.pagination}
+      />
     </main>
   );
 }

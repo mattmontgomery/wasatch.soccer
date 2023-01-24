@@ -1,0 +1,17 @@
+.pagination {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    column-gap: .5rem;
+    font-weight: bold;
+}
+.pagination span {
+    background-color: var(--theme-alternate);
+    color: var(--theme-alternate-contrast);
+    padding: .5rem;
+    border-radius: .25rem;
+}
+.pagination .current {
+    background-color: var(--theme-alternate-contrast);
+    color: var(--theme-alternate);
+}

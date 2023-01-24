@@ -1,12 +1,17 @@
 .main {
   column-gap: 2rem;
   padding: 1rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 2rem;
+}
+.main .section {
+
 }
 
 .pageHeader {
   font-size: 24pt;
   padding-bottom: 1rem;
-  margin-bottom: 2rem;
   border-bottom: 4px solid var(--theme-primary);
 }
 @media screen and (min-width: 72rem) {
