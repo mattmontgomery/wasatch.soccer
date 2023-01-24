@@ -30,7 +30,7 @@ export default async function PostPage({
   const groups = data.attributes.groups?.data ?? [];
   const primaryGroup = data.attributes.primaryGroup?.data ?? null;
   const posts = await getPosts({
-    sort: ["publishedAt:desc"],
+    sort: ["published:desc", "publishedAt:desc"],
     filters: {
       id: {
         $ne: id,
