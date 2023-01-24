@@ -52,36 +52,6 @@ export default async function PostPage({
             )}
             <h2 className={pageStyles.headline}>{data.attributes.headline}</h2>
             <p className={pageStyles.summary}>{data.attributes.summary}</p>
-            <p className={pageStyles.details}>
-              {authors.length ? (
-                <span className={postStyles.author}>
-                  <Authors {...data} />
-                </span>
-              ) : (
-                <></>
-              )}
-              <span className={postStyles.date}>
-                <Published {...data} />
-              </span>
-              {groups.length ? (
-                <span className={postStyles.groups}>
-                  <Groups {...data} />
-                </span>
-              ) : (
-                <></>
-              )}
-            </p>
-
-            {streams.length ? (
-              <div className={pageStyles.streams}>
-                <span>Filed under:</span>{" "}
-                <span className={pageStyles.streamsContent}>
-                  <Streams {...data} />
-                </span>
-              </div>
-            ) : (
-              <></>
-            )}
           </header>
           {leadPhoto && (
             <div className={pageStyles.leadPhotoContainer}>
@@ -100,6 +70,40 @@ export default async function PostPage({
               </div>
             </div>
           )}
+          <div className={pageStyles.detailSection}>
+            <p className={pageStyles.details}>
+              {authors.length ? (
+                <span className={postStyles.author}>
+                  <Authors {...data} />
+                </span>
+              ) : (
+                <></>
+              )}
+              <span className={postStyles.date}>
+                <Published {...data} />
+              </span>
+            </p>
+            <div className={pageStyles.details}>
+              {groups.length ? (
+                <span className={postStyles.groups}>
+                  <Groups {...data} />
+                </span>
+              ) : (
+                <></>
+              )}
+
+              {streams.length ? (
+                <div className={pageStyles.streams}>
+                  <span>Filed under:</span>{" "}
+                  <span className={pageStyles.streamsContent}>
+                    <Streams {...data} />
+                  </span>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
           <div className={textStyles.body}>
             <ReactMarkdown
               components={{

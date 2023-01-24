@@ -38,11 +38,13 @@
 .headline {
   font-size: 28pt;
   margin-bottom: 1rem;
+  line-height: 1.15;
 }
 
 .summary {
-  font-size: 12pt;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  font-size: 16pt;
+  font-style: italic;
 }
 
 .groups span:not(:empty):not(:last-child):after {
@@ -63,8 +65,7 @@
 }
 
 .leadPhotoCaption {
-  font-size: 11pt;
-  font-weight: bold;
+  font-size: 9pt;
   text-align: right;
 }
 .leadPhotoContainer {
@@ -73,6 +74,11 @@
 
 .streamsContent span:not(:empty):not(:last-child):after {
   content: ", ";
+}
+
+.detailSection {
+  padding-bottom: 1rem;
+  border-bottom: 4px solid var(--theme-alternate);
 }
 
 @media screen and (min-width: 48rem) {
