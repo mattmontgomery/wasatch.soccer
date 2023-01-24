@@ -4,8 +4,6 @@ import { Posts } from "@/app/components/PostGrid";
 import { getGroup, getPosts } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
-import Pagination from "@/app/components/Pagination";
-import Link from "next/link";
 
 export default async function AuthorsPage({
   params: { id },
@@ -36,7 +34,7 @@ export default async function AuthorsPage({
       <h2 className={styles.pageHeader}>{group.data.attributes.name}</h2>
       <Posts
         posts={posts.data ?? []}
-        pageUrl={`/author/${id}/${group.data.attributes.slug}`}
+        pageUrl={`/group/${id}/${group.data.attributes.slug}`}
         pagination={posts.meta.pagination}
       />
     </main>
