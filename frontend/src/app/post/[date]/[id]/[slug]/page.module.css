@@ -76,6 +76,7 @@
   .main {
     display: grid;
     grid-template-columns: auto 300px;
+    column-gap: 2rem;
   }
   .section {
     display: grid;

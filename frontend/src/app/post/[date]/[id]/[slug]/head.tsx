@@ -1,34 +1,36 @@
 import DefaultTags from "@/app/DefaultTags";
-import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
+import { getAuthor, getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { getTitle } from "@/app/util/site";
 import { notFound } from "next/navigation";
 
 export default async function Head({ params }: { params: { id: number } }) {
-  const post = await getPost(params.id);
-  if (!post.data) {
-    return notFound();
+  const { data } = await getPost(params.id);
+  if (!data) {
+    notFound();
   }
-  const photo = getPhoto(post.data, "small");
+  const photo = getPhoto(data, "small");
   const photoPath = photo ? getPhotoPath(photo.url) : null;
+
   return (
     <>
-      <DefaultTags />
-      <title>{await getTitle([post.data.attributes.headline])}</title>
-
-      <meta name="description">{post.data.attributes.summary}</meta>
-      <meta property="og:title" content={post.data.attributes.headline} />
-      <meta property="og:description" content={post.data.attributes.summary} />
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <link rel="shortcut icon" href="/ball.png" />
+      <title>{await getTitle([data?.attributes.headline])}</title>
+      <meta name="description">{data?.attributes.summary}</meta>
+      <meta property="og:title" content={data.attributes.headline} />
+      <meta property="og:description" content={data.attributes.summary} />
       <meta property="og:type" content="article" />
       <meta property="article:section" content="Sports" />
       <meta property="article:tag" content="Real Salt Lake" />
+
       {photoPath && <meta property="og:image" content={photoPath} />}
 
-      {post.data.attributes.authors.data.length ? (
+      {data.attributes.authors.data.length ? (
         <>
           <meta property="twitter:label1" content="Written by" />
           <meta
             property="twitter:data1"
-            content={post.data.attributes.authors.data
+            content={data.attributes.authors.data
               .map((author) => author.attributes.name)
               .join(", ")}
           />

@@ -40,7 +40,7 @@ export default async function PostPage({
   });
   const streams = data.attributes.streams?.data ?? [];
   return (
-    <>
+    <main className={`${postStyles.main} ${pageStyles.main}`}>
       <article className={pageStyles.post}>
         <Redirect slugFromPath={slug} post={data} />
         <section className={pageStyles.section}>
@@ -121,7 +121,7 @@ export default async function PostPage({
         <h3>Latest News</h3>
         <Posts posts={posts.data} />
       </div>
-    </>
+    </main>
   );
 }
 
