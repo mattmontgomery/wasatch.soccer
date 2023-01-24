@@ -5,7 +5,7 @@
 .header h1 {
   font-family: var(--headline-font);
   font-size: 24pt;
-  text-transform: lowercase;
+  text-transform: uppercase;
   font-weight: 900;
 }
 .header h5 {

@@ -1,7 +1,7 @@
 import Config, { getConfig } from "@/app/util/config";
 import Script from "next/script";
 import DefaultTags from "./DefaultTags";
-import { getTitle } from "./util/site";
+import { getSiteTitle, getTitle } from "./util/site";
 
 export default async function Head() {
   const config = await getConfig();
@@ -9,6 +9,7 @@ export default async function Head() {
     <>
       <DefaultTags />
       <title>{await getTitle([config.homepageTitleText], true)}</title>
+      <meta property="og:site_name" content={await getSiteTitle()} />
       <meta name="description" content={config.siteDescription} />
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-PRYEH8MYJ1"
