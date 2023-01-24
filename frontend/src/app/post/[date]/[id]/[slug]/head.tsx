@@ -1,5 +1,4 @@
-import DefaultTags from "@/app/DefaultTags";
-import { getAuthor, getPhoto, getPhotoPath, getPost } from "@/app/util/api";
+import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { getSiteTitle, getTitle } from "@/app/util/site";
 import { notFound } from "next/navigation";
 
@@ -10,14 +9,16 @@ export default async function Head({ params }: { params: { id: number } }) {
   }
   const photo = getPhoto(data, "small");
   const photoPath = photo ? getPhotoPath(photo.url) : null;
+  const title = await getTitle([data?.attributes.headline]);
+  const siteName = await getSiteTitle();
 
   return (
     <>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="shortcut icon" href="/ball.png" />
-      <title>{await getTitle([data?.attributes.headline])}</title>
+      <title>{title}</title>
       <meta name="description">{data?.attributes.summary}</meta>
-      <meta property="og:site_name" content={await getSiteTitle()} />
+      <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={data.attributes.headline} />
       <meta property="og:description" content={data.attributes.summary} />
       <meta property="og:type" content="article" />
