@@ -9,11 +9,12 @@ import textStyles from "@/app/text.module.css";
 
 export default async function AuthorsPage({
   params: { id, slug },
-  searchParams: { page = 1 },
+  searchParams,
 }: {
   params: { id: string; slug: string };
-  searchParams: { page: number };
+  searchParams?: { page: string };
 }) {
+  const page = searchParams?.page ?? 1;
   const author = await getAuthor(Number(id));
   if (!author.data) {
     notFound();

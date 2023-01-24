@@ -6,8 +6,14 @@ import { getPodcastFeed } from "./util/podcast";
 import podcastStyles from "@/app/styles/podcast.module.css";
 import { getConfig } from "./util/config";
 
-export default async function Home({ searchParams: { page: _page = 1 } }) {
-  const page = isNaN(Number(_page)) ? 1 : Number(_page);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: { page: string };
+}) {
+  const page = isNaN(Number(searchParams?.page))
+    ? 1
+    : Number(searchParams?.page);
   const posts = await getPosts({
     sort: ["published:desc", "publishedAt:desc"],
     pagination: { pageSize: 20, page },

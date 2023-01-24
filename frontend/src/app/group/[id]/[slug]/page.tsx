@@ -7,11 +7,12 @@ import styles from "@/app/page.module.css";
 
 export default async function AuthorsPage({
   params: { id },
-  searchParams: { page = 1 },
+  searchParams,
 }: {
   params: { id: string; slug: string };
-  searchParams: { page: number };
+  searchParams?: { page: string };
 }) {
+  const page = searchParams?.page ?? 1;
   const group = await getGroup(Number(id));
   if (!group.data) {
     notFound();
