@@ -17,7 +17,7 @@ export default async function Home({
   const feed = config.podcastFeed
     ? await getPodcastFeed(config.podcastFeed)
     : { episodes: [], meta: { link: "" } };
-  const slotCount = 18;
+  const slotCount = 21;
   const customSlots = [
     config.podcastFeed
       ? {
