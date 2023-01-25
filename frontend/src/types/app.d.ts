@@ -58,6 +58,7 @@ declare namespace App {
     id: number;
     attributes: {
       name: string;
+      title: string;
       slug: string;
       bio: string;
       photo: {

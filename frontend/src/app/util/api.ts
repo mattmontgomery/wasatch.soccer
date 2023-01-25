@@ -148,3 +148,11 @@ export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
   const res = await makeApiCall(`/api/site-config?populate=*`);
   return res.json();
 }
+
+export async function getAuthors(): Promise<{ data: App.Author[] }> {
+  const query = qs.stringify({
+    sort: ["name:asc"],
+  });
+  const res = await makeApiCall(`/api/authors?${query}`);
+  return res.json();
+}

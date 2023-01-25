@@ -27,6 +27,17 @@
   margin-top: 4rem;
   padding: 1rem;
   font-size: 9pt;
+  display: grid;
+  row-gap: 1rem;
+}
+.footer a {
+  color: var(--theme-primary);
+}
+.footer .links {
+  display: block;
+}
+.footer .links span {
+  margin-right: 1rem;
 }
 @media screen and (min-width: 72rem) {
   .navigation {

@@ -17,6 +17,8 @@ export const Config: {
   siteDescription: "",
   siteName: "",
 };
+
+export type Config = typeof Config;
 export default Config;
 
 export async function getConfig(): Promise<typeof Config> {

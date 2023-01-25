@@ -1,6 +1,6 @@
 import { Montserrat } from "@next/font/google";
 import Link from "next/link";
-import { useState } from "react";
+import Footer from "./components/Footer";
 import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";
@@ -54,9 +54,7 @@ export default async function RootLayout({
             </nav>
           </header>
           {children}
-          <footer className={styles.footer}>
-            &copy; 2023 {config.siteName}
-          </footer>
+          <Footer config={config} />
         </div>
       </body>
     </html>
