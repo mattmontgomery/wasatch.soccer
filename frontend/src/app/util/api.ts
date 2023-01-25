@@ -95,6 +95,11 @@ export function getPhoto(
   data: App.Post,
   format: string = "large"
 ): App.Photo | null {
+  if (format === "original") {
+    return data?.attributes?.leadPhoto.data?.attributes
+      ? data.attributes.leadPhoto.data.attributes
+      : null;
+  }
   return data?.attributes?.leadPhoto.data
     ? data.attributes.leadPhoto.data.attributes.formats[format]
     : null;

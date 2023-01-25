@@ -25,8 +25,11 @@ declare namespace App {
       leadPhoto: {
         data: {
           attributes: {
-            formats: Record<string, Photo>;
             caption: string;
+            formats: Record<string, Photo>;
+            height: number;
+            width: number;
+            url: string;
           };
         };
       };

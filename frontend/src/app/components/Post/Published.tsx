@@ -1,5 +1,5 @@
 import format from "date-fns-tz/format";
-import { differenceInHours, differenceInMinutes } from "date-fns";
+import { differenceInHours, differenceInMinutes, isFuture } from "date-fns";
 
 export default function Published(props: App.Post): React.ReactElement {
   const date = new Date(
@@ -20,6 +20,9 @@ export function Relative(props: App.Post) {
   const hours = differenceInHours(new Date(), date);
   const minutes = differenceInMinutes(new Date(), date);
   const thisYear = new Date().getFullYear() === date.getFullYear();
+  if (isFuture(date)) {
+    return <>Now</>;
+  }
   const relative =
     hours === 0
       ? `${minutes}m ago`

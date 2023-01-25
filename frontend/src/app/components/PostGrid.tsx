@@ -26,7 +26,7 @@ export function Card({
 }
 
 export function Post(props: App.Post & { hero?: boolean; slot: number }) {
-  const photo = getPhoto(props, props.hero ? "large" : "medium");
+  const photo = getPhoto(props, props.hero ? "original" : "small");
   const primaryGroup = props.attributes.primaryGroup?.data ?? null;
   return (
     <Card hero={props.hero}>
@@ -36,8 +36,9 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
       >
         {photo && (
           <Image
-            sizes="(max-width: 72rem) 100vw
-              33vw"
+            quality={80}
+            sizes="(max-width: 72rem) 800px,
+              (min-width: 72rem) 900px"
             priority={!!props.hero}
             alt={props.attributes.headline}
             src={getPhotoPath(photo.url)}
