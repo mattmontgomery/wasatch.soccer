@@ -31,6 +31,18 @@
     },
     "newsletterSignup": {
       "type": "string"
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
     }
   }
 }

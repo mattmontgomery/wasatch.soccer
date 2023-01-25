@@ -1,6 +1,7 @@
 declare namespace App {
   type SiteConfig = {
     attributes: {
+      about: string;
       siteName: string;
       siteDescription: string;
       homepageTitleText: string;

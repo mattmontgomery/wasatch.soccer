@@ -2,6 +2,7 @@ import { getSiteConfig } from "./api";
 
 export const Config: {
   __loaded: boolean;
+  about: string;
   homepageTitleText: string;
   navigationGroups: App.Group[];
   newsletterSignup: string;
@@ -10,6 +11,7 @@ export const Config: {
   siteName: string;
 } = {
   __loaded: false,
+  about: "",
   homepageTitleText: "",
   navigationGroups: [],
   newsletterSignup: "",
@@ -27,6 +29,7 @@ export async function getConfig(): Promise<typeof Config> {
     const { data } = resp;
     Config.siteName = data.attributes.siteName;
     Config.siteDescription = data.attributes.siteDescription;
+    Config.about = data.attributes.about;
     Config.homepageTitleText = data.attributes.homepageTitleText;
     Config.navigationGroups = data.attributes.navigationGroups.data ?? [];
     Config.newsletterSignup = data.attributes.newsletterSignup;

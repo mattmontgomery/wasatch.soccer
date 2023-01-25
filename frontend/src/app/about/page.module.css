@@ -1,0 +1,11 @@
+.grid {
+    display: grid;
+    grid-template-rows: repeat(12, max-content);
+    grid-template-columns: repeat(3,1fr);
+}
+.grid div {
+    min-height: 5rem;
+}
+.grid div h5 {
+    font-family: var(--subtitle-font);
+}

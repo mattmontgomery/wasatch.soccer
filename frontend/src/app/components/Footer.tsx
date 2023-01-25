@@ -27,6 +27,9 @@ export default function Footer(props: { config: Config }) {
             </Link>
           </span>
         )}
+        <span>
+          <Link href="/about">About</Link>
+        </span>
       </div>
       <p>&copy; 2023 {props.config.siteName}</p>
     </footer>
