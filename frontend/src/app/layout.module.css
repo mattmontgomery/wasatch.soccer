@@ -4,15 +4,26 @@
 }
 .header h1 {
   font-family: var(--headline-font);
-  font-size: 24pt;
+  font-size: 0;
   text-transform: uppercase;
   font-weight: 900;
+  margin-bottom: 1rem;
 }
 .header h5 {
   font-family: var(--subtitle-font);
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   font-weight: 500;
 }
+.headerImageDark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+.headerImageLight {
+  display: none;
+}
+.headerImageDark {
+    display: block;
+  }}
 .navigation {
   display: flex;
   column-gap: 1rem;
