@@ -1,7 +1,6 @@
 import { Montserrat } from "@next/font/google";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Link from "next/link";
-import { Suspense } from "react";
+import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
@@ -34,6 +33,7 @@ export default async function RootLayout({
       */}
       <head />
       <body className={`${headlineFont.variable} ${subtitleFont.variable}`}>
+        <Top />
         <div className={styles.grid}>
           <header className={styles.header}>
             <h1>
