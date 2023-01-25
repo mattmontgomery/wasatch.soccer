@@ -5,7 +5,7 @@ export default function Published(props: App.Post): React.ReactElement {
   const date = new Date(
     props.attributes.published ?? props.attributes.publishedAt
   );
-  const formattedDate = format(date, "MMM dd, yyyy, hh:mm a", {
+  const formattedDate = format(date, "MMM dd, yyyy", {
     timeZone: process.env.TIMEZONE ?? "",
   })
     .replace(/am/i, "a.m.")
@@ -17,6 +17,7 @@ export function Relative(props: App.Post) {
   const date = new Date(
     props.attributes.published ?? props.attributes.publishedAt
   );
+  console.log(date, new Date());
   const hours = differenceInHours(new Date(), date);
   const minutes = differenceInMinutes(new Date(), date);
   const thisYear = new Date().getFullYear() === date.getFullYear();
@@ -28,7 +29,7 @@ export function Relative(props: App.Post) {
       ? `${minutes}m ago`
       : hours > 16
       ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`, {
-          timeZone: process.env.TIMEZONE ?? "",
+          timeZone: "Europe/Berlin",
         })
       : `${hours}h ago`;
   return <>{relative}</>;
