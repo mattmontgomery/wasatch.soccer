@@ -4,6 +4,7 @@ export const Config: {
   __loaded: boolean;
   homepageTitleText: string;
   navigationGroups: App.Group[];
+  newsletterSignup: string;
   podcastFeed: string;
   siteDescription: string;
   siteName: string;
@@ -11,6 +12,7 @@ export const Config: {
   __loaded: false,
   homepageTitleText: "",
   navigationGroups: [],
+  newsletterSignup: "",
   podcastFeed: "",
   siteDescription: "",
   siteName: "",
@@ -25,6 +27,7 @@ export async function getConfig(): Promise<typeof Config> {
     Config.siteDescription = data.attributes.siteDescription;
     Config.homepageTitleText = data.attributes.homepageTitleText;
     Config.navigationGroups = data.attributes.navigationGroups.data ?? [];
+    Config.newsletterSignup = data.attributes.newsletterSignup;
     Config.podcastFeed = data.attributes.podcastFeed;
     Config.__loaded = true;
   }

@@ -7,6 +7,7 @@ declare namespace App {
       navigationGroups: {
         data: Group[];
       };
+      newsletterSignup: string;
       podcastFeed: string;
     };
   };

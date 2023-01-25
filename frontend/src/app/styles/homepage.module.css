@@ -1,0 +1,22 @@
+.card {
+    padding: 1rem;
+    background-color: var(--theme-primary);
+    color: var(--theme-primary-contrast);
+    grid-template-rows: auto auto 1fr auto;
+}
+.card.alternate {
+    background-color: var(--theme-alternate);
+    color: var(--theme-alternate-contrast);
+}
+.card .subscribe {
+    font-weight: bold;
+    background-color: var(--theme-primary-contrast);
+    color: var(--theme-primary);
+    
+    padding: 1rem;
+    margin-top: .5rem;
+}
+.card.alternate .subscribe {
+    background-color: var(--theme-alternate-contrast);
+    color: var(--theme-alternate);
+}
