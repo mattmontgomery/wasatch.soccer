@@ -1,7 +1,9 @@
 :root {
 
   --theme-primary: #a21d12;
+  --theme-primary-70: #a21d12cc;
   --theme-alternate: #fdb71a;
+  --theme-alternate-70: #fdb71acc;
   --theme-primary-contrast: #fafafa;
   --theme-alternate-contrast: #000034;
   --theme-hero: #fafafa;
