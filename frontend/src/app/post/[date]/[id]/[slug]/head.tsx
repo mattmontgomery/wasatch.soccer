@@ -24,6 +24,12 @@ export default async function Head({ params }: { params: { id: number } }) {
       <meta property="article:section" content="Sports" />
       <meta property="article:tag" content="Real Salt Lake" />
 
+      <meta property="twitter:card" />
+      <meta property="twitter:site" content="@rslsoapbox" />
+      <meta property="twitter:description" content={data.attributes.summary} />
+      <meta property="twitter:title" content={data.attributes.headline} />
+      {photoPath && <meta property="twitter:image" content={photoPath} />}
+
       {photoPath && <meta property="og:image" content={photoPath} />}
 
       {data.attributes.authors.data.length ? (
