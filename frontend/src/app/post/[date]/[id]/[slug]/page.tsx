@@ -143,7 +143,12 @@ function getAuthors(data: App.Post): string[] {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
+  const posts = await getPosts({
+    populate: "",
+    pagination: {
+      pageSize: 100,
+    },
+  });
 
   return posts.data.map((post) => {
     return getPathnamePieces(post);
