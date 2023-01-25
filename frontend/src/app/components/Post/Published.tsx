@@ -5,7 +5,7 @@ export default function Published(props: App.Post): React.ReactElement {
   const date = new Date(
     props.attributes.published ?? props.attributes.publishedAt
   );
-  const formattedDate = format(date, "MMM dd, yyyy, hh:ii a", {
+  const formattedDate = format(date, "MMM dd, yyyy, hh:mm a", {
     timeZone: process.env.TIMEZONE ?? "",
   })
     .replace(/am/i, "a.m.")
