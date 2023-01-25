@@ -40,7 +40,10 @@ export default async function AuthorsPage({
         author.data.attributes.bio ? styles.main4 : ""
       }`}
     >
-      <h2 className={styles.pageHeader}>{author.data.attributes.name}</h2>
+      <div className={styles.pageHeader}>
+        <h2>{author.data.attributes.name}</h2>
+        <h5>{author.data.attributes.title}</h5>
+      </div>
       {author.data.attributes.bio && (
         <section className={textStyles.body}>
           <ReactMarkdown>{author.data.attributes.bio}</ReactMarkdown>

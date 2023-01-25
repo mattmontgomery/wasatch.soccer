@@ -14,11 +14,17 @@
   padding-bottom: 1rem;
   border-bottom: 4px solid var(--theme-primary);
 }
+.pageHeader h2 {
+  font-size: 24pt;
+}
+.pageHeader h5 {
+  font-size: 18pt;
+}
 @media screen and (min-width: 72rem) {
   .main {
     max-width: 72rem;
   }
-  .pageHeader {
+  .pageHeader, .pageHeader h2 {
     font-size: 48pt;
   }
 }
