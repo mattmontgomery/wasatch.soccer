@@ -1,7 +1,14 @@
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import format from "date-fns/format";
 
-import { getPhoto, getPhotoPath, getPost, getPosts } from "@/app/util/api";
+import {
+  getPathnamePieces,
+  getPhoto,
+  getPhotoPath,
+  getPost,
+  getPosts,
+} from "@/app/util/api";
 import { Redirect } from "@/app/components/Post/Redirect";
 import { Embed } from "@/app/components/Post/Embed";
 import Published from "@/app/components/Post/Published";
@@ -133,4 +140,17 @@ function getAuthors(data: App.Post): string[] {
   return (
     data.attributes.authors?.data.map((author) => author.attributes.name) ?? []
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts({
+    populate: "",
+    pagination: {
+      pageSize: 100,
+    },
+  });
+
+  return posts.data.map((post) => {
+    return getPathnamePieces(post);
+  });
 }

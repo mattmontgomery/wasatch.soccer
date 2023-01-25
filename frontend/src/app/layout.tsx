@@ -38,7 +38,7 @@ export default async function RootLayout({
       */}
       <head />
       <body className={`${headlineFont.variable} ${subtitleFont.variable}`}>
-        <Top />
+        {typeof window !== "undefined" && <Top />}
         <div className={styles.grid}>
           <header className={styles.header}>
             <div className={styles.wordmark}>
