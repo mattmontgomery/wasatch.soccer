@@ -12,7 +12,7 @@ export default async function MastheadPage(): Promise<React.ReactElement> {
     <main className={pageStyles.main}>
       <h2 className={pageStyles.pageHeader}>Masthead</h2>
       <div className={styles.grid}>
-        {authors.data.map((author, idx) => (
+        {authors.data?.map((author, idx) => (
           <div key={idx}>
             <h3>
               <Link href={`/authors/${author.id}/${author.attributes.slug}`}>
