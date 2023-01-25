@@ -28,6 +28,9 @@
     },
     "podcastFeed": {
       "type": "string"
+    },
+    "newsletterSignup": {
+      "type": "string"
     }
   }
 }
