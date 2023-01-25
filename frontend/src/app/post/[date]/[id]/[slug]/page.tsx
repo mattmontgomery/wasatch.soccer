@@ -134,3 +134,11 @@ function getAuthors(data: App.Post): string[] {
     data.attributes.authors?.data.map((author) => author.attributes.name) ?? []
   );
 }
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+
+  return posts.data.map((post) => {
+    return { id: post.id, slug: post.attributes.slug };
+  });
+}
