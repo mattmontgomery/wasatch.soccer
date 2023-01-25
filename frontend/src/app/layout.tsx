@@ -1,5 +1,6 @@
 import { Montserrat } from "@next/font/google";
 import Link from "next/link";
+import { useState } from "react";
 import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";

@@ -16,6 +16,7 @@
 .navigation {
   display: flex;
   column-gap: 1rem;
+  font-size: 10pt;
 }
 .navigation a {
   font-weight: 500;
@@ -28,6 +29,9 @@
   font-size: 9pt;
 }
 @media screen and (min-width: 72rem) {
+  .navigation {
+    font-size: 13pt;
+  }
   .header {
     margin-bottom: 4rem;
   }

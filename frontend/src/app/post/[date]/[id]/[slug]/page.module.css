@@ -47,9 +47,6 @@
   font-style: italic;
 }
 
-.groups span:not(:empty):not(:last-child):after {
-  content: ", ";
-}
 
 .leadPhoto {
   max-width: 100%;
@@ -70,10 +67,6 @@
 }
 .leadPhotoContainer {
   margin-bottom: 1rem;
-}
-
-.streamsContent span:not(:empty):not(:last-child):after {
-  content: ", ";
 }
 
 .detailSection {

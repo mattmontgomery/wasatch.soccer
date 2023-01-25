@@ -27,7 +27,7 @@
 .postCardImage {
   position: relative;
   height: 150px;
-  background-color: var(--theme-primary);
+  background-color: var(--background-rgb);
   border-radius: 0.25rem;
 }
 @media screen and (max-width: 48rem) {
@@ -68,4 +68,8 @@
   font-size: 18pt;
   text-transform: uppercase;
   margin-bottom: 0;
+}
+
+.commaSeparatedList span:not(:empty):not(:last-child):after {
+   content: ", ";
 }
