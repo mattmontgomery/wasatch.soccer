@@ -48,13 +48,11 @@ export default async function RootLayout({
                     src={wordmark}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageLight}`}
-                    width={400}
                   />
                   <Image
                     src={wordmarkLight}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageDark}`}
-                    width={400}
                   />
                   {config.siteName}
                 </Link>
