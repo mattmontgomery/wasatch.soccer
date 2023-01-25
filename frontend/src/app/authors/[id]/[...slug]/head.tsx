@@ -11,7 +11,6 @@ export default async function Head({ params }: { params: { id: number } }) {
     <>
       <title>{await getTitle([author.data.attributes.name, "Authors"])}</title>
       <meta property="og:site_name" content={await getSiteTitle()} />
-      <link rel="shortcut icon" href="/ball.png" />
     </>
   );
 }

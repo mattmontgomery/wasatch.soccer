@@ -15,7 +15,6 @@ export default async function Head({ params }: { params: { id: number } }) {
   return (
     <>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <link rel="shortcut icon" href="/ball.png" />
       <title>{title}</title>
       <meta name="description">{data?.attributes.summary}</meta>
       <meta property="og:site_name" content={siteName} />
