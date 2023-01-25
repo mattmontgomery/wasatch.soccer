@@ -37,9 +37,6 @@
   font-weight: bold;
   font-size: 24px;
 }
-.postHero .headline {
-  font-size: 36px;
-}
 
 .post .published {
   font-size: 0.95rem;
@@ -102,6 +99,9 @@
     grid-column: 1 / span 2;
     grid-row: span 2;
     grid-template-rows: 1fr min-content min-content;
+  }
+  .postHero .headline {
+    font-size: 36px;
   }
   .postHero .image {
     min-height: 550px;
