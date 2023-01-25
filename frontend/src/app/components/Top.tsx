@@ -12,6 +12,7 @@ export default function Top(): React.ReactElement {
       setInitialized(true);
       return;
     }
-  }, [pathname, searchParams, initialized]);
+    window.scrollTo({ top: 0 });
+  }, [pathname, searchParams]);
   return <></>;
 }
