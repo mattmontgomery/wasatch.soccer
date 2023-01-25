@@ -107,7 +107,7 @@ export function getPhoto(
 
 export function getPathnamePieces(post: App.Post): {
   date: string;
-  id: number;
+  id: string;
   slug: string;
 } {
   const date = format(
@@ -116,7 +116,7 @@ export function getPathnamePieces(post: App.Post): {
   );
   return {
     date,
-    id: post.id,
+    id: String(post.id),
     slug: post.attributes.slug,
   };
 }
