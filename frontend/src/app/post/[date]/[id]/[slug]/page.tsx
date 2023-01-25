@@ -1,7 +1,14 @@
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
+import format from "date-fns/format";
 
-import { getPhoto, getPhotoPath, getPost, getPosts } from "@/app/util/api";
+import {
+  getPathnamePieces,
+  getPhoto,
+  getPhotoPath,
+  getPost,
+  getPosts,
+} from "@/app/util/api";
 import { Redirect } from "@/app/components/Post/Redirect";
 import { Embed } from "@/app/components/Post/Embed";
 import Published from "@/app/components/Post/Published";
@@ -139,6 +146,6 @@ export async function generateStaticParams() {
   const posts = await getPosts();
 
   return posts.data.map((post) => {
-    return { id: post.id, slug: post.attributes.slug };
+    return getPathnamePieces(post);
   });
 }

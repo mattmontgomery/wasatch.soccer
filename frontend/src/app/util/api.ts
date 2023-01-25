@@ -105,12 +105,25 @@ export function getPhoto(
     : null;
 }
 
-export function getPathname(post: App.Post): string {
+export function getPathnamePieces(post: App.Post): {
+  date: string;
+  id: number;
+  slug: string;
+} {
   const date = format(
     new Date(post.attributes.published ?? post.attributes.publishedAt),
     "yyyy-MM-dd"
   );
-  return `/post/${date}/${post.id}/${post.attributes.slug}`;
+  return {
+    date,
+    id: post.id,
+    slug: post.attributes.slug,
+  };
+}
+
+export function getPathname(post: App.Post): string {
+  const { date, id, slug } = getPathnamePieces(post);
+  return `/post/${date}/${id}/${slug}`;
 }
 export function getFullPathname(post: App.Post): string {
   return `${process.env.SITE_BASE}${getPathname(post)}`;
