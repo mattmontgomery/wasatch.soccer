@@ -16,10 +16,12 @@
   color: var(--theme-primary);
   font-weight: bold;
 }
-
+.detailSection {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
 .details {
   text-transform: uppercase;
-  grid-template-columns: repeat(3, max-content);
   margin-bottom: 1rem;
 }
 

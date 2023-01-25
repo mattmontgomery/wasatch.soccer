@@ -25,7 +25,7 @@ export default async function PostPage({
   if (!data) {
     return notFound();
   }
-  const leadPhoto = getPhoto(data);
+  const leadPhoto = getPhoto(data, "original");
   const authors = getAuthors(data);
   const groups = data.attributes.groups?.data ?? [];
   const primaryGroup = data.attributes.primaryGroup?.data ?? null;
@@ -57,7 +57,7 @@ export default async function PostPage({
             <div className={pageStyles.leadPhotoContainer}>
               <div className={pageStyles.leadPhoto}>
                 <Image
-                  sizes="(max-width: 72rem) 100vw
+                  sizes="(max-width: 72rem) 100vw,
                   50vw"
                   priority
                   src={getPhotoPath(leadPhoto.url)}
@@ -94,7 +94,7 @@ export default async function PostPage({
 
               {streams.length ? (
                 <div className={pageStyles.streams}>
-                  <span>Filed under:</span>{" "}
+                  <span>Series:</span>{" "}
                   <span className={pageStyles.streamsContent}>
                     <Streams {...data} />
                   </span>
