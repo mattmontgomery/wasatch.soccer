@@ -38,6 +38,11 @@
     },
     "title": {
       "type": "string"
+    },
+    "displayOnMasthead": {
+      "type": "boolean",
+      "default": true,
+      "required": false
     }
   }
 }

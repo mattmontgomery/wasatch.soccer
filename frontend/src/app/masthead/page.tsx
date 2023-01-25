@@ -5,7 +5,9 @@ import styles from "./page.module.css";
 import Link from "next/link";
 
 export default async function MastheadPage(): Promise<React.ReactElement> {
-  const authors = await getAuthors();
+  const authors = await getAuthors({
+    displayOnMasthead: true,
+  });
   return (
     <main className={pageStyles.main}>
       <h2 className={pageStyles.pageHeader}>Masthead</h2>

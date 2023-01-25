@@ -149,9 +149,16 @@ export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
   return res.json();
 }
 
-export async function getAuthors(): Promise<{ data: App.Author[] }> {
+export async function getAuthors({
+  displayOnMasthead = false,
+}: { displayOnMasthead?: boolean } = {}): Promise<{ data: App.Author[] }> {
   const query = qs.stringify({
     sort: ["name:asc"],
+    filters: displayOnMasthead
+      ? {
+          displayOnMasthead: { $eq: displayOnMasthead },
+        }
+      : {},
   });
   const res = await makeApiCall(`/api/authors?${query}`);
   return res.json();
