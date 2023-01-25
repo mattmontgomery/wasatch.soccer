@@ -105,14 +105,17 @@ export function getPhoto(
     : null;
 }
 
+export function formatDateForPathname(date: string) {
+  return format(new Date(date), "yyyy-MM-dd");
+}
+
 export function getPathnamePieces(post: App.Post): {
   date: string;
   id: string;
   slug: string;
 } {
-  const date = format(
-    new Date(post.attributes.published ?? post.attributes.publishedAt),
-    "yyyy-MM-dd"
+  const date = formatDateForPathname(
+    post.attributes.published ?? post.attributes.publishedAt
   );
   return {
     date,

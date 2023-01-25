@@ -17,7 +17,6 @@ export function Relative(props: App.Post) {
   const date = new Date(
     props.attributes.published ?? props.attributes.publishedAt
   );
-  console.log(date, new Date());
   const hours = differenceInHours(new Date(), date);
   const minutes = differenceInMinutes(new Date(), date);
   const thisYear = new Date().getFullYear() === date.getFullYear();
