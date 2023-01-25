@@ -86,6 +86,11 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
   );
 }
 
+export type Slot = {
+  slot: number;
+  renderCard: () => React.ReactElement;
+};
+
 export function Posts({
   customSlots = [],
   heroSlots = [],
@@ -94,10 +99,7 @@ export function Posts({
   posts,
   slots = 20,
 }: {
-  customSlots?: {
-    slot: number;
-    renderCard: () => React.ReactElement;
-  }[];
+  customSlots?: Slot[];
   heroSlots?: number[];
   pageUrl: string;
   pagination?: App.Pagination;

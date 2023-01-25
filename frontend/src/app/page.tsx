@@ -1,4 +1,4 @@
-import { Card, Posts } from "./components/PostGrid";
+import { Card, Posts, Slot } from "./components/PostGrid";
 import { getPosts } from "./util/api";
 import { getPodcastFeed } from "./util/podcast";
 import { getConfig } from "./util/config";
@@ -72,7 +72,7 @@ export default async function Home({
           },
         }
       : null,
-  ].filter(Boolean);
+  ].filter(Boolean) as Slot[];
   const heroSlots = [0];
   const heroSlotSize = 4;
   const posts = await getPosts({
