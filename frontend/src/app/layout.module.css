@@ -20,6 +20,17 @@
   max-width: 100%;
   height: auto;
   object-fit: contain;
+  position: relative;
+}
+.headerImageContainer {
+  display: block;
+  position: relative;
+  width: auto;
+  height: 85px;
+}
+.headerImageContainer img {
+  object-fit: contain;
+  object-position: left;
 }
 .headerImageDark {
   display: none;

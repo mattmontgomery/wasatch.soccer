@@ -7,8 +7,8 @@ import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
 
-import wordmark from "@/logo-black.png";
-import wordmarkLight from "@/logo-white.png";
+const wordmark = process.env.LOGO_LIGHT_MODE ?? "";
+const wordmarkLight = process.env.LOGO_DARK_MODE ?? "";
 
 const headlineFont = Montserrat({
   subsets: ["latin"],
@@ -37,11 +37,13 @@ export default async function RootLayout({
               <h1>
                 <Link href="/" className={styles.headerImageContainer}>
                   <Image
+                    fill
                     src={wordmark}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageLight}`}
                   />
                   <Image
+                    fill
                     src={wordmarkLight}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageDark}`}
