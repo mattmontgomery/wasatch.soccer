@@ -15,9 +15,8 @@ Locations for those changes include:
 - /frontend/.env.default > /frontend/.env
 - /backend/.env.example > /backend/.env
 
-If you'd like to change theme colors, that's easy, too.
+If you'd like to change your favicon, that's easy, too. But it's not automatic ... yet.
 
-- /frontend/src/app/globals.css
 - /frontend/public/\*(png|webmanifest)
 
 Given those constraints above, I'd recommend a fork if you're looking to run this, but I will
@@ -39,7 +38,7 @@ Here are some things you'll need to get up and running
 
    - That siteConfig is where everything lives EXCEPT for your logo (for now.)
      That includes your site name, your site description, podcast feeds,
-     newsletter sign-up links, all that.
+     newsletter sign-up links, all that. Even colors!
 
 2. Frontend hosting. Like I said, I recommend Vercel for this. Their
    edge-caching and automatic static optimization has made all of this

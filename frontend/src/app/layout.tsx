@@ -30,6 +30,28 @@ export default async function RootLayout({
       */}
       <head />
       <body className={`${headlineFont.variable}`}>
+        <style>
+          {`
+        :root {
+          --theme-primary: #${config.theme.primary};
+          --theme-primary-70: #${config.theme.primary}cc;
+          --theme-alternate: #${config.theme.alternate};
+          --theme-alternate-70: #${config.theme.alternateDark}cc;
+          --theme-primary-contrast: #${
+            config.theme.primaryContrast ?? "fafafa"
+          };
+          --theme-alternate-contrast: #${
+            config.theme.alternateContrast ?? "000000"
+          };
+        }
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --theme-primary: #${config.theme.primaryDark};
+          --theme-alternate: #${config.theme.alternateDark};
+          }
+        }
+        `}
+        </style>
         {typeof window !== "undefined" && <Top />}
         <div className={styles.grid}>
           <header className={styles.header}>

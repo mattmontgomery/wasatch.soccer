@@ -1,12 +1,4 @@
 :root {
-
-  --theme-primary: #a21d12;
-  --theme-primary-70: #a21d12cc;
-  --theme-alternate: #fdb71a;
-  --theme-alternate-70: #fdb71acc;
-  --theme-primary-contrast: #fafafa;
-  --theme-alternate-contrast: #000034;
-  --theme-hero: #fafafa;
   --max-width: 1100px;
   --border-radius: 12px;
   --font-sans: ui-sans, 'Helvetica Neue', 'Arial';
@@ -50,8 +42,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --theme-primary: #e14233;
-    --theme-hero: #202020;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;

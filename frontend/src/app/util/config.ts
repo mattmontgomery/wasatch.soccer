@@ -9,6 +9,14 @@ export const Config: {
   podcastFeed: string;
   siteDescription: string;
   siteName: string;
+  theme: {
+    primary: string;
+    primaryContrast: string;
+    primaryDark: string;
+    alternate: string;
+    alternateContrast: string;
+    alternateDark: string;
+  };
 } = {
   __loaded: false,
   about: "",
@@ -18,6 +26,14 @@ export const Config: {
   podcastFeed: "",
   siteDescription: "",
   siteName: "",
+  theme: {
+    primary: "",
+    primaryContrast: "",
+    primaryDark: "",
+    alternate: "",
+    alternateContrast: "",
+    alternateDark: "",
+  },
 };
 
 export type Config = typeof Config;
@@ -34,6 +50,15 @@ export async function getConfig(): Promise<typeof Config> {
     Config.navigationGroups = data.attributes.navigationGroups.data ?? [];
     Config.newsletterSignup = data.attributes.newsletterSignup;
     Config.podcastFeed = data.attributes.podcastFeed;
+    Config.theme.primary = data.attributes.themePrimary ?? "";
+    Config.theme.primaryContrast = data.attributes.themePrimaryContrast ?? "";
+    Config.theme.primaryDark =
+      data.attributes.themePrimaryDark ?? data.attributes.themePrimary;
+    Config.theme.alternate = data.attributes.themeAlternate ?? "";
+    Config.theme.alternateContrast =
+      data.attributes.themeAlternateContrast ?? "";
+    Config.theme.alternateDark =
+      data.attributes.themeAlternateDark ?? data.attributes.themeAlternate;
     Config.__loaded = true;
   }
   return Config;

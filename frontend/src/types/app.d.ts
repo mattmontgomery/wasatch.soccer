@@ -10,6 +10,12 @@ declare namespace App {
       };
       newsletterSignup: string;
       podcastFeed: string;
+      themePrimary: string;
+      themePrimaryContrast: string;
+      themePrimaryDark: string;
+      themeAlternate: string;
+      themeAlternateContrast: string;
+      themeAlternateDark: string;
     };
   };
   type Post = {
