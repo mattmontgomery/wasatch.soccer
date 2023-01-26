@@ -10,6 +10,7 @@ export default async function Head() {
       <DefaultTags />
       <title>{await getTitle([config.homepageTitleText], true)}</title>
       <meta name="description" content={config.siteDescription} />
+      <link rel="alternate" type="application/rss+xml" title={`RSS feed for ${config.siteName}` href="/rss.xml" />
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-PRYEH8MYJ1"
         strategy="afterInteractive"
