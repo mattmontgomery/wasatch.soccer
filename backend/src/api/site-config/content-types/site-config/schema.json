@@ -43,6 +43,30 @@
     },
     "instagram": {
       "type": "string"
+    },
+    "themePrimary": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "themeAlternate": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "themePrimaryDark": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "themeAlternateDark": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "themePrimaryContrast": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "themeAlternateContrast": {
+      "type": "string",
+      "maxLength": 6
     }
   }
 }
