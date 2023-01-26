@@ -30,7 +30,8 @@ Someday this might evolve into a multi-site architecture. Keep your eyes peeled 
 Here are some things you'll need to get up and running
 
 1. Backend hosting. That's gotta come first. Once that's up and running,
-   there's a `siteConfig` single type that will give you options for site name and the like. This includes setting up a Postgres database and a
+   there's a `siteConfig` single type that will give you options for site name and the like.
+   This includes setting up a Postgres database and a
    Redis instance. You could probably get away without a Redis instance,
    but I've found it's catching a lot of the cached traffic really well. I'd
    highly recommend keeping one so you can reduce load on your backend with
