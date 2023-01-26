@@ -60,7 +60,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                         elements: [
                           {
                             type: "text",
-                            text: "en",
+                            text: process.env.SITE_LANGUAGE ?? "en",
                           },
                         ],
                       },
