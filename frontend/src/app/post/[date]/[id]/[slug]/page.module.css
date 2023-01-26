@@ -16,10 +16,6 @@
   color: var(--theme-primary);
   font-weight: bold;
 }
-.detailSection {
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
 .details {
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -74,6 +70,9 @@
 .detailSection {
   padding-bottom: 1rem;
   border-bottom: 4px solid var(--theme-alternate);
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: start;
 }
 
 @media screen and (min-width: 48rem) {
