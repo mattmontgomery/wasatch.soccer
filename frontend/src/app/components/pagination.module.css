@@ -8,7 +8,7 @@
 .pagination span {
     background-color: var(--theme-alternate);
     color: var(--theme-alternate-contrast);
-    padding: .5rem;
+    padding: 1rem;
     border-radius: .25rem;
 }
 .pagination .current {
