@@ -10,9 +10,6 @@ import { getConfig } from "./util/config";
 import wordmark from "@/logo-black.png";
 import wordmarkLight from "@/logo-white.png";
 
-// const hf = Fonts[String(process.env.HEADLINE_FONT ?? "Montserrat")]();
-const _hf = String(process.env.HEADLINE_FONT ?? "Montserrat");
-
 const headlineFont = Montserrat({
   subsets: ["latin"],
   style: ["normal"],
