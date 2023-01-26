@@ -49,14 +49,14 @@
 .leadPhoto {
   max-width: 100%;
   position: relative;
-  height: 300px;
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
 
 .leadPhoto img {
-  object-fit: cover;
-  object-position: 50% 10%;
+  object-fit: scale-down;
+  width: 100%;
+  height: auto;
 }
 
 .leadPhotoCaption {
@@ -70,20 +70,18 @@
 .detailSection {
   padding-bottom: 1rem;
   border-bottom: 4px solid var(--theme-alternate);
-  display: grid;
-  grid-template-columns: auto auto auto;
-  align-items: start;
 }
 
 @media screen and (min-width: 48rem) {
   .leadPhoto {
-    height: 50vh;
     max-height: 600px;
   }
 }
 @media screen and (min-width: 56rem) {
-  .leadPhoto {
-    height: 300px;
+  .detailSection {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: start;
   }
   .main {
     display: grid;
