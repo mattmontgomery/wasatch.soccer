@@ -15,6 +15,15 @@ Locations for those changes include:
 - /frontend/.env.default > /frontend/.env
 - /backend/.env.example > /backend/.env
 
-If you'd like to change theme colors (and you should), that's in one place, too.
+If you'd like to change theme colors and logs (and you should — please don't impersonate our
+website), that's easy, too.
 
 - /frontend/src/app/globals.css
+- /frontend/public/\*(png|webmanifest)
+- /frontend/src/logo-black.png (for light mode)
+- /frontend/src/logo-white.png (for dark mode)
+
+Given those constraints above, I'd recommend a fork if you're looking to run this, but I will
+be working on making those things a bit simpler to maintain and deploy.
+
+Someday this might evolve into a multi-site architecture. Keep your eyes peeled for that.
