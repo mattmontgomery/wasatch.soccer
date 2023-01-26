@@ -1,6 +1,7 @@
 import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { getSiteTitle, getTitle } from "@/app/util/site";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 export default async function Head({ params }: { params: { id: number } }) {
   const { data } = await getPost(params.id);

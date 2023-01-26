@@ -7,5 +7,6 @@
     min-height: 5rem;
 }
 .grid div h5 {
-    font-family: var(--subtitle-font);
+    font-family: var(--headline-font);
+    font-weight: 500;
 }

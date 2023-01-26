@@ -10,18 +10,13 @@ import { getConfig } from "./util/config";
 import wordmark from "@/logo-black.png";
 import wordmarkLight from "@/logo-white.png";
 
+// const hf = Fonts[String(process.env.HEADLINE_FONT ?? "Montserrat")]();
+const _hf = String(process.env.HEADLINE_FONT ?? "Montserrat");
+
 const headlineFont = Montserrat({
   subsets: ["latin"],
   style: ["normal"],
-  weight: ["900"],
   variable: "--headline-font",
-  fallback: ["Helvetica Neue", "Arial", "sans-serif"],
-});
-const subtitleFont = Montserrat({
-  subsets: ["latin"],
-  style: ["normal"],
-  weight: ["500"],
-  variable: "--subtitle-font",
   fallback: ["Helvetica Neue", "Arial", "sans-serif"],
 });
 export default async function RootLayout({
@@ -37,7 +32,7 @@ export default async function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={`${headlineFont.variable} ${subtitleFont.variable}`}>
+      <body className={`${headlineFont.variable}`}>
         {typeof window !== "undefined" && <Top />}
         <div className={styles.grid}>
           <header className={styles.header}>

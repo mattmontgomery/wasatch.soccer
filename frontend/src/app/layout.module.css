@@ -10,7 +10,7 @@
   margin-bottom: 1rem;
 }
 .header h5 {
-  font-family: var(--subtitle-font);
+  font-family: var(----headline-font);
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
