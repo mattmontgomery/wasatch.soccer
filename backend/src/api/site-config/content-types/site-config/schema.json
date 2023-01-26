@@ -67,6 +67,12 @@
     "themeAlternateContrast": {
       "type": "string",
       "maxLength": 6
+    },
+    "logoLightMode": {
+      "type": "string"
+    },
+    "logoDarkMode": {
+      "type": "string"
     }
   }
 }
