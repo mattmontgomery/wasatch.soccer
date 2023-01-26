@@ -7,9 +7,6 @@ import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
 
-const wordmark = process.env.LOGO_LIGHT_MODE ?? "";
-const wordmarkLight = process.env.LOGO_DARK_MODE ?? "";
-
 const headlineFont = Montserrat({
   subsets: ["latin"],
   style: ["normal"],
@@ -22,6 +19,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const config = await getConfig();
+  const logoLightMode = config.logo.light;
+  const logoDarkMode = config.logo.dark;
   return (
     <html lang="en">
       {/*
@@ -60,13 +59,13 @@ export default async function RootLayout({
                 <Link href="/" className={styles.headerImageContainer}>
                   <Image
                     fill
-                    src={wordmark}
+                    src={logoLightMode}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageLight}`}
                   />
                   <Image
                     fill
-                    src={wordmarkLight}
+                    src={logoDarkMode}
                     alt={config.siteName}
                     className={`${styles.headerImage} ${styles.headerImageDark}`}
                   />

@@ -4,6 +4,10 @@ export const Config: {
   __loaded: boolean;
   about: string;
   homepageTitleText: string;
+  logo: {
+    dark: string;
+    light: string;
+  };
   navigationGroups: App.Group[];
   newsletterSignup: string;
   podcastFeed: string;
@@ -21,6 +25,10 @@ export const Config: {
   __loaded: false,
   about: "",
   homepageTitleText: "",
+  logo: {
+    dark: "",
+    light: "",
+  },
   navigationGroups: [],
   newsletterSignup: "",
   podcastFeed: "",
@@ -59,6 +67,8 @@ export async function getConfig(): Promise<typeof Config> {
       data.attributes.themeAlternateContrast ?? "";
     Config.theme.alternateDark =
       data.attributes.themeAlternateDark ?? data.attributes.themeAlternate;
+    Config.logo.dark = data.attributes.logoDarkMode;
+    Config.logo.light = data.attributes.logoLightMode;
     Config.__loaded = true;
   }
   return Config;

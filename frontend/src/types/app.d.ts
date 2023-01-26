@@ -5,6 +5,8 @@ declare namespace App {
       siteName: string;
       siteDescription: string;
       homepageTitleText: string;
+      logoDarkMode: string;
+      logoLightMode: string;
       navigationGroups: {
         data: Group[];
       };
