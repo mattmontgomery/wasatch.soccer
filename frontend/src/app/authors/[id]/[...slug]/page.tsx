@@ -40,67 +40,67 @@ export default async function AuthorsPage({
   return (
     <main
       className={`${styles.main} ${
-        author.data.attributes.bio ? styles.main4 : ""
+        author.data.attributes.photo || author.data.attributes.bio
+          ? styles.main4
+          : ""
       }`}
     >
       <div className={styles.pageHeader}>
         <h2>{author.data.attributes.name}</h2>
         <h5>{author.data.attributes.title}</h5>
       </div>
-      <div className={styles.pageBody}>
-        <div className={authorStyles.bioSection}>
-          <div className={authorStyles.photoSection}>
-            {author.data.attributes.photo && (
-              <div className={authorStyles.photo}>
-                <Image
-                  alt={author.data.attributes.name}
-                  src={author.data.attributes.photo.data.attributes.url}
-                  height={author.data.attributes.photo.data.attributes.height}
-                  width={author.data.attributes.photo.data.attributes.width}
+      <div className={authorStyles.bioSection}>
+        <div className={authorStyles.photoSection}>
+          {author.data.attributes.photo && (
+            <div className={authorStyles.photo}>
+              <Image
+                alt={author.data.attributes.name}
+                src={author.data.attributes.photo.data.attributes.url}
+                height={author.data.attributes.photo.data.attributes.height}
+                width={author.data.attributes.photo.data.attributes.width}
+              />
+            </div>
+          )}
+          {author.data.attributes.socialLinks && (
+            <div className={authorStyles.socialLinks}>
+              {author.data.attributes.socialLinks?.twitter && (
+                <SocialIcon
+                  url={author.data.attributes.socialLinks.twitter}
+                  style={{ width: 25, height: 25 }}
                 />
-              </div>
-            )}
-            {author.data.attributes.socialLinks && (
-              <div className={authorStyles.socialLinks}>
-                {author.data.attributes.socialLinks?.twitter && (
-                  <SocialIcon
-                    url={author.data.attributes.socialLinks.twitter}
-                    style={{ width: 25, height: 25 }}
-                  />
-                )}
-                {author.data.attributes.socialLinks?.facebook && (
-                  <SocialIcon
-                    url={author.data.attributes.socialLinks.facebook}
-                    style={{ width: 25, height: 25 }}
-                  />
-                )}
-                {author.data.attributes.socialLinks?.instagram && (
-                  <SocialIcon
-                    url={author.data.attributes.socialLinks.instagram}
-                    style={{ width: 25, height: 25 }}
-                  />
-                )}
-                {author.data.attributes.socialLinks?.mastodon && (
-                  <SocialIcon
-                    url={author.data.attributes.socialLinks.mastodon}
-                    style={{ width: 25, height: 25 }}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-          {author.data.attributes.bio && (
-            <section className={textStyles.body}>
-              <ReactMarkdown>{author.data.attributes.bio}</ReactMarkdown>
-            </section>
+              )}
+              {author.data.attributes.socialLinks?.facebook && (
+                <SocialIcon
+                  url={author.data.attributes.socialLinks.facebook}
+                  style={{ width: 25, height: 25 }}
+                />
+              )}
+              {author.data.attributes.socialLinks?.instagram && (
+                <SocialIcon
+                  url={author.data.attributes.socialLinks.instagram}
+                  style={{ width: 25, height: 25 }}
+                />
+              )}
+              {author.data.attributes.socialLinks?.mastodon && (
+                <SocialIcon
+                  url={author.data.attributes.socialLinks.mastodon}
+                  style={{ width: 25, height: 25 }}
+                />
+              )}
+            </div>
           )}
         </div>
-        <Posts
-          posts={posts.data ?? []}
-          pageUrl={`/author/${id}/${author.data.attributes.slug}`}
-          pagination={posts.meta.pagination}
-        />
+        {author.data.attributes.bio && (
+          <section className={textStyles.body}>
+            <ReactMarkdown>{author.data.attributes.bio}</ReactMarkdown>
+          </section>
+        )}
       </div>
+      <Posts
+        posts={posts.data ?? []}
+        pageUrl={`/author/${id}/${author.data.attributes.slug}`}
+        pagination={posts.meta.pagination}
+      />
     </main>
   );
 }
