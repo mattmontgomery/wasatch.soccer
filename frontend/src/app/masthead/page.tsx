@@ -3,6 +3,7 @@ import { getAuthors } from "../util/api";
 import pageStyles from "@/app/page.module.css";
 import styles from "./page.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function MastheadPage(): Promise<React.ReactElement> {
   const authors = await getAuthors({
@@ -20,6 +21,17 @@ export default async function MastheadPage(): Promise<React.ReactElement> {
               </Link>
             </h3>
             <h5>{author.attributes.title}</h5>
+            <div className={styles.photo}>
+              {author.attributes.photo.data && (
+                <Image
+                  alt={author.attributes.name}
+                  src={
+                    author.attributes.photo.data.attributes.formats.medium.url
+                  }
+                  fill
+                />
+              )}
+            </div>
           </div>
         ))}
       </div>

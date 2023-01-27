@@ -178,6 +178,7 @@ export async function getAuthors({
 }: { displayOnMasthead?: boolean } = {}): Promise<{ data: App.Author[] }> {
   const query = qs.stringify({
     sort: ["name:asc"],
+    populate: ["photo"],
     filters: displayOnMasthead
       ? {
           displayOnMasthead: { $eq: displayOnMasthead },

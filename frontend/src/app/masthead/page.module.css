@@ -1,12 +1,35 @@
 .grid {
-    display: grid;
-    grid-template-rows: repeat(12, max-content);
-    grid-template-columns: repeat(3,1fr);
+  display: grid;
+  grid-template-rows: repeat(12, max-content);
+  row-gap: 2rem;
+  column-gap: 1rem;
+}
+@media (min-width: 24rem) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 56rem) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 .grid div {
-    min-height: 5rem;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
 }
 .grid div h5 {
-    font-family: var(--headline-font);
-    font-weight: 500;
+  font-family: var(--headline-font);
+  font-weight: 500;
+}
+.grid div .photo {
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+}
+.grid div .photo img {
+  object-fit: cover;
+  object-position: 50% 20%;
 }
