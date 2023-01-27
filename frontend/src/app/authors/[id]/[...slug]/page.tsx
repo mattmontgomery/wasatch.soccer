@@ -38,20 +38,14 @@ export default async function AuthorsPage({
     },
   });
   return (
-    <main
-      className={`${styles.main} ${
-        author.data.attributes.photo || author.data.attributes.bio
-          ? styles.main4
-          : ""
-      }`}
-    >
+    <main className={`${styles.main} ${styles.main4}`}>
       <div className={styles.pageHeader}>
         <h2>{author.data.attributes.name}</h2>
         <h5>{author.data.attributes.title}</h5>
       </div>
       <div className={authorStyles.bioSection}>
         <div className={authorStyles.photoSection}>
-          {author.data.attributes.photo && (
+          {author.data.attributes.photo.data && (
             <div className={authorStyles.photo}>
               <Image
                 alt={author.data.attributes.name}
