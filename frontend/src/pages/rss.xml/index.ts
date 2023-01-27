@@ -18,7 +18,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const siteConfig = await getConfig();
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");
   const posts = await getPosts({
-    populate: "",
+    populate: ["leadPhoto", "authors"],
     pagination: {
       pageSize: 50,
     },
