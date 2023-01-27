@@ -142,7 +142,7 @@ export async function getAuthor(
   if (typeof authorId !== "number") {
     throw "Not a valid group";
   }
-  const res = await makeApiCall(`/api/authors/${authorId}`, {
+  const res = await makeApiCall(`/api/authors/${authorId}?populate=photo`, {
     revalidate: 60 * 60 * 8, // eight hours
   });
   return res.json();

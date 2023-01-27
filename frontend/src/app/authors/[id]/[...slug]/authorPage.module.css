@@ -1,0 +1,14 @@
+.bioSection {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2rem;
+}
+.bioSection .photo {
+    position: relative;
+    max-height: 10rem;
+}
+.bioSection .photo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}

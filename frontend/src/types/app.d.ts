@@ -79,9 +79,14 @@ declare namespace App {
       slug: string;
       bio: string;
       photo: {
-        attributes: {
-          formats: Record<string, Photo>;
-          caption: string;
+        data: {
+          attributes: {
+            caption: string;
+            formats: Record<string, Photo>;
+            height: number;
+            width: number;
+            url: string;
+          };
         };
       };
       createdAt: string;

@@ -20,6 +20,10 @@
 .pageHeader h5 {
   font-size: 18pt;
 }
+.pageBody {
+  display: grid;
+  row-gap: 2rem;
+}
 @media screen and (min-width: 72rem) {
   .main {
     max-width: 72rem;
