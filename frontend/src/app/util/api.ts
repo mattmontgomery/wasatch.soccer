@@ -100,7 +100,7 @@ export function getPhoto(
       ? data.attributes.leadPhoto.data.attributes
       : null;
   }
-  return data?.attributes?.leadPhoto.data
+  return data?.attributes?.leadPhoto?.data
     ? data.attributes.leadPhoto.data.attributes.formats[format]
     : null;
 }

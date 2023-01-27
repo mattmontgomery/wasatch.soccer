@@ -1,4 +1,10 @@
-import { getFullPathname, getPathname, getPosts } from "@/app/util/api";
+import {
+  getFullPathname,
+  getPathname,
+  getPhoto,
+  getPhotoPath,
+  getPosts,
+} from "@/app/util/api";
 import { NextApiResponse } from "next";
 
 import { format, subDays } from "date-fns";
@@ -26,6 +32,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
           name: "rss",
           attributes: {
             version: "2.0",
+            "xmlns:dc": "http://purl.org/dc/elements/1.1/",
           },
           elements: [
             {
@@ -45,6 +52,16 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                 },
                 {
                   type: "element",
+                  name: "description",
+                  elements: [
+                    {
+                      type: "text",
+                      text: siteConfig.siteDescription,
+                    },
+                  ],
+                },
+                {
+                  type: "element",
                   name: "link",
                   elements: [
                     {
@@ -55,7 +72,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                 },
                 {
                   type: "element",
-                  name: "link",
+                  name: "language",
                   elements: [
                     {
                       type: "text",
@@ -75,54 +92,90 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                     },
                   ],
                 },
-                ...posts.data?.map((post) => ({
-                  type: "element",
-                  name: "item",
-                  elements: [
-                    {
-                      type: "element",
-                      name: "title",
-                      elements: [
-                        {
-                          type: "text",
-                          text: post.attributes.headline,
-                        },
-                      ],
-                    },
-                    {
-                      type: "element",
-                      name: "link",
-                      elements: [
-                        {
-                          type: "text",
-                          text: getFullPathname(post),
-                        },
-                      ],
-                    },
-                    {
-                      type: "element",
-                      name: "description",
-                      elements: [
-                        {
-                          type: "text",
-                          text: post.attributes.summary,
-                        },
-                      ],
-                    },
-                    {
-                      type: "element",
-                      name: "pubDate",
-                      elements: [
-                        {
-                          type: "text",
-                          text: new Date(
-                            post.attributes.publishedAt
-                          ).toUTCString(),
-                        },
-                      ],
-                    },
-                  ],
-                })),
+                ...posts.data?.map((post) => {
+                  const photo = getPhoto(post, "large");
+                  return {
+                    type: "element",
+                    name: "item",
+                    elements: [
+                      {
+                        type: "element",
+                        name: "title",
+                        elements: [
+                          {
+                            type: "text",
+                            text: post.attributes.headline,
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "link",
+                        elements: [
+                          {
+                            type: "text",
+                            text: getFullPathname(post),
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "description",
+                        elements: [
+                          {
+                            type: "text",
+                            text: post.attributes.summary,
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "pubDate",
+                        elements: [
+                          {
+                            type: "text",
+                            text: new Date(
+                              post.attributes.publishedAt
+                            ).toUTCString(),
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "guid",
+                        elements: [
+                          {
+                            type: "text",
+                            text: getPathname(post),
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "dc:creator",
+                        elements: [
+                          {
+                            type: "text",
+                            text:
+                              post.attributes.authors?.data
+                                .map((author) => author.attributes.name)
+                                .join(", ") ?? "",
+                          },
+                        ],
+                      },
+                      {
+                        type: "element",
+                        name: "enclosure",
+                        elements: [
+                          {
+                            type: "text",
+                            text: photo ? getPhotoPath(photo.url) : "",
+                          },
+                        ],
+                      },
+                    ],
+                  };
+                }),
               ],
             },
           ],
