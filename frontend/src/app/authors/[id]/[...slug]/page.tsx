@@ -9,6 +9,7 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
+import Link from "next/link";
 
 export default async function AuthorsPage({
   params: { id, slug: _slug },
@@ -64,25 +65,28 @@ export default async function AuthorsPage({
               />
             </div>
           )}
-          {author.data.attributes.socialLinks && (
-            <div className={authorStyles.socialLinks}>
-              {Object.values(author.data.attributes.socialLinks)
-                .filter((a) => a && typeof a === "string")
-                .map((url, idx) => (
-                  <SocialIcon
-                    style={{ width: 25, height: 25 }}
-                    url={url}
-                    key={idx}
-                  />
-                ))}
-            </div>
-          )}
         </div>
         {author.data.attributes.bio && (
           <section className={textStyles.body}>
             <ReactMarkdown>{author.data.attributes.bio}</ReactMarkdown>
           </section>
         )}
+        <section>
+          {author.data.attributes.socialLinks && (
+            <div className={authorStyles.socialLinks}>
+              {Object.entries(author.data.attributes.socialLinks)
+                .filter(([, a]) => a && typeof a === "string")
+                .map(([network, url], idx) => (
+                  <div className={authorStyles.socialLink} key={idx}>
+                    <SocialIcon style={{ width: 25, height: 25 }} url={url} />
+                    <Link target="_blank" href={url}>
+                      {network}
+                    </Link>
+                  </div>
+                ))}
+            </div>
+          )}
+        </section>
       </div>
       <Posts
         posts={posts.data ?? []}

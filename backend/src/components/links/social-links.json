@@ -32,6 +32,9 @@
     },
     "linkedIn": {
       "type": "string"
+    },
+    "newsletter": {
+      "type": "string"
     }
   }
 }

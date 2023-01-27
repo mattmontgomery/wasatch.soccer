@@ -81,16 +81,18 @@ export const paths: Record<
       entry.published ?? entry.publishedAt ?? ""
     )}/${entry.id}/${entry.slug}`,
     async (event) => {
+      if (event === "entry.publish") {
+        return "/";
+      }
       if (
-        event === "entry.publish" ||
-        (entry.publishedAt &&
-          [
-            "entry.update",
-            "entry.unpublish",
-            "media.update",
-            "media.create",
-            "entry.delete",
-          ].includes(event))
+        entry.publishedAt &&
+        [
+          "entry.update",
+          "entry.unpublish",
+          "media.update",
+          "media.create",
+          "entry.delete",
+        ].includes(event)
       ) {
         // if in the first 18 posts
         const posts = await getPosts({
@@ -99,7 +101,7 @@ export const paths: Record<
             page: 1,
           },
         });
-        // if the post is one the homepage, send a revalidate request
+        // if the post is one the homepage and has been updated, send a revalidate request
         return posts.data.find((post) => post.id === entry.id) ? "/" : "";
       } else {
         return "";
