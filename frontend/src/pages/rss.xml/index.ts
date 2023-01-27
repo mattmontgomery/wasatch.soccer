@@ -87,7 +87,8 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                     {
                       type: "text",
                       text: new Date(
-                        posts.data?.[0]?.attributes.publishedAt
+                        posts.data?.[0]?.attributes.published ??
+                          posts.data?.[0]?.attributes.publishedAt
                       ).toUTCString(),
                     },
                   ],
