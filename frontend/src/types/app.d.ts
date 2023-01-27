@@ -18,6 +18,11 @@ declare namespace App {
       themeAlternate: string;
       themeAlternateContrast: string;
       themeAlternateDark: string;
+
+      // social handles
+      facebook: string;
+      instagram: string;
+      twitter: string;
     };
   };
   type Post = {

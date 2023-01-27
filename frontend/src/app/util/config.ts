@@ -13,6 +13,11 @@ export const Config: {
   podcastFeed: string;
   siteDescription: string;
   siteName: string;
+  social: {
+    facebook: string;
+    instagram: string;
+    twitter: string;
+  };
   theme: {
     primary: string;
     primaryContrast: string;
@@ -34,6 +39,11 @@ export const Config: {
   podcastFeed: "",
   siteDescription: "",
   siteName: "",
+  social: {
+    facebook: "",
+    instagram: "",
+    twitter: "",
+  },
   theme: {
     primary: "",
     primaryContrast: "",
@@ -58,6 +68,10 @@ export async function getConfig(): Promise<typeof Config> {
     Config.navigationGroups = data.attributes.navigationGroups.data ?? [];
     Config.newsletterSignup = data.attributes.newsletterSignup;
     Config.podcastFeed = data.attributes.podcastFeed;
+
+    /**
+     * Theming
+     */
     Config.theme.primary = data.attributes.themePrimary ?? "";
     Config.theme.primaryContrast = data.attributes.themePrimaryContrast ?? "";
     Config.theme.primaryDark =
@@ -69,6 +83,14 @@ export async function getConfig(): Promise<typeof Config> {
       data.attributes.themeAlternateDark ?? data.attributes.themeAlternate;
     Config.logo.dark = data.attributes.logoDarkMode;
     Config.logo.light = data.attributes.logoLightMode;
+
+    /**
+     * Social Media
+     */
+    Config.social.facebook = data.attributes.facebook ?? "";
+    Config.social.instagram = data.attributes.instagram ?? "";
+    Config.social.twitter = data.attributes.twitter ?? "";
+
     Config.__loaded = true;
   }
   return Config;

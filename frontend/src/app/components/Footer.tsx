@@ -31,6 +31,29 @@ export default function Footer(props: { config: Config }) {
           <Link href="/about">About</Link>
         </span>
       </div>
+      <div className={styles.links}>
+        {props.config.social.facebook && (
+          <span>
+            <Link href={props.config.social.facebook} prefetch={false}>
+              Facebook
+            </Link>
+          </span>
+        )}
+        {props.config.social.instagram && (
+          <span>
+            <Link href={props.config.social.instagram} prefetch={false}>
+              Instagram
+            </Link>
+          </span>
+        )}
+        {props.config.social.twitter && (
+          <span>
+            <Link href={props.config.social.twitter} prefetch={false}>
+              Twitter
+            </Link>
+          </span>
+        )}
+      </div>
       <p>&copy; 2023 {props.config.siteName}</p>
     </footer>
   );
