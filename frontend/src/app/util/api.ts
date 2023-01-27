@@ -45,7 +45,8 @@ export async function getPosts({
       };
     };
     published?: {
-      $gte: string;
+      $gte?: string;
+      $lte?: string;
     };
     streams?: {
       id: {
@@ -64,12 +65,19 @@ export async function getPosts({
   data: App.Post[];
   meta: Required<App.Meta>;
 }> {
+  const now = format(new Date(), "yyyy-MM-dd");
   const queryString = qs.stringify(
     {
       populate,
       pagination,
       sort,
-      filters,
+      filters: {
+        ...filters,
+        published: {
+          ...(filters.published ? filters.published : {}),
+          $lte: now,
+        },
+      },
     },
     {
       encodeValuesOnly: true,

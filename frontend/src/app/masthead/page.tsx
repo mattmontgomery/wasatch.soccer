@@ -26,7 +26,8 @@ export default async function MastheadPage(): Promise<React.ReactElement> {
                 <Image
                   alt={author.attributes.name}
                   src={
-                    author.attributes.photo.data.attributes.formats.medium.url
+                    author.attributes.photo.data.attributes.formats.medium
+                      ?.url ?? author.attributes.photo.data.attributes.url
                   }
                   fill
                 />
