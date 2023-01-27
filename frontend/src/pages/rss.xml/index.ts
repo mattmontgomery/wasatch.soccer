@@ -150,19 +150,16 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                           },
                         ],
                       },
-                      {
+                      ...post.attributes.authors?.data.map((author) => ({
                         type: "element",
                         name: "dc:creator",
                         elements: [
                           {
                             type: "text",
-                            text:
-                              post.attributes.authors?.data
-                                .map((author) => author.attributes.name)
-                                .join(", ") ?? "",
+                            text: author.attributes.name,
                           },
                         ],
-                      },
+                      })),
                       {
                         type: "element",
                         name: "enclosure",
