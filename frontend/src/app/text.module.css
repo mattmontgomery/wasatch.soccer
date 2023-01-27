@@ -1,6 +1,5 @@
 .body {
   font-size: 115%;
-  margin-bottom: 1rem;
   line-height: 1.5;
 }
 
@@ -40,6 +39,9 @@
 
 .body p {
   margin-bottom: 1rem;
+}
+.body p:last-child {
+  margin-bottom: 0;
 }
 
 .body img {

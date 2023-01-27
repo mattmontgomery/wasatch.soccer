@@ -47,7 +47,7 @@ export default async function PostPage({
   });
   const streams = data.attributes.streams?.data ?? [];
   return (
-    <main className={`${postStyles.main} ${pageStyles.main}`}>
+    <main className={`${pageStyles.main}`}>
       <article className={pageStyles.post}>
         <Redirect slugFromPath={slug} post={data} />
         <section className={pageStyles.section}>
