@@ -65,7 +65,7 @@ export async function getPosts({
   data: App.Post[];
   meta: Required<App.Meta>;
 }> {
-  const now = format(new Date(), "yyyy-MM-dd");
+  const now = new Date().toISOString();
   const queryString = qs.stringify(
     {
       populate,
