@@ -43,6 +43,11 @@
       "type": "boolean",
       "default": true,
       "required": false
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": false,
+      "component": "links.social-links"
     }
   }
 }

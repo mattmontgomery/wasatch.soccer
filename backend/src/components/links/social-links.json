@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_links_social_links",
+  "info": {
+    "displayName": "Social Links",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "mastodon": {
+      "type": "string"
+    }
+  }
+}

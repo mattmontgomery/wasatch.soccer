@@ -89,6 +89,7 @@ declare namespace App {
           };
         };
       };
+      socialLinks: SocialLinks;
       createdAt: string;
       updatedAt: string;
     };
@@ -116,5 +117,11 @@ declare namespace App {
     pageSize: number;
     pageCount: number;
     total: number;
+  };
+  type SocialLinks = {
+    facebook: string;
+    instagram: string;
+    mastodon: string;
+    twitter: string;
   };
 }

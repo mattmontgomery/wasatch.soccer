@@ -5,10 +5,19 @@
 }
 .bioSection .photo {
     position: relative;
-    max-height: 10rem;
+    max-height: 15rem;
 }
 .bioSection .photo img {
     height: 100%;
     width: auto;
     object-fit: contain;
+}
+.socialLinks {
+    display: flex;
+    column-gap: .5rem;
+}
+.photoSection {
+    display: grid;
+    grid-template-rows: max-content min-content;
+    row-gap: 1rem;
 }
