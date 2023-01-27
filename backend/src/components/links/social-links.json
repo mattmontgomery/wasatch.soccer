@@ -17,6 +17,21 @@
     },
     "mastodon": {
       "type": "string"
+    },
+    "podcast": {
+      "type": "string"
+    },
+    "youtube": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "github": {
+      "type": "string"
+    },
+    "linkedIn": {
+      "type": "string"
     }
   }
 }

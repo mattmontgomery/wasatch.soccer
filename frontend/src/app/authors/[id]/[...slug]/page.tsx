@@ -49,38 +49,32 @@ export default async function AuthorsPage({
             <div className={authorStyles.photo}>
               <Image
                 alt={author.data.attributes.name}
-                src={author.data.attributes.photo.data.attributes.url}
-                height={author.data.attributes.photo.data.attributes.height}
-                width={author.data.attributes.photo.data.attributes.width}
+                src={
+                  author.data.attributes.photo.data.attributes.formats.medium
+                    .url
+                }
+                height={
+                  author.data.attributes.photo.data.attributes.formats.medium
+                    .height
+                }
+                width={
+                  author.data.attributes.photo.data.attributes.formats.medium
+                    .width
+                }
               />
             </div>
           )}
           {author.data.attributes.socialLinks && (
             <div className={authorStyles.socialLinks}>
-              {author.data.attributes.socialLinks?.twitter && (
-                <SocialIcon
-                  url={author.data.attributes.socialLinks.twitter}
-                  style={{ width: 25, height: 25 }}
-                />
-              )}
-              {author.data.attributes.socialLinks?.facebook && (
-                <SocialIcon
-                  url={author.data.attributes.socialLinks.facebook}
-                  style={{ width: 25, height: 25 }}
-                />
-              )}
-              {author.data.attributes.socialLinks?.instagram && (
-                <SocialIcon
-                  url={author.data.attributes.socialLinks.instagram}
-                  style={{ width: 25, height: 25 }}
-                />
-              )}
-              {author.data.attributes.socialLinks?.mastodon && (
-                <SocialIcon
-                  url={author.data.attributes.socialLinks.mastodon}
-                  style={{ width: 25, height: 25 }}
-                />
-              )}
+              {Object.values(author.data.attributes.socialLinks)
+                .filter((a) => a && typeof a === "string")
+                .map((url, idx) => (
+                  <SocialIcon
+                    style={{ width: 25, height: 25 }}
+                    url={url}
+                    key={idx}
+                  />
+                ))}
             </div>
           )}
         </div>

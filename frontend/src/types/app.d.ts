@@ -120,8 +120,12 @@ declare namespace App {
   };
   type SocialLinks = {
     facebook: string;
+    github: string;
     instagram: string;
     mastodon: string;
+    podcast: string;
     twitter: string;
+    website: string;
+    youtube: string;
   };
 }
