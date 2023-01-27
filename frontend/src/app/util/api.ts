@@ -75,7 +75,7 @@ export async function getPosts({
         ...filters,
         published: {
           ...(filters.published ? filters.published : {}),
-          $lte: now,
+          ...(process.env.NODE_ENV === "development" ? {} : { $lte: now }),
         },
       },
     },
