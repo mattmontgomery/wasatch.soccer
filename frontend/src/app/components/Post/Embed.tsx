@@ -10,7 +10,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export function Embed({ url }: { url: string }): React.ReactElement {
   const { data, error, isLoading } = useSWR(`/api/embed?url=${url}`, fetcher);
 
-  if (isLoading || error || !data) {
+  if (isLoading || error || !data || data.errors?.length) {
     return <p>{url}</p>;
   }
   if (data.data.provider_name === "Twitter") {

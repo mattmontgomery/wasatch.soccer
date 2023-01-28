@@ -52,15 +52,17 @@ export default async function AuthorsPage({
                 alt={author.data.attributes.name}
                 src={
                   author.data.attributes.photo.data.attributes.formats.medium
-                    .url
+                    ?.url ?? author.data.attributes.photo.data.attributes.url
                 }
                 height={
                   author.data.attributes.photo.data.attributes.formats.medium
-                    .height
+                    ?.height ??
+                  author.data.attributes.photo.data.attributes.height
                 }
                 width={
                   author.data.attributes.photo.data.attributes.formats.medium
-                    .width
+                    ?.width ??
+                  author.data.attributes.photo.data.attributes.width
                 }
               />
             </div>

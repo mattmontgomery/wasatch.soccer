@@ -71,6 +71,8 @@ export async function getPosts({
       populate,
       pagination,
       sort,
+      publicationState:
+        process.env.NODE_ENV === "development" ? "preview" : "live",
       filters: {
         ...filters,
         published: {
