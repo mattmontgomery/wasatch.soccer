@@ -26,6 +26,14 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "groupType": {
+      "type": "enumeration",
+      "enum": [
+        "column",
+        "section",
+        "grouping"
+      ]
     }
   }
 }
