@@ -51,12 +51,7 @@ declare namespace App {
         data: Group[];
       };
       primaryGroup: {
-        data: {
-          id: number;
-          attributes: {
-            name: string;
-          };
-        };
+        data: Group;
       };
       authors: {
         data: Author[];
@@ -99,6 +94,7 @@ declare namespace App {
     attributes: {
       name: string;
       slug: string;
+      groupType: "column" | "section" | "grouping";
     };
   };
   type Stream = {

@@ -57,3 +57,11 @@
   border-left: 4px solid var(--theme-primary);
   padding-left: 1rem;
 }
+
+.body hr {
+  margin: 2rem 0;
+  padding: 0;
+  border: none;
+  border-top: 4px solid var(--theme-primary);
+  outline: 0;
+}

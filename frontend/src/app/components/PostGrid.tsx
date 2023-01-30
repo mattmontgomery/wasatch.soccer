@@ -46,7 +46,21 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
           />
         )}
         {primaryGroup ? (
-          <h5 className={styles.primaryGroup}>
+          <h5
+            className={`${styles.primaryGroup} ${
+              primaryGroup.attributes.groupType === "column"
+                ? styles.primaryGroupColumn
+                : ""
+            } ${
+              primaryGroup.attributes.groupType === "section"
+                ? styles.primaryGroupSection
+                : ""
+            } ${
+              primaryGroup.attributes.groupType === "grouping"
+                ? styles.primaryGroupGrouping
+                : ""
+            }`}
+          >
             {primaryGroup.attributes.name}
           </h5>
         ) : (
