@@ -36,6 +36,10 @@
   margin-bottom: 1rem;
   margin-left: 1rem;
 }
+.body ul li,
+.body ol li {
+  margin-bottom: 0.5rem;
+}
 
 .body p,
 .body blockquote {
