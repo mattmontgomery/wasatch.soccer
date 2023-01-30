@@ -1,13 +1,14 @@
-import { getFullPathname, getPathname, getPosts } from "@/app/util/api";
-import { NextApiResponse } from "next";
+import { getFullPathname, getPosts } from "@/app/util/api";
+import { NextApiRequest, NextApiResponse } from "next";
 
 import { format, subDays } from "date-fns";
 
 import { js2xml, Element } from "xml-js";
 
-export default async function generateSitemap() {}
-
-export async function getServerSideProps({ res }: { res: NextApiResponse }) {
+export default async function generateSitemap(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");
   const posts = await getPosts({
     populate: "",
