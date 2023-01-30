@@ -7,7 +7,6 @@ export default async function Head() {
   const config = await getConfig();
   return (
     <>
-      <DefaultTags />
       <title>{await getTitle([config.homepageTitleText], true)}</title>
       <meta name="description" content={config.siteDescription} />
       <link

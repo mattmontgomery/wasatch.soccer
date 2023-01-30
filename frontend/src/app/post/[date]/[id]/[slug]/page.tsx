@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
-import format from "date-fns/format";
+import { ArticleJsonLd } from "next-seo";
 
 import {
   getPathnamePieces,
@@ -8,6 +8,7 @@ import {
   getPhotoPath,
   getPost,
   getPosts,
+  getSiteConfig,
 } from "@/app/util/api";
 import { Redirect } from "@/app/components/Post/Redirect";
 import { Embed } from "@/app/components/Post/Embed";
@@ -22,6 +23,8 @@ import Streams from "@/app/components/Post/Streams";
 
 import Posts from "./Posts";
 import { notFound } from "next/navigation";
+import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
+import { getConfig } from "@/app/util/config";
 
 export default async function PostPage({
   params: { id, slug },
@@ -32,6 +35,7 @@ export default async function PostPage({
   if (!data) {
     return notFound();
   }
+  const config = await getConfig();
   const leadPhoto = getPhoto(data, "original");
   const authors = getAuthors(data);
   const groups = data.attributes.groups?.data ?? [];
@@ -48,6 +52,58 @@ export default async function PostPage({
   const streams = data.attributes.streams?.data ?? [];
   return (
     <main className={`${pageStyles.main}`}>
+      {/**
+       * 
+      <Script
+        src=""
+        id="schema.org"
+        type="application/jd+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            {
+              "@context": "https://schema.org",
+              "@type": "NewsArticle",
+              author: data.attributes.authors.data.length
+                ? data.attributes.authors.data.map((author) => ({
+                    "@type": "Person",
+                    name: author.attributes.name,
+                    url: getAbsolutePath(getAuthorUrl(author)),
+                  }))
+                : [],
+              dateModified: new Date(data.attributes.updatedAt).toISOString(),
+              datePublished: new Date(data.attributes.published).toISOString(),
+              headline: data.attributes.headline,
+              image: [photoPath],
+            },
+            null,
+            2
+          ),
+        }}
+      />
+
+       */}
+      <ArticleJsonLd
+        type="NewsArticle"
+        useAppDir
+        url={getAbsolutePath(getPostUrl(data))}
+        title={data.attributes.headline}
+        images={[leadPhoto ? getPhotoPath(leadPhoto.url) : ""]}
+        dateModified={new Date(data.attributes.updatedAt).toISOString()}
+        datePublished={new Date(data.attributes.published).toISOString()}
+        publisherName={config.siteName}
+        publisherLogo={config.logo.light}
+        description={data.attributes.summary}
+        isAccessibleForFree
+        authorName={
+          data.attributes.authors.data.length
+            ? data.attributes.authors.data.map((author) => ({
+                "@type": "Person",
+                name: author.attributes.name,
+                url: getAbsolutePath(getAuthorUrl(author)),
+              }))
+            : []
+        }
+      />
       <article className={pageStyles.post}>
         <Redirect slugFromPath={slug} post={data} />
         <section className={pageStyles.section}>

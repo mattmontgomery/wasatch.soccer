@@ -1,7 +1,7 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import format from "date-fns/format";
+import { getPostUrl } from "@/app/util/urls";
 
 export function useRedirect(slugFromPath: string, post: App.Post): void {
   const router = useRouter();
@@ -11,9 +11,9 @@ export function useRedirect(slugFromPath: string, post: App.Post): void {
       return;
     }
     const slug = post.attributes.slug;
-    const date = format(new Date(post.attributes.publishedAt), "yyyy-mm-dd");
+    const url = getPostUrl(post);
     if (slug && slugFromPath !== slug) {
-      router.replace(`/post/${date}/${post.id}/${slug}`);
+      router.replace(url);
     }
   }, [slugFromPath, post, router]);
 }

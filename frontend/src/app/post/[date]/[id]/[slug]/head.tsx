@@ -1,5 +1,6 @@
 import { getPhoto, getPhotoPath, getPost } from "@/app/util/api";
 import { getSiteTitle, getTitle } from "@/app/util/site";
+import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 
@@ -15,7 +16,6 @@ export default async function Head({ params }: { params: { id: number } }) {
 
   return (
     <>
-      <meta content="width=device-width, initial-scale=1" name="viewport" />
       <title>{title}</title>
       <meta name="description">{data?.attributes.summary}</meta>
       <meta property="og:site_name" content={siteName} />
@@ -29,6 +29,9 @@ export default async function Head({ params }: { params: { id: number } }) {
       <meta property="twitter:site" content="@rslsoapbox" />
       <meta property="twitter:description" content={data.attributes.summary} />
       <meta property="twitter:title" content={data.attributes.headline} />
+
+      <link rel="canonical" href={getAbsolutePath(getPostUrl(data))} />
+
       {photoPath && <meta property="twitter:image" content={photoPath} />}
 
       {photoPath && <meta property="og:image" content={photoPath} />}

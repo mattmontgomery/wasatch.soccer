@@ -9,7 +9,7 @@ export default function Authors(props: App.Post) {
       <span className={styles.commaSeparatedList}>
         by{" "}
         {authors.map((author, idx) => (
-          <span key={idx}>
+          <span key={idx} itemProp="author">
             <Link
               prefetch={false}
               href={`/authors/${author.id}/${author.attributes.slug}`}
