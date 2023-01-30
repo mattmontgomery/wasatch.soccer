@@ -52,36 +52,6 @@ export default async function PostPage({
   const streams = data.attributes.streams?.data ?? [];
   return (
     <main className={`${pageStyles.main}`}>
-      {/**
-       * 
-      <Script
-        src=""
-        id="schema.org"
-        type="application/jd+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            {
-              "@context": "https://schema.org",
-              "@type": "NewsArticle",
-              author: data.attributes.authors.data.length
-                ? data.attributes.authors.data.map((author) => ({
-                    "@type": "Person",
-                    name: author.attributes.name,
-                    url: getAbsolutePath(getAuthorUrl(author)),
-                  }))
-                : [],
-              dateModified: new Date(data.attributes.updatedAt).toISOString(),
-              datePublished: new Date(data.attributes.published).toISOString(),
-              headline: data.attributes.headline,
-              image: [photoPath],
-            },
-            null,
-            2
-          ),
-        }}
-      />
-
-       */}
       <ArticleJsonLd
         type="NewsArticle"
         useAppDir
