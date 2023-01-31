@@ -1,6 +1,6 @@
 import { getTitle } from "@/app/util/site";
 import { notFound } from "next/navigation";
-import { fetchPage } from "@/app/util/api/page";
+import { fetchPage } from "@/app/util/api/pages";
 import { getConfig } from "@/app/util/config";
 
 export default async function Head({

@@ -6,7 +6,7 @@ import { getPosts } from "@/app/util/api";
 
 import { NewsletterCard, PodcastCard, StreamCard, TextCard } from "./Cards";
 import { getPodcastFeed } from "@/app/util/podcast";
-import { fetchPage } from "@/app/util/api/page";
+import { fetchPage } from "@/app/util/api/pages";
 
 import styles from "@/app/page.module.css";
 
