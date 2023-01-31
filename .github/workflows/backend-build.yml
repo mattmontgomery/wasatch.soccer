@@ -1,0 +1,22 @@
+name: Backend / Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**/*"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run build
