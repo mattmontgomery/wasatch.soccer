@@ -8,7 +8,10 @@ export default function Groups(props: App.Post) {
     <span className={styles.commaSeparatedList}>
       {groups.map((group, idx) => (
         <span key={idx}>
-          <Link href={`/group/${group.id}/${group.attributes.slug}`}>
+          <Link
+            href={`/group/${group.id}/${group.attributes.slug}`}
+            prefetch={false}
+          >
             {group.attributes.name}
           </Link>
         </span>

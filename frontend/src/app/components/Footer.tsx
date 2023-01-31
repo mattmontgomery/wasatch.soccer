@@ -24,7 +24,9 @@ export default function Footer(props: { config: Config }) {
           </span>
         )}
         <span>
-          <Link href="/about">About</Link>
+          <Link href="/about" prefetch={false}>
+            About
+          </Link>
         </span>
       </div>
       <div className={styles.links}>
