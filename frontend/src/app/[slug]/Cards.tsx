@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 import { Card } from "@/app/components/PostGrid";
 
 import homepageStyles from "@/app/styles/homepage.module.css";
@@ -66,7 +68,9 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
           )}
         </div>
       )}
-      <p>{body}</p>
+      <div>
+        <ReactMarkdown>{body}</ReactMarkdown>
+      </div>
     </Card>
   );
 }
