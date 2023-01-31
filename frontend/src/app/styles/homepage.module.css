@@ -57,12 +57,14 @@
 .streamCard {
   display: grid;
   grid-template-rows: 1fr;
+  min-height: 250px;
 }
 
 .streamCard .image {
   position: relative;
   height: 100%;
 }
+
 .streamCard .image img {
   height: 100%;
   object-fit: cover;
