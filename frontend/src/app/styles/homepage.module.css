@@ -28,8 +28,29 @@
 .textCard {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  font-size: 10pt;
 }
 
 .textCard .image {
   position: relative;
+}
+
+.textCard h1,
+.textCard h2,
+.textCard h3,
+.textCard h4,
+.textCard h5,
+.textCard h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.textCard ul:last-child,
+.textCard ol:last-child {
+  margin: 0 1rem 0;
+}
+.textCard ul li,
+.textCard ol li {
+  margin-bottom: 0;
 }

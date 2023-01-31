@@ -31,6 +31,12 @@ async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
           "modules.text": {
             populate: "*",
           },
+          "modules.feed": {
+            populate: "*",
+          },
+          "modules.newsletter": {
+            populate: "*",
+          },
         },
       },
     },
@@ -72,6 +78,7 @@ export default async function CustomPage({
   const customSlots = (
     await Promise.all(
       gridSlots.map(async (slot, idx) => {
+        console.log(slot);
         if (slot.__component === "modules.feed") {
           const feed = await getPodcastFeed(slot.feedUrl);
           return {

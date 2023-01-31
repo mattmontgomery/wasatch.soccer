@@ -61,7 +61,7 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
             <Link href={url}>
               <Image
                 alt={coverImage.data.attributes.caption}
-                src={coverImage.data.attributes.url}
+                src={image}
                 fill
               />
             </Link>
