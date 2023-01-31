@@ -9,7 +9,6 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
-import Link from "next/link";
 
 export default async function AuthorsPage({
   params: { id, slug: _slug },
