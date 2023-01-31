@@ -18,7 +18,7 @@ export function PodcastCard({ feed }: { feed: Podcast }) {
       </ul>
       <a
         className={homepageStyles.subscribe}
-        href={feed.meta.showUrl}
+        href={feed.meta.link}
         target="_blank"
         rel="noreferrer"
       >
