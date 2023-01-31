@@ -23,6 +23,15 @@
         "modules.auto-post",
         "modules.newsletter"
       ]
+    },
+    "groups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

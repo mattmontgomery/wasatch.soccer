@@ -73,6 +73,12 @@
     },
     "logoDarkMode": {
       "type": "string"
+    },
+    "navigationItems": {
+      "displayName": "navigationItems",
+      "type": "component",
+      "repeatable": true,
+      "component": "links.navigation-items"
     }
   }
 }

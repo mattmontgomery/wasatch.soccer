@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_links_navigation_items",
+  "info": {
+    "displayName": "navigationItems"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}
