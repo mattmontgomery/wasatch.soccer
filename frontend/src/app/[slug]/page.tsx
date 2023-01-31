@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 import styles from "@/app/page.module.css";
-import { NewsletterCard, PodcastCard, TextCard } from "./Cards";
+import { NewsletterCard, PodcastCard, StreamCard, TextCard } from "./Cards";
 import { getPodcastFeed } from "@/app/util/podcast";
 import QueryString from "qs";
 
@@ -27,6 +27,9 @@ async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
               "pinnedPost.authors",
               "pinnedPost.groups",
             ],
+          },
+          "modules.stream": {
+            populate: "*",
           },
           "modules.text": {
             populate: "*",
@@ -93,6 +96,11 @@ export default async function CustomPage({
         } else if (slot.__component === "modules.text") {
           return {
             renderCard: () => <TextCard {...slot} />,
+            slot: idx,
+          };
+        } else if (slot.__component === "modules.stream") {
+          return {
+            renderCard: () => <StreamCard {...slot} />,
             slot: idx,
           };
         }

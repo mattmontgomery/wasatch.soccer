@@ -33,6 +33,7 @@ declare namespace App {
         | GridSlots.AutoPost
         | GridSlots.Feed
         | GridSlots.Newsletter
+        | GridSlots.Stream
         | GridSlots.Text
       )[];
       title: string;

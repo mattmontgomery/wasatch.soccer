@@ -21,6 +21,9 @@
   color: var(--theme-alternate);
 }
 
+.card .image {
+  position: relative;
+}
 .card .image img {
   object-fit: cover;
 }
@@ -29,10 +32,6 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-size: 10pt;
-}
-
-.textCard .image {
-  position: relative;
 }
 
 .textCard h1,
@@ -53,4 +52,29 @@
 .textCard ul li,
 .textCard ol li {
   margin-bottom: 0;
+}
+
+.streamCard {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.streamCard .image {
+  position: relative;
+  height: 100%;
+}
+.streamCard .image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.streamCard h2 {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+  font-size: 24pt;
+  text-shadow: 1px 1px 3px RGBA(0, 0, 0, 0.8), 4px 4px 24px RGBA(0, 0, 0, 0.9),
+    4px 4px 48px RGBA(0, 0, 0, 0.4);
 }

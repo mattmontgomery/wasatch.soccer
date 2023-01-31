@@ -6,8 +6,9 @@ import { getPosts, getStream } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
+import { getStreamUrl } from "@/app/util/urls";
 
-export default async function AuthorsPage({
+export default async function StreamPage({
   params: { id, slug: _slug },
 }: {
   params: { id: string; slug: string[] };
@@ -42,7 +43,7 @@ export default async function AuthorsPage({
 
       <Posts
         posts={posts.data ?? []}
-        pageUrl={`/streams/${id}/${stream.data.attributes.slug}`}
+        pageUrl={getStreamUrl(stream.data)}
         pagination={posts.meta.pagination}
       />
     </main>

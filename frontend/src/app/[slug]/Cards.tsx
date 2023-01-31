@@ -10,6 +10,7 @@ import { getPhoto, getPhotoPath, getPhotoRaw } from "../util/api";
 import podcastStyles from "@/app/styles/podcast.module.css";
 import homepageStyles from "@/app/styles/homepage.module.css";
 import textStyles from "@/app/text.module.css";
+import { getStreamUrl } from "../util/urls";
 
 export function PodcastCard({ feed }: { feed: Podcast }) {
   return (
@@ -75,6 +76,33 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
       <div className={textStyles.body}>
         <ReactMarkdown>{body}</ReactMarkdown>
       </div>
+    </Card>
+  );
+}
+export function StreamCard({ coverImage, stream }: App.GridSlots.Stream) {
+  const url = getStreamUrl(stream.data);
+  const image = coverImage.data
+    ? getPhotoRaw(coverImage.data, "medium")?.url
+    : "";
+  const title = stream.data.attributes.name;
+  return (
+    <Card className={homepageStyles.streamCard}>
+      {image && (
+        <div className={homepageStyles.image}>
+          {url ? (
+            <Link href={url}>
+              <Image
+                alt={coverImage.data.attributes.caption}
+                src={image}
+                fill
+              />
+            </Link>
+          ) : (
+            <Image alt={coverImage.data.attributes.caption} src={image} fill />
+          )}
+        </div>
+      )}
+      <h2>{url ? <Link href={url}>{title}</Link> : title}</h2>
     </Card>
   );
 }
