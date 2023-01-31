@@ -66,6 +66,8 @@ export const paths: Record<
     publishedAt?: string;
   }) => RevalidateType | RevalidateType[]
 > = {
+  page: (entry: { id: number; slug: string }) =>
+    entry.slug === "homepage" ? "/" : `/${entry.slug}`,
   stream: (entry: { id: number; slug: string }) =>
     `/streams/${entry.id}/${entry.slug}`,
   author: (entry: { id: number; slug: string }) =>
