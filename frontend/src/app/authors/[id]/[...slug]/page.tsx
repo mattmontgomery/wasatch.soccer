@@ -9,7 +9,6 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
-import Link from "next/link";
 
 export default async function AuthorsPage({
   params: { id, slug: _slug },
@@ -81,9 +80,9 @@ export default async function AuthorsPage({
                 .map(([network, url], idx) => (
                   <div className={authorStyles.socialLink} key={idx}>
                     <SocialIcon style={{ width: 25, height: 25 }} url={url} />
-                    <Link target="_blank" href={url}>
+                    <a target="_blank" href={url} rel="noreferrer">
                       {network}
-                    </Link>
+                    </a>
                   </div>
                 ))}
             </div>

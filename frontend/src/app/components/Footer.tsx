@@ -15,42 +15,34 @@ export default function Footer(props: { config: Config }) {
         </span>
         {props.config.newsletterSignup && (
           <span>
-            <Link href={props.config.newsletterSignup} prefetch={false}>
-              Newsletter
-            </Link>
+            <a href={props.config.newsletterSignup}>Newsletter</a>
           </span>
         )}
         {props.config.podcastFeed && (
           <span>
-            <Link href={props.config.podcastFeed} prefetch={false}>
-              Podcast
-            </Link>
+            <a href={props.config.podcastFeed}>Podcast</a>
           </span>
         )}
         <span>
-          <Link href="/about">About</Link>
+          <Link href="/about" prefetch={false}>
+            About
+          </Link>
         </span>
       </div>
       <div className={styles.links}>
         {props.config.social.facebook && (
           <span>
-            <Link href={props.config.social.facebook} prefetch={false}>
-              Facebook
-            </Link>
+            <a href={props.config.social.facebook}>Facebook</a>
           </span>
         )}
         {props.config.social.instagram && (
           <span>
-            <Link href={props.config.social.instagram} prefetch={false}>
-              Instagram
-            </Link>
+            <a href={props.config.social.instagram}>Instagram</a>
           </span>
         )}
         {props.config.social.twitter && (
           <span>
-            <Link href={props.config.social.twitter} prefetch={false}>
-              Twitter
-            </Link>
+            <a href={props.config.social.twitter}>Twitter</a>
           </span>
         )}
       </div>
