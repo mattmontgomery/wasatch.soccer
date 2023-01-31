@@ -23,3 +23,4 @@ The overarching idea here is that `phase one` should be run from your local mach
 * Azure Resource Group
 * Azure Storage Blob
 * Azure Database for Postgresql Server
+* Azure Redis

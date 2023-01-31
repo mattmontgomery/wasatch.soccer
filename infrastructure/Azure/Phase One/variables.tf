@@ -3,7 +3,7 @@ variable "resource_group_name" {
   description = "value"
 }
 
-variable "default_location" {
+variable "resource_location" {
   type         = string
   ddescription = "value"
 }
