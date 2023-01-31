@@ -1,51 +1,14 @@
-import { Card, Posts } from "@/app/components/PostGrid";
-import { getPosts, makeApiCall } from "@/app/util/api";
-import { notFound } from "next/navigation";
 import React from "react";
+import { notFound } from "next/navigation";
 
-import styles from "@/app/page.module.css";
+import { Posts } from "@/app/components/PostGrid";
+import { getPosts } from "@/app/util/api";
+
 import { NewsletterCard, PodcastCard, StreamCard, TextCard } from "./Cards";
 import { getPodcastFeed } from "@/app/util/podcast";
-import QueryString from "qs";
+import { fetchPage } from "@/app/util/api/page";
 
-async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
-  const queryString = QueryString.stringify({
-    filters: {
-      slug: {
-        $eq: slug,
-      },
-    },
-    publicationState:
-      process.env.NODE_ENV === "development" ? "preview" : "live",
-    populate: {
-      groups: "*",
-      gridSlots: {
-        on: {
-          "modules.auto-post": {
-            populate: [
-              "pinnedPost.leadPhoto",
-              "pinnedPost.authors",
-              "pinnedPost.groups",
-            ],
-          },
-          "modules.stream": {
-            populate: "*",
-          },
-          "modules.text": {
-            populate: "*",
-          },
-          "modules.feed": {
-            populate: "*",
-          },
-          "modules.newsletter": {
-            populate: "*",
-          },
-        },
-      },
-    },
-  });
-  return (await makeApiCall(`/api/pages?${queryString}`)).json();
-}
+import styles from "@/app/page.module.css";
 
 export default async function CustomPage({
   params: { slug = "homepage", page = "1" },
@@ -132,6 +95,9 @@ export default async function CustomPage({
   });
   return (
     <main className={`${styles.main}`}>
+      {slug !== "homepage" && (
+        <h2 className={styles.pageHeader}>{data.attributes.title}</h2>
+      )}
       <Posts
         slots={gridSlots.length}
         heroSlots={Number(page) === 1 || !page ? heroSlots : []}
