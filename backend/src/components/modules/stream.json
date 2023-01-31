@@ -1,7 +1,8 @@
 {
   "collectionName": "components_modules_streams",
   "info": {
-    "displayName": "stream"
+    "displayName": "stream",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -9,6 +10,16 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::stream.stream"
+    },
+    "coverImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
