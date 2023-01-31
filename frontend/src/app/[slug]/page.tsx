@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 import styles from "@/app/page.module.css";
-import { NewsletterCard, PodcastCard } from "./Cards";
+import { NewsletterCard, PodcastCard, TextCard } from "./Cards";
 import { getPodcastFeed } from "@/app/util/podcast";
 import QueryString from "qs";
 
@@ -17,7 +17,23 @@ async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
     },
     publicationState:
       process.env.NODE_ENV === "development" ? "preview" : "live",
-    populate: "*",
+    populate: {
+      groups: "*",
+      gridSlots: {
+        on: {
+          "modules.auto-post": {
+            populate: [
+              "pinnedPost.leadPhoto",
+              "pinnedPost.authors",
+              "pinnedPost.groups",
+            ],
+          },
+          "modules.text": {
+            populate: "*",
+          },
+        },
+      },
+    },
   });
   return (await makeApiCall(`/api/pages?${queryString}`)).json();
 }
@@ -38,6 +54,21 @@ export default async function CustomPage({
       slot.__component === "modules.auto-post" && slot.isHero ? idx : -1
     )
     .filter((n) => n > -1);
+  const pinnedPosts = gridSlots
+    .map((slot, idx) => {
+      if (slot.__component === "modules.auto-post" && slot.pinnedPost.data) {
+        return {
+          slot: idx,
+          post: slot.pinnedPost.data,
+        };
+      } else {
+        return {
+          slot: -1,
+          post: null,
+        };
+      }
+    })
+    .filter((p) => p.slot > -1) as { slot: number; post: App.Post }[];
   const customSlots = (
     await Promise.all(
       gridSlots.map(async (slot, idx) => {
@@ -52,6 +83,11 @@ export default async function CustomPage({
             renderCard: () => <NewsletterCard {...slot} />,
             slot: idx,
           };
+        } else if (slot.__component === "modules.text") {
+          return {
+            renderCard: () => <TextCard {...slot} />,
+            slot: idx,
+          };
         }
         return {
           renderCard: () => <></>,
@@ -64,7 +100,8 @@ export default async function CustomPage({
   const pageSize =
     gridSlots.length -
     (heroSlots.length * heroSlotSize - 1) -
-    customSlots.length;
+    customSlots.length -
+    pinnedPosts.length;
   const posts = await getPosts({
     sort: ["published:desc", "publishedAt:desc"],
     filters: data.attributes.groups.data.length
@@ -87,6 +124,7 @@ export default async function CustomPage({
         customSlots={customSlots}
         pageUrl={`/${slug}`}
         pagination={posts.meta.pagination}
+        pinnedPosts={pinnedPosts}
         posts={posts.data ?? []}
       />
     </main>

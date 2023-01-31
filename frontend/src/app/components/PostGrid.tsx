@@ -111,6 +111,7 @@ export function Posts({
   heroSlots = [],
   pageUrl,
   pagination,
+  pinnedPosts = [],
   posts,
   slots = 20,
 }: {
@@ -118,6 +119,7 @@ export function Posts({
   heroSlots?: number[];
   pageUrl: string;
   pagination?: App.Pagination;
+  pinnedPosts?: { slot: number; post: App.Post }[];
   posts: App.Post[];
   slots?: number;
 }) {
@@ -130,6 +132,19 @@ export function Posts({
         );
         if (customSlot) {
           return <Fragment key={idx}>{customSlot.renderCard()}</Fragment>;
+        }
+        const pinnedPost = pinnedPosts
+          .filter(Boolean)
+          .find((pin) => pin.slot === idx);
+        if (pinnedPost && typeof pinnedPost.slot === "number") {
+          return (
+            <Post
+              hero={heroSlots?.includes(idx)}
+              slot={pinnedPost.slot}
+              key={idx}
+              {...pinnedPost.post}
+            />
+          );
         }
       });
     let lastUsedPostIdx = 0;
@@ -152,7 +167,7 @@ export function Posts({
       }
       return slot;
     });
-  }, [slots, customSlots, heroSlots, posts]);
+  }, [slots, customSlots, heroSlots, posts, pinnedPosts]);
   const showPagination =
     pagination && (pagination.pageCount > 1 || pagination.page > 1);
   return (

@@ -20,3 +20,16 @@
   background-color: var(--theme-alternate-contrast);
   color: var(--theme-alternate);
 }
+
+.card .image img {
+  object-fit: cover;
+}
+
+.textCard {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.textCard .image {
+  position: relative;
+}

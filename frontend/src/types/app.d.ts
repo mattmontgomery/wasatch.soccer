@@ -29,7 +29,12 @@ declare namespace App {
   type Page = {
     id: number;
     attributes: {
-      gridSlots: (GridSlots.AutoPost | GridSlots.Feed | GridSlots.Newsletter)[];
+      gridSlots: (
+        | GridSlots.AutoPost
+        | GridSlots.Feed
+        | GridSlots.Newsletter
+        | GridSlots.Text
+      )[];
       title: string;
       createdAt: string;
       updatedAt: string;
@@ -46,6 +51,7 @@ declare namespace App {
     type AutoPost = Generic & {
       __component: "modules.auto-post";
       isHero: boolean;
+      pinnedPost: { data: App.Post };
     };
     type Feed = Generic & {
       __component: "modules.feed";
@@ -58,6 +64,13 @@ declare namespace App {
       feedUrl: string;
       title: string;
       body: string;
+      url: string;
+    };
+    type Text = Generic & {
+      __component: "modules.text";
+      body: string;
+      coverImage: { data: App.Photo };
+      title: string;
       url: string;
     };
   }
@@ -73,15 +86,7 @@ declare namespace App {
       summary: string;
       body: string;
       leadPhoto: {
-        data: {
-          attributes: {
-            caption: string;
-            formats: Record<string, Photo>;
-            height: number;
-            width: number;
-            url: string;
-          };
-        };
+        data: Photo;
       };
       groups: {
         data: Group[];
@@ -98,6 +103,15 @@ declare namespace App {
     };
   };
   type Photo = {
+    attributes: {
+      caption: string;
+      height: number;
+      width: number;
+      url: string;
+      formats: Record<string, PhotoBasics>;
+    };
+  } & PhotoBasics;
+  type PhotoBasics = {
     height: number;
     width: number;
     url: string;
@@ -110,15 +124,7 @@ declare namespace App {
       slug: string;
       bio: string;
       photo: {
-        data: {
-          attributes: {
-            caption: string;
-            formats: Record<string, Photo>;
-            height: number;
-            width: number;
-            url: string;
-          };
-        };
+        data: Photo;
       };
       socialLinks: SocialLinks;
       createdAt: string;

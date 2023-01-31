@@ -108,15 +108,20 @@ export async function getPost(postId: number): Promise<{
 export function getPhoto(
   data: App.Post,
   format: string = "large"
-): App.Photo | null {
-  if (format === "original") {
-    return data?.attributes?.leadPhoto.data?.attributes
-      ? data.attributes.leadPhoto.data.attributes
-      : null;
-  }
-  return data?.attributes?.leadPhoto?.data
-    ? data.attributes.leadPhoto.data.attributes.formats[format]
+): App.PhotoBasics | null {
+  return data.attributes.leadPhoto.data
+    ? getPhotoRaw(data.attributes.leadPhoto.data, format)
     : null;
+}
+
+export function getPhotoRaw(
+  photo: App.Photo,
+  format: string = "large"
+): App.PhotoBasics | null {
+  if (format === "original") {
+    return photo.attributes;
+  }
+  return photo.attributes.formats[format] ?? photo.attributes;
 }
 
 export function formatDateForPathname(date: string) {
