@@ -2,12 +2,14 @@ import ReactMarkdown from "react-markdown";
 
 import { Card } from "@/app/components/PostGrid";
 
-import homepageStyles from "@/app/styles/homepage.module.css";
-import podcastStyles from "@/app/styles/podcast.module.css";
 import type { Podcast } from "podparse";
 import Image from "next/image";
 import Link from "next/link";
 import { getPhoto, getPhotoPath, getPhotoRaw } from "../util/api";
+
+import podcastStyles from "@/app/styles/podcast.module.css";
+import homepageStyles from "@/app/styles/homepage.module.css";
+import textStyles from "@/app/text.module.css";
 
 export function PodcastCard({ feed }: { feed: Podcast }) {
   return (
@@ -68,7 +70,7 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
           )}
         </div>
       )}
-      <div>
+      <div className={textStyles.body}>
         <ReactMarkdown>{body}</ReactMarkdown>
       </div>
     </Card>
