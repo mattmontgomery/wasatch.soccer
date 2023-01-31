@@ -51,7 +51,9 @@ export function NewsletterCard({ title, body, url }: App.GridSlots.Newsletter) {
 }
 
 export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
-  const image = getPhotoRaw(coverImage.data, "medium")?.url;
+  const image = coverImage.data
+    ? getPhotoRaw(coverImage.data, "medium")?.url
+    : "";
   return (
     <Card className={`${homepageStyles.card} ${homepageStyles.textCard}`}>
       <h2>{url ? <Link href={url}>{title}</Link> : title}</h2>
