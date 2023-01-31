@@ -73,6 +73,11 @@ declare namespace App {
       title: string;
       url: string;
     };
+    type Stream = Generic & {
+      __component: "modules.stream";
+      stream: { data: App.Stream };
+      coverImage: { data: App.Photo };
+    };
   }
   type Post = {
     id: number;

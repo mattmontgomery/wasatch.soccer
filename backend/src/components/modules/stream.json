@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_modules_streams",
+  "info": {
+    "displayName": "stream"
+  },
+  "options": {},
+  "attributes": {
+    "stream": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::stream.stream"
+    }
+  }
+}

@@ -21,7 +21,8 @@
         "modules.feed",
         "modules.auto-post",
         "modules.newsletter",
-        "modules.text"
+        "modules.text",
+        "modules.stream"
       ]
     },
     "groups": {
