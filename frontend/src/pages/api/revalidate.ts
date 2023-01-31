@@ -1,4 +1,3 @@
-import { slotCount } from "@/app/page";
 import { formatDateForPathname, getPosts } from "@/app/util/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -97,7 +96,7 @@ export const paths: Record<
         // if in the first 18 posts
         const posts = await getPosts({
           pagination: {
-            pageSize: slotCount,
+            pageSize: 18,
             page: 1,
           },
         });
