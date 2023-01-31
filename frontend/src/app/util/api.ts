@@ -125,7 +125,7 @@ export function getPhotoRaw(
 }
 
 export function formatDateForPathname(date: string) {
-  return format(new Date(date), "yyyy-MM-dd");
+  return date ? format(new Date(date), "yyyy-MM-dd") : "";
 }
 
 export function getPathnamePieces(post: App.Post): {
