@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_modules_posts",
+  "info": {
+    "displayName": "post",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::post.post"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "slotNumber": {
+      "type": "integer"
+    }
+  }
+}

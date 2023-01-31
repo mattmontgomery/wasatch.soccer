@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_modules_auto_posts",
+  "info": {
+    "displayName": "autoPost",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "isHero": {
+      "type": "boolean"
+    }
+  }
+}
