@@ -16,6 +16,9 @@
     },
     "slotNumber": {
       "type": "integer"
+    },
+    "isHero": {
+      "type": "boolean"
     }
   }
 }

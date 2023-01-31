@@ -8,6 +8,11 @@
   "attributes": {
     "isHero": {
       "type": "boolean"
+    },
+    "pinnedPost": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::post.post"
     }
   }
 }

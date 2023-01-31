@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_modules_texts",
+  "info": {
+    "displayName": "text"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "coverImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

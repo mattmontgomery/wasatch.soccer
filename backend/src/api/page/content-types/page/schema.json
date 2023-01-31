@@ -18,10 +18,10 @@
     "gridSlots": {
       "type": "dynamiczone",
       "components": [
-        "modules.post",
         "modules.feed",
         "modules.auto-post",
-        "modules.newsletter"
+        "modules.newsletter",
+        "modules.text"
       ]
     },
     "groups": {
