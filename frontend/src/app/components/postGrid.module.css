@@ -58,17 +58,16 @@
 
 .primaryGroup {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 1rem;
+  left: 1rem;
 }
 
 .primaryGroup.primaryGroupColumn {
   font-size: 14pt;
   color: white;
-  text-shadow: 1px 1px 6px RGBA(0, 0, 0, 0.8), 8px 8px 24px black;
-  padding: 1rem;
+  text-shadow: 1px 1px 8px RGBA(0, 0, 0, 0.8);
   text-align: left;
+  border-bottom: 4px solid var(--theme-alternate);
 }
 
 .primaryGroup.primaryGroupGrouping {

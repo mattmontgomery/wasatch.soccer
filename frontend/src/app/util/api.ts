@@ -3,7 +3,7 @@ import format from "date-fns/format";
 
 const API_BASE = process.env.API_BASE;
 
-async function makeApiCall(
+export async function makeApiCall(
   path: string,
   options: { revalidate: number } = { revalidate: 120 }
 ): Promise<Response> {
@@ -40,9 +40,13 @@ export async function getPosts({
       };
     };
     groups?: {
-      id: {
-        $eq: number;
-      };
+      id:
+        | {
+            $eq: number;
+          }
+        | {
+            $in: number[];
+          };
     };
     published?: {
       $gte?: string;

@@ -10,6 +10,7 @@ declare namespace App {
       navigationGroups: {
         data: Group[];
       };
+      navigationItems: { url: string; label: string; id: number }[];
       newsletterSignup: string;
       podcastFeed: string;
       themePrimary: string;
@@ -25,6 +26,41 @@ declare namespace App {
       twitter: string;
     };
   };
+  type Page = {
+    id: number;
+    attributes: {
+      gridSlots: (GridSlots.AutoPost | GridSlots.Feed | GridSlots.Newsletter)[];
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
+      slug: string;
+      groups: { data: Group[] };
+    };
+  };
+  namespace GridSlots {
+    type Generic = {
+      id: number;
+      __component: string;
+    };
+    type AutoPost = Generic & {
+      __component: "modules.auto-post";
+      isHero: boolean;
+    };
+    type Feed = Generic & {
+      __component: "modules.feed";
+      feedUrl: string;
+      title: string;
+      body: string;
+    };
+    type Newsletter = Generic & {
+      __component: "modules.newsletter";
+      feedUrl: string;
+      title: string;
+      body: string;
+      url: string;
+    };
+  }
   type Post = {
     id: number;
     attributes: {

@@ -9,6 +9,7 @@ export const Config: {
     light: string;
   };
   navigationGroups: App.Group[];
+  navigationItems: App.SiteConfig["attributes"]["navigationItems"];
   newsletterSignup: string;
   podcastFeed: string;
   siteDescription: string;
@@ -35,6 +36,7 @@ export const Config: {
     light: "",
   },
   navigationGroups: [],
+  navigationItems: [],
   newsletterSignup: "",
   podcastFeed: "",
   siteDescription: "",
@@ -66,6 +68,7 @@ export async function getConfig(): Promise<typeof Config> {
     Config.about = data.attributes.about;
     Config.homepageTitleText = data.attributes.homepageTitleText;
     Config.navigationGroups = data.attributes.navigationGroups.data ?? [];
+    Config.navigationItems = data.attributes.navigationItems;
     Config.newsletterSignup = data.attributes.newsletterSignup;
     Config.podcastFeed = data.attributes.podcastFeed;
 
