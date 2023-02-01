@@ -19,7 +19,11 @@ export default async function SearchPage({
 }): Promise<React.ReactElement> {
   const query = searchParams?.q ?? "";
   const postsIndex = client.index(process.env.MEILISEARCH_POST_INDEX ?? "post");
-  const { hits } = await postsIndex.search<PostHit>(query);
+  const { hits } = await postsIndex.search<PostHit>(query, {
+    hitsPerPage: 12,
+    limit: 12,
+    q: query,
+  });
   const posts = convertHitsToPosts(hits);
   return (
     <div className={styles.main}>
