@@ -93,7 +93,7 @@
   display: grid;
   row-gap: 2rem;
   grid-template-columns: 100%;
-  grid-template-rows: min-content;
+  grid-template-rows: min-content min-content;
 }
 @media screen and (min-width: 36rem) {
   .post .image {

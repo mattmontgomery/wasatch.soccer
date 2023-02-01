@@ -26,10 +26,11 @@ export default async function SearchPage({
   });
   const posts = convertHitsToPosts(hits);
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${styles.main4}`}>
       <h2 className={styles.pageHeader}>Search Results</h2>
       <Search value={query} />
       <Posts posts={posts} pageUrl={`/search?q=${query}`} />
+      <div></div>
     </div>
   );
 }
