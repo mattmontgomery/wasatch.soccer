@@ -1,5 +1,17 @@
 export default function ({ env }) {
   return {
+    meilisearch: {
+      config: {
+        post: {
+          settings: {
+            sortableAttributes: ["published", "publishedAt"],
+            synonyms: {
+              rsl: ["real salt lake"],
+            },
+          },
+        },
+      },
+    },
     redis: {
       config: {
         connections: {

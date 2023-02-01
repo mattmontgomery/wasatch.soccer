@@ -22,6 +22,7 @@ export default async function SearchPage({
   const { hits } = await postsIndex.search<PostHit>(query, {
     hitsPerPage: 12,
     limit: 12,
+    sort: ["published:desc", "publishedAt:desc"],
     q: query,
   });
   const posts = convertHitsToPosts(hits);
