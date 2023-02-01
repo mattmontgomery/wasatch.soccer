@@ -24,6 +24,7 @@ export default async function SearchPage({
     limit: 12,
     sort: ["published:desc", "publishedAt:desc"],
     q: query,
+    matchingStrategy: "all",
   });
   const posts = convertHitsToPosts(hits);
   return (
