@@ -92,13 +92,13 @@ declare namespace App {
       summary: string;
       body: string;
       leadPhoto: {
-        data: Photo;
+        data: Photo | null;
       };
       groups: {
         data: Group[];
       };
       primaryGroup: {
-        data: Group;
+        data: Group | null;
       };
       authors: {
         data: Author[];
@@ -110,17 +110,23 @@ declare namespace App {
   };
   type Photo = {
     attributes: {
+      alternativeText: string;
       caption: string;
       height: number;
       width: number;
       url: string;
       formats: Record<string, PhotoBasics>;
-    };
-  } & PhotoBasics;
+    } & PhotoBasics;
+  };
   type PhotoBasics = {
+    ext: string;
+    hash: string;
     height: number;
-    width: number;
+    mime: string;
+    path: string;
+    size: number;
     url: string;
+    width: number;
   };
   type Author = {
     id: number;

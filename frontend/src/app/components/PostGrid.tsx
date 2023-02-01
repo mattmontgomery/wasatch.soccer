@@ -113,6 +113,7 @@ export function Posts({
   pagination,
   pinnedPosts = [],
   posts,
+  postsClassName = "",
   slots = 20,
 }: {
   customSlots?: Slot[];
@@ -121,6 +122,7 @@ export function Posts({
   pagination?: App.Pagination;
   pinnedPosts?: { slot: number; post: App.Post }[];
   posts: App.Post[];
+  postsClassName?: string;
   slots?: number;
 }) {
   const Slots = useMemo(() => {
@@ -172,7 +174,7 @@ export function Posts({
     pagination && (pagination.pageCount > 1 || pagination.page > 1);
   return (
     <>
-      <section className={styles.posts}>{Slots}</section>
+      <section className={`${styles.posts} ${postsClassName}`}>{Slots}</section>
       {showPagination && (
         <Pagination
           pagination={pagination}

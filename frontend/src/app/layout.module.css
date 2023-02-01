@@ -59,6 +59,7 @@
   font-size: 9pt;
   display: grid;
   row-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
 }
 .footer a {
   color: var(--theme-primary);
@@ -68,6 +69,17 @@
 }
 .footer .links span {
   margin-right: 1rem;
+}
+.footer .search {
+  grid-column: 2;
+  grid-row: 1 / 2;
+}
+.footer .links {
+  grid-column: 1;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
 }
 @media screen and (min-width: 72rem) {
   .navigation {

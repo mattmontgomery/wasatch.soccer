@@ -80,7 +80,7 @@ export default async function PostPage({
           <header>
             {primaryGroup && (
               <h5 className={postStyles.groupTag}>
-                {data.attributes.primaryGroup.data.attributes.name}
+                {primaryGroup.attributes.name}
               </h5>
             )}
             <h2 className={pageStyles.headline}>{data.attributes.headline}</h2>
@@ -99,7 +99,7 @@ export default async function PostPage({
                 />
               </div>
               <div className={pageStyles.leadPhotoCaption}>
-                {data.attributes.leadPhoto.data.attributes.caption}
+                {data.attributes.leadPhoto.data?.attributes.caption}
               </div>
             </div>
           )}
