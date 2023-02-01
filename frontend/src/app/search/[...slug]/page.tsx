@@ -1,6 +1,6 @@
 import MeiliSearch from "meilisearch";
-import { Posts } from "../components/PostGrid";
-import { convertHitsToPosts, PostHit, PostHits } from "../util/api/posts";
+import { Posts } from "../../components/PostGrid";
+import { convertHitsToPosts, PostHit, PostHits } from "../../util/api/posts";
 
 import styles from "@/app/page.module.css";
 import Search from "@/app/components/Search";
@@ -11,13 +11,13 @@ const client = new MeiliSearch({
 });
 
 export default async function SearchPage({
-  searchParams,
+  params: { slug = [] },
 }: {
-  searchParams: {
-    q: string;
+  params: {
+    slug: string[];
   };
 }): Promise<React.ReactElement> {
-  const query = searchParams?.q ?? "";
+  const query = slug[0] ?? 0;
   const postsIndex = client.index(process.env.MEILISEARCH_POST_INDEX ?? "post");
   const { hits } = await postsIndex.search<PostHit>(query, {
     hitsPerPage: 12,
