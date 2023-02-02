@@ -1,5 +1,5 @@
 import { getAuthor } from "@/app/util/api";
-import { getSiteTitle, getTitle } from "@/app/util/site";
+import { getTitle } from "@/app/util/site";
 import { notFound } from "next/navigation";
 
 export default async function Head({ params }: { params: { id: number } }) {
@@ -10,7 +10,6 @@ export default async function Head({ params }: { params: { id: number } }) {
   return (
     <>
       <title>{await getTitle([author.data.attributes.name, "Authors"])}</title>
-      <meta property="og:site_name" content={await getSiteTitle()} />
     </>
   );
 }

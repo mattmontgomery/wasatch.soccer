@@ -10,7 +10,6 @@ export default async function Head({ params }: { params: { id: number } }) {
   return (
     <>
       <title>{await getTitle([group.data?.attributes.name])}</title>
-      <meta property="og:site_name" content={await getSiteTitle()} />
     </>
   );
 }
