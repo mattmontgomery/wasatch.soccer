@@ -1,11 +1,13 @@
 import { Montserrat } from "@next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import Footer from "./components/Footer";
 import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
+import { getSiteTitle } from "./util/site";
 
 const headlineFont = Montserrat({
   subsets: ["latin"],
@@ -21,6 +23,7 @@ export default async function RootLayout({
   const config = await getConfig();
   const logoLightMode = config.logo.light;
   const logoDarkMode = config.logo.dark;
+  const siteName = await getSiteTitle();
   return (
     <html lang="en">
       {/*
@@ -30,6 +33,30 @@ export default async function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`RSS feed for ${config.siteName}`}
+          href="/rss.xml"
+        />
+        <meta property="og:site_name" content={siteName} />
+        <meta property="twitter:site" content="@rslsoapbox" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PRYEH8MYJ1"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PRYEH8MYJ1');`,
+          }}
+        />
       </head>
       <body className={`${headlineFont.variable}`}>
         <style>

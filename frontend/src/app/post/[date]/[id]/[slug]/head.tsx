@@ -12,13 +12,11 @@ export default async function Head({ params }: { params: { id: number } }) {
   const photo = getPhoto(data, "small");
   const photoPath = photo ? getPhotoPath(photo.url) : null;
   const title = await getTitle([data?.attributes.headline]);
-  const siteName = await getSiteTitle();
 
   return (
     <>
       <title>{title}</title>
       <meta name="description">{data?.attributes.summary}</meta>
-      <meta property="og:site_name" content={siteName} />
       <meta property="og:title" content={data.attributes.headline} />
       <meta property="og:description" content={data.attributes.summary} />
       <meta property="og:type" content="article" />
@@ -26,7 +24,6 @@ export default async function Head({ params }: { params: { id: number } }) {
       <meta property="article:tag" content="Real Salt Lake" />
 
       <meta property="twitter:card" />
-      <meta property="twitter:site" content="@rslsoapbox" />
       <meta property="twitter:description" content={data.attributes.summary} />
       <meta property="twitter:title" content={data.attributes.headline} />
 
