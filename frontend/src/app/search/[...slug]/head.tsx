@@ -12,7 +12,7 @@ export default async function SearchPageHead({
   );
   return (
     <>
-      <title></title>
+      <title>{title}</title>
     </>
   );
 }
