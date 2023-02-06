@@ -20,7 +20,8 @@
 .post .noImage {
   position: relative;
   height: 250px;
-  background: var(--theme-primary);
+  background-image: url("/cartographer.png"),
+    linear-gradient(to bottom, var(--theme-primary-70), var(--theme-primary));
 }
 
 .post .image img {
@@ -122,7 +123,8 @@
   .postHero .headline {
     font-size: 36px;
   }
-  .postHero .image {
+  .postHero .image,
+  .postHero .noImage {
     min-height: 550px;
     height: 100%;
     position: relative;

@@ -18,7 +18,9 @@ export function Card({
 }): React.ReactElement {
   return (
     <div
-      className={`${styles.post} ${hero ? styles.postHero : ""} ${className}`}
+      className={`${styles.post} ${hero ? styles.postHero : ""} ${
+        className ?? ""
+      }`}
     >
       {children}
     </div>

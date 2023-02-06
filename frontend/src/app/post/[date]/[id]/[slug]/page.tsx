@@ -8,7 +8,6 @@ import {
   getPhotoPath,
   getPost,
   getPosts,
-  getSiteConfig,
 } from "@/app/util/api";
 import { Redirect } from "@/app/components/Post/Redirect";
 import { Embed } from "@/app/components/Post/Embed";

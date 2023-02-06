@@ -105,7 +105,9 @@ export default async function CustomPage({
         pageUrl={`/${slug}`}
         pagination={posts.meta.pagination}
         pinnedPosts={pinnedPosts}
-        posts={posts.data ?? []}
+        posts={(posts.data ?? []).filter(
+          (post) => !pinnedPosts.find((pinned) => pinned.post.id === post.id)
+        )}
       />
     </main>
   );
