@@ -19,6 +19,7 @@ export async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
               "pinnedPost.leadPhoto",
               "pinnedPost.authors",
               "pinnedPost.groups",
+              "pinnedPost.primaryGroup",
             ],
           },
           "modules.stream": {

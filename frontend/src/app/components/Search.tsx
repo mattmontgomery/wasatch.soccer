@@ -5,7 +5,6 @@ import styles from "./search.module.css";
 
 export default function Search({ value }: { value?: string }) {
   const [search, setSearch] = useState<string>(value ?? "");
-  console.log(search);
   return (
     <form className={styles.search} action={`/search/${encodeURI(search)}`}>
       <input
