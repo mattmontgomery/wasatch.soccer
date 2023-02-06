@@ -1,6 +1,7 @@
 .body {
   font-size: 115%;
   line-height: 1.5;
+  word-break: break-word;
 }
 
 .body a {
