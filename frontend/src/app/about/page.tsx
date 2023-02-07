@@ -4,6 +4,7 @@ import pageStyles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 
 import { getConfig } from "@/app/util/config";
+import { Metadata } from "next";
 
 export default async function AboutPage(): Promise<React.ReactElement> {
   const config = await getConfig();
@@ -15,4 +16,18 @@ export default async function AboutPage(): Promise<React.ReactElement> {
       </div>
     </main>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "About",
+    twitter: {
+      title: "About",
+    },
+    openGraph: {
+      title: {
+        absolute: "About",
+      },
+    },
+  };
 }

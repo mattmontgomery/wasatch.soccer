@@ -24,12 +24,13 @@ import Posts from "./Posts";
 import { notFound } from "next/navigation";
 import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
+import { Metadata } from "next";
 
-export default async function PostPage({
-  params: { id, slug },
-}: {
+type PageProps = {
   params: { id: number; slug: string };
-}) {
+};
+
+export default async function PostPage({ params: { id, slug } }: PageProps) {
   const { data } = await getPost(id);
   if (!data) {
     return notFound();
@@ -181,4 +182,39 @@ export async function generateStaticParams() {
   return posts.data.map((post) => {
     return getPathnamePieces(post);
   });
+}
+
+export async function generateMetadata({
+  params: { id },
+}: PageProps): Promise<Metadata> {
+  const { data } = await getPost(id);
+  const photo = getPhoto(data, "small");
+  const photoPath = photo ? getPhotoPath(photo.url) : null;
+  return {
+    alternates: {
+      canonical: getAbsolutePath(getPostUrl(data)),
+    },
+    title: data.attributes.headline,
+    description: data.attributes.summary,
+    openGraph: {
+      title: { absolute: data.attributes.headline },
+      type: "article",
+      section: "Sports",
+      tags: ["Real Salt Lake"],
+      description: data.attributes.summary,
+      images: photoPath ? [photoPath] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      description: data.attributes.summary,
+      title: data.attributes.headline,
+      images: photoPath ? [photoPath] : undefined,
+    },
+    other: {
+      "twitter:label1": "Written By",
+      "twitter:data1": data.attributes.authors.data
+        .map((author) => author.attributes.name)
+        .join(", "),
+    },
+  };
 }

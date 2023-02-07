@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Montserrat } from "@next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,15 +46,12 @@ export default async function RootLayout({
       */}
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width" />
         <link
           rel="alternate"
           type="application/rss+xml"
           title={`RSS feed for ${config.siteName}`}
           href="/rss.xml"
         />
-        <meta property="og:site_name" content={siteName} />
-        <meta property="twitter:site" content="@rslsoapbox" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-PRYEH8MYJ1"
           strategy="afterInteractive"
@@ -132,4 +130,33 @@ export default async function RootLayout({
       </body>
     </html>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getConfig();
+  return {
+    title: {
+      default: config.siteName,
+      template: `%s | ${config.siteName}`,
+    },
+    viewport: "width=device-width",
+    description: config.siteDescription,
+    openGraph: {
+      type: "website",
+      title: {
+        default: config.siteName,
+        template: `%s | ${config.siteName}`,
+      },
+      siteName: config.siteName,
+    },
+    twitter: {
+      card: "summary",
+      title: {
+        default: config.siteName,
+        template: `%s | ${config.siteName}`,
+      },
+      site: `@${config.social.twitter.replace(new RegExp(".+/"), "")}`,
+      description: config.siteDescription,
+    },
+  };
 }
