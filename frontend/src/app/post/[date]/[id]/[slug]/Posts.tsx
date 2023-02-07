@@ -22,7 +22,9 @@ function Post(props: App.Post): React.ReactElement {
   const photo = getPhoto(props, "small");
   return (
     <Link href={getPathname(props)} className={styles.postCard}>
-      <div className={styles.postCardImage}>
+      <div
+        className={`${styles.postCardImage} ${!photo ? styles.noImage : ""}`}
+      >
         {photo && (
           <Image
             sizes="(max-width: 72rem) 100vw
