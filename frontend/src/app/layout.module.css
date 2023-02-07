@@ -57,9 +57,9 @@
   margin-top: 4rem;
   padding: 1rem;
   font-size: 9pt;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   row-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
 }
 .footer a {
   color: var(--theme-primary);
@@ -76,12 +76,18 @@
 }
 .footer .links {
   grid-column: 1;
-  align-self: center;
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
 }
 @media screen and (min-width: 72rem) {
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer .links {
+    align-self: center;
+  }
   .navigation {
     font-size: 13pt;
   }
