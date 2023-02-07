@@ -92,7 +92,10 @@ export default async function PostPage({
                   priority
                   sizes="(max-width: 48rem) 480px, (max-width: 56rem) 640px, (min-width: 56rem) 1280px"
                   src={getPhotoPath(leadPhoto.url)}
-                  alt={data.attributes.headline}
+                  alt={
+                    data.attributes.leadPhoto.data?.attributes
+                      .alternativeText ?? data.attributes.headline
+                  }
                   width={leadPhoto.width}
                   height={leadPhoto.height}
                 />

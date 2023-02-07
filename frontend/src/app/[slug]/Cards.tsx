@@ -63,13 +63,25 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
           {url ? (
             <Link href={url}>
               <Image
-                alt={coverImage.data.attributes.caption}
+                alt={
+                  coverImage.data.attributes.alternativeText ??
+                  coverImage.data.attributes.caption ??
+                  title
+                }
                 src={image}
                 fill
               />
             </Link>
           ) : (
-            <Image alt={coverImage.data.attributes.caption} src={image} fill />
+            <Image
+              alt={
+                coverImage.data.attributes.alternativeText ??
+                coverImage.data.attributes.caption ??
+                title
+              }
+              src={image}
+              fill
+            />
           )}
         </div>
       )}
@@ -92,13 +104,25 @@ export function StreamCard({ coverImage, stream }: App.GridSlots.Stream) {
           {url ? (
             <Link href={url}>
               <Image
-                alt={coverImage.data.attributes.caption}
+                alt={
+                  coverImage.data.attributes.alternativeText ??
+                  coverImage.data.attributes.caption ??
+                  title
+                }
                 src={image}
                 fill
               />
             </Link>
           ) : (
-            <Image alt={coverImage.data.attributes.caption} src={image} fill />
+            <Image
+              alt={
+                coverImage.data.attributes.alternativeText ??
+                coverImage.data.attributes.caption ??
+                title
+              }
+              src={image}
+              fill
+            />
           )}
         </div>
       )}
