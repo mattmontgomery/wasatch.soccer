@@ -57,5 +57,10 @@ export async function generateMetadata({
     twitter: {
       title,
     },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+    },
   };
 }

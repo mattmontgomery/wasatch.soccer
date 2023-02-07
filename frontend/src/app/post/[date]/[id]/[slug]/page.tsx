@@ -179,9 +179,7 @@ export async function generateStaticParams() {
     },
   });
 
-  return posts.data.map((post) => {
-    return getPathnamePieces(post);
-  });
+  return posts.data.map(getPathnamePieces);
 }
 
 export async function generateMetadata({
@@ -202,13 +200,29 @@ export async function generateMetadata({
       section: "Sports",
       tags: ["Real Salt Lake"],
       description: data.attributes.summary,
-      images: photoPath ? [photoPath] : undefined,
+      images: photo
+        ? [
+            {
+              url: getPhotoPath(photo.url),
+              width: photo.width,
+              height: photo.height,
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       description: data.attributes.summary,
       title: data.attributes.headline,
-      images: photoPath ? [photoPath] : undefined,
+      images: photo
+        ? [
+            {
+              url: getPhotoPath(photo.url),
+              width: photo.width,
+              height: photo.height,
+            },
+          ]
+        : undefined,
     },
     other: {
       "twitter:label1": "Written By",

@@ -153,10 +153,14 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary",
       title: {
         default: config.siteName,
-        template: `%s | ${config.siteName}`,
+        template: `%s`,
       },
       site: `@${config.social.twitter.replace(new RegExp(".+/"), "")}`,
       description: config.siteDescription,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

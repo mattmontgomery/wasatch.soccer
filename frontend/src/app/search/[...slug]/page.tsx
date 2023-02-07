@@ -62,5 +62,9 @@ export async function generateMetadata({
         absolute: title,
       },
     },
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
