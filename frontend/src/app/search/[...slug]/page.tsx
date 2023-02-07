@@ -4,10 +4,24 @@ import { convertHitsToPosts, PostHit, PostHits } from "../../util/api/posts";
 
 import styles from "@/app/page.module.css";
 import Search from "@/app/components/Search";
+import { cache } from "react";
 
 const client = new MeiliSearch({
   host: process.env.MEILISEARCH_HOST ?? "",
   apiKey: process.env.MEILISEARCH_KEY ?? "",
+});
+
+const search = cache(async (query: string) => {
+  const postsIndex = client.index(process.env.MEILISEARCH_POST_INDEX ?? "post");
+  const { hits } = await postsIndex.search<PostHit>(query, {
+    hitsPerPage: 12,
+    limit: 12,
+    sort: ["published:desc", "publishedAt:desc"],
+    q: query,
+    matchingStrategy: "all",
+  });
+  const posts = convertHitsToPosts(hits);
+  return posts;
 });
 
 export default async function SearchPage({
@@ -18,15 +32,7 @@ export default async function SearchPage({
   };
 }): Promise<React.ReactElement> {
   const query = decodeURI(slug[0] ? String(slug[0]) : "");
-  const postsIndex = client.index(process.env.MEILISEARCH_POST_INDEX ?? "post");
-  const { hits } = await postsIndex.search<PostHit>(query, {
-    hitsPerPage: 12,
-    limit: 12,
-    sort: ["published:desc", "publishedAt:desc"],
-    q: query,
-    matchingStrategy: "all",
-  });
-  const posts = convertHitsToPosts(hits);
+  const posts = await search(query);
   return (
     <div className={`${styles.main} ${styles.main4}`}>
       <h2 className={styles.pageHeader}>Search Results</h2>
