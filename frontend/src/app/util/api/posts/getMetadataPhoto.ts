@@ -1,7 +1,7 @@
 import { getPhoto, getPhotoPath } from "@/app/util/api";
 
 export default function getMetadataPhoto(post: App.Post) {
-  const photo = getPhoto(post, "small") as App.PhotoBasics;
+  const photo = getPhoto(post, "medium") as App.PhotoBasics;
   return {
     url: getPhotoPath(photo.url),
     width: photo.width,
