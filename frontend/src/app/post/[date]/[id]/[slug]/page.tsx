@@ -187,6 +187,7 @@ export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const { data } = await getPost(id);
+  const metadataPhoto = getMetadataPhoto(data);
   return {
     alternates: {
       canonical: getAbsolutePath(getPostUrl(data)),
@@ -199,13 +200,13 @@ export async function generateMetadata({
       section: "Sports",
       tags: ["Real Salt Lake"],
       description: data.attributes.summary,
-      images: getMetadataPhoto(data),
+      images: metadataPhoto ? [metadataPhoto] : [],
     },
     twitter: {
       card: "summary_large_image",
       description: data.attributes.summary,
       title: data.attributes.headline,
-      images: getMetadataPhoto(data),
+      images: metadataPhoto ? [metadataPhoto] : [],
     },
     other: {
       "twitter:label1": "Written By",
