@@ -25,6 +25,7 @@ import { notFound } from "next/navigation";
 import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
 import { Metadata } from "next";
+import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -186,8 +187,7 @@ export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const { data } = await getPost(id);
-  const photo = getPhoto(data, "small");
-  const photoPath = photo ? getPhotoPath(photo.url) : null;
+  const photo = getPhoto(data, "medium");
   return {
     alternates: {
       canonical: getAbsolutePath(getPostUrl(data)),
@@ -200,29 +200,13 @@ export async function generateMetadata({
       section: "Sports",
       tags: ["Real Salt Lake"],
       description: data.attributes.summary,
-      images: photo
-        ? [
-            {
-              url: getPhotoPath(photo.url),
-              width: photo.width,
-              height: photo.height,
-            },
-          ]
-        : undefined,
+      images: photo ? [getMetadataPhoto(data)] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       description: data.attributes.summary,
       title: data.attributes.headline,
-      images: photo
-        ? [
-            {
-              url: getPhotoPath(photo.url),
-              width: photo.width,
-              height: photo.height,
-            },
-          ]
-        : undefined,
+      images: photo ? [getMetadataPhoto(data)] : undefined,
     },
     other: {
       "twitter:label1": "Written By",
