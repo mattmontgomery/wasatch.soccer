@@ -2,19 +2,23 @@ import React from "react";
 import { notFound } from "next/navigation";
 
 import { Posts } from "@/app/components/PostGrid";
-import { getPosts } from "@/app/util/api";
+import { getPosts, getSiteConfig } from "@/app/util/api";
 
 import { NewsletterCard, PodcastCard, StreamCard, TextCard } from "./Cards";
 import { getPodcastFeed } from "@/app/util/podcast";
 import { fetchPage } from "@/app/util/api/pages";
 
 import styles from "@/app/page.module.css";
+import { Metadata } from "next";
+import { getConfig } from "../util/config";
+
+type PageProps = {
+  params: { slug: string; page?: string };
+};
 
 export default async function CustomPage({
   params: { slug = "homepage", page = "1" },
-}: {
-  params: { slug: string; page?: string };
-}): Promise<React.ReactElement> {
+}: PageProps): Promise<React.ReactElement> {
   const resp = await fetchPage(slug);
   if (resp.data.length === 0) {
     return notFound();
@@ -111,4 +115,30 @@ export default async function CustomPage({
       />
     </main>
   );
+}
+
+export async function generateMetadata({
+  params: { slug = "homepage", page = "1" },
+}: PageProps): Promise<Metadata> {
+  const { data } = await fetchPage(slug);
+  if (!data || data.length !== 1) {
+    return notFound();
+  }
+  const config = await getConfig();
+  const _page = data[0];
+  const title =
+    slug === "homepage" && Number(page) === 1
+      ? config.homepageTitleText
+      : _page.attributes.title;
+  return {
+    title,
+    twitter: {
+      title,
+    },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+    },
+  };
 }

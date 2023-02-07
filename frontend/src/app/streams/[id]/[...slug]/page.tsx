@@ -7,12 +7,15 @@ import { getPosts, getStream } from "@/app/util/api";
 import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 import { getStreamUrl } from "@/app/util/urls";
+import { Metadata } from "next";
+
+type PageProps = {
+  params: { id: string; slug: string[] };
+};
 
 export default async function StreamPage({
   params: { id, slug: _slug },
-}: {
-  params: { id: string; slug: string[] };
-}) {
+}: PageProps) {
   const [, _page] = _slug;
   const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const stream = await getStream(Number(id));
@@ -48,4 +51,25 @@ export default async function StreamPage({
       />
     </main>
   );
+}
+
+export async function generateMetadata({
+  params: { id, slug: _slug },
+}: PageProps): Promise<Metadata> {
+  const stream = await getStream(Number(id));
+  if (!stream.data) {
+    notFound();
+  }
+  const title = stream.data.attributes.name;
+  return {
+    title,
+    twitter: {
+      title,
+    },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+    },
+  };
 }

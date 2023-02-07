@@ -4,6 +4,7 @@ import pageStyles from "@/app/page.module.css";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 
 export default async function MastheadPage(): Promise<React.ReactElement> {
   const authors = await getAuthors({
@@ -38,4 +39,18 @@ export default async function MastheadPage(): Promise<React.ReactElement> {
       </div>
     </main>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Masthead",
+    twitter: {
+      title: "Masthead",
+    },
+    openGraph: {
+      title: {
+        absolute: "Masthead",
+      },
+    },
+  };
 }

@@ -181,7 +181,9 @@ export function Posts({
         <Pagination
           pagination={pagination}
           renderLink={(page, text) => (
-            <Link href={`${pageUrl}/${page}`}>{text ?? page}</Link>
+            <Link prefetch={false} href={`${pageUrl}/${page}`}>
+              {text ?? page}
+            </Link>
           )}
         />
       )}

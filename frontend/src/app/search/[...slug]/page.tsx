@@ -1,10 +1,12 @@
+import { cache } from "react";
 import MeiliSearch from "meilisearch";
+
 import { Posts } from "../../components/PostGrid";
-import { convertHitsToPosts, PostHit, PostHits } from "../../util/api/posts";
+import { convertHitsToPosts, PostHit } from "@/app/util/api/posts";
 
 import styles from "@/app/page.module.css";
 import Search from "@/app/components/Search";
-import { cache } from "react";
+import { Metadata } from "next";
 
 const client = new MeiliSearch({
   host: process.env.MEILISEARCH_HOST ?? "",
@@ -24,13 +26,15 @@ const search = cache(async (query: string) => {
   return posts;
 });
 
-export default async function SearchPage({
-  params: { slug = [] },
-}: {
+type PageProps = {
   params: {
     slug: string[];
   };
-}): Promise<React.ReactElement> {
+};
+
+export default async function SearchPage({
+  params: { slug = [] },
+}: PageProps): Promise<React.ReactElement> {
   const query = decodeURI(slug[0] ? String(slug[0]) : "");
   const posts = await search(query);
   return (
@@ -41,4 +45,26 @@ export default async function SearchPage({
       <div></div>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const query = decodeURI(slug[0] ? String(slug[0]) : "");
+  const title = `${query} | Search Results`;
+  return {
+    title,
+    twitter: {
+      title,
+    },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
 }

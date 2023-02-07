@@ -9,12 +9,15 @@ import styles from "@/app/page.module.css";
 import textStyles from "@/app/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
+import { Metadata } from "next";
+
+type PageProps = {
+  params: { id: string; slug: string[] };
+};
 
 export default async function AuthorsPage({
   params: { id, slug: _slug },
-}: {
-  params: { id: string; slug: string[] };
-}) {
+}: PageProps) {
   const [slug, _page] = _slug;
   const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const author = await getAuthor(Number(id));
@@ -96,4 +99,25 @@ export default async function AuthorsPage({
       />
     </main>
   );
+}
+
+export async function generateMetadata({
+  params: { id, slug: _slug },
+}: PageProps): Promise<Metadata> {
+  const author = await getAuthor(Number(id));
+  if (!author.data) {
+    notFound();
+  }
+  const title = author.data.attributes.name;
+  return {
+    title,
+    twitter: {
+      title,
+    },
+    openGraph: {
+      title: {
+        absolute: title,
+      },
+    },
+  };
 }
