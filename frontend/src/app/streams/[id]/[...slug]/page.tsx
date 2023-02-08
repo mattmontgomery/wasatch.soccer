@@ -5,7 +5,7 @@ import { Posts } from "@/app/components/PostGrid";
 import { getPosts, getStream } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
-import textStyles from "@/app/text.module.css";
+import textStyles from "@/app/styles/text.module.css";
 import { getStreamUrl } from "@/app/util/urls";
 import { Metadata } from "next";
 

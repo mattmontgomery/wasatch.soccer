@@ -69,3 +69,33 @@
   border-top: 4px solid var(--theme-primary);
   outline: 0;
 }
+
+.body .related {
+  padding: 1rem 0;
+  margin: 2rem 0;
+  border-top: 1px solid var(--theme-alternate);
+  border-bottom: 1px solid var(--theme-alternate);
+}
+.body .related .relatedBody {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  font-size: 11pt;
+}
+.body .related h5 {
+  color: initial;
+  font-size: 14pt;
+  font-weight: 400;
+  margin-top: 0;
+  /* text-align: right; */
+  text-transform: uppercase;
+}
+
+@media (min-width: 36rem) {
+  .body .related {
+    float: right;
+    margin: 0 0 2rem 2rem;
+    width: 40%;
+  }
+}

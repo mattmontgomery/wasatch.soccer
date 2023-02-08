@@ -6,7 +6,7 @@ import { Posts } from "@/app/components/PostGrid";
 import { getAuthor, getPosts } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
-import textStyles from "@/app/text.module.css";
+import textStyles from "@/app/styles/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
 import { Metadata } from "next";

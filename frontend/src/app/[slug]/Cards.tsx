@@ -5,11 +5,11 @@ import { Card } from "@/app/components/PostGrid";
 import type { Podcast } from "podparse";
 import Image from "next/image";
 import Link from "next/link";
-import { getPhoto, getPhotoPath, getPhotoRaw } from "../util/api";
+import { getPhotoRaw } from "../util/api";
 
 import podcastStyles from "@/app/styles/podcast.module.css";
 import homepageStyles from "@/app/styles/homepage.module.css";
-import textStyles from "@/app/text.module.css";
+import textStyles from "@/app/styles/text.module.css";
 import { getStreamUrl } from "../util/urls";
 
 export function PodcastCard({ feed }: { feed: Podcast }) {

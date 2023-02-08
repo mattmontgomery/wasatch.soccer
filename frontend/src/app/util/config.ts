@@ -9,7 +9,7 @@ export const Config: {
     light: string;
   };
   navigationGroups: App.Group[];
-  navigationItems: App.SiteConfig["attributes"]["navigationItems"];
+  navigationItems: App.SiteConfig["attributes"]["navigationItems"][];
   newsletterSignup: string;
   podcastFeed: string;
   siteDescription: string;

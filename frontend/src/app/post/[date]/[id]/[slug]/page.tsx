@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { ArticleJsonLd } from "next-seo";
@@ -15,7 +16,7 @@ import Published from "@/app/components/Post/Published";
 
 import pageStyles from "./page.module.css";
 import postStyles from "@/app/styles/post.module.css";
-import textStyles from "@/app/text.module.css";
+import textStyles from "@/app/styles/text.module.css";
 import Authors from "@/app/components/Post/Author";
 import Groups from "@/app/components/Post/Groups";
 import Streams from "@/app/components/Post/Streams";
@@ -24,8 +25,8 @@ import Posts from "./Posts";
 import { notFound } from "next/navigation";
 import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
-import { Metadata } from "next";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
+import Related from "./Related";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -145,8 +146,15 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
             <ReactMarkdown
               components={{
                 p({ node, children }) {
-                  if (children?.[0]?.toString().startsWith("https://")) {
-                    return <Embed url={children[0].toString()} />;
+                  const text = children?.[0]?.toString();
+                  if (text && text.startsWith("https://")) {
+                    return <Embed url={text} />;
+                  } else if (text === "[[relatedPosts]]") {
+                    return (
+                      <Related
+                        relatedPosts={data.attributes.relatedPosts?.data ?? []}
+                      />
+                    );
                   } else {
                     return <p>{children}</p>;
                   }

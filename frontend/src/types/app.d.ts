@@ -106,7 +106,12 @@ declare namespace App {
       streams: {
         data: Stream[];
       };
+      relatedPosts: { data: RelatedPost[] };
     };
+  };
+  type RelatedPost = {
+    id: number;
+    attributes: Pick<Post["attributes"], "headline" | "slug" | "published">;
   };
   type Photo = {
     attributes: {

@@ -4,7 +4,7 @@ export function getAuthorUrl(author: App.Author) {
   return `/authors/${author.id}/${author.attributes.slug}`;
 }
 
-export function getPostUrl(post: App.Post) {
+export function getPostUrl(post: App.Post | App.RelatedPost) {
   const date = format(new Date(post.attributes.published), "yyyy-MM-dd");
   return `/post/${date}/${post.id}/${post.attributes.slug}`;
 }

@@ -30,6 +30,9 @@
   background-color: var(--background-rgb);
   border-radius: 0.25rem;
 }
+.postCardImage img {
+  border-radius: 0.25rem;
+}
 .postCardImage.noImage {
   background: var(--no-background-image);
 }
