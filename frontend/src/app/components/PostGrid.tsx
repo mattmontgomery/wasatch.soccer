@@ -5,7 +5,7 @@ import Authors from "@/app/components/Post/Author";
 import Streams from "@/app/components/Post/Streams";
 import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
-import { Fragment, PropsWithChildren, useMemo } from "react";
+import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import Pagination from "./Pagination";
 
 export function Card({
@@ -157,7 +157,7 @@ export function Posts({
         // find the next unused post
         const post = posts.slice(lastUsedPostIdx, posts.length);
         if (!post[0]) {
-          return <></>;
+          return <React.Fragment key={idx}></React.Fragment>;
         }
         lastUsedPostIdx++;
         return (
