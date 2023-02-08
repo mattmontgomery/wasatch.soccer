@@ -94,7 +94,7 @@ export default async function AuthorsPage({
       </div>
       <Posts
         posts={posts.data ?? []}
-        pageUrl={`/author/${id}/${author.data.attributes.slug}`}
+        pageUrl={`/authors/${id}/${author.data.attributes.slug}`}
         pagination={posts.meta.pagination}
       />
     </main>
