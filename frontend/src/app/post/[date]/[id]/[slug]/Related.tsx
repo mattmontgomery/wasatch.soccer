@@ -8,7 +8,7 @@ export default function Related({
   relatedPosts: App.RelatedPost[];
 }): React.ReactElement {
   return (
-    <div className={styles.related}>
+    <aside className={styles.related}>
       <h5>Read More</h5>
       <div className={styles.relatedBody}>
         {relatedPosts.map((post, idx) => (
@@ -17,6 +17,6 @@ export default function Related({
           </div>
         ))}
       </div>
-    </div>
+    </aside>
   );
 }
