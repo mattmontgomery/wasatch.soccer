@@ -87,6 +87,7 @@ export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
             };
           }),
         },
+        relatedPosts: { data: [] },
         ...remainder,
       },
     };
