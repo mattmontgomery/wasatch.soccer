@@ -71,7 +71,7 @@ export default async function CustomPage({
           };
         }
         return {
-          renderCard: () => <></>,
+          renderCard: () => <span></span>,
           slot: -1,
         };
       })
