@@ -4,11 +4,12 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
+    "develop": "strapi develop",
+    "deploy": "cd ../ && git subtree push --prefix backend heroku main",
+    "start": "strapi start",
     "strapi": "strapi",
-    "deploy": "cd ../ && git subtree push --prefix backend heroku main"
+    "types:generate": "strapi ts:generate-types --verbose"
   },
   "dependencies": {
     "@strapi/admin": "4.5.6",
