@@ -88,6 +88,7 @@ export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
           }),
         },
         relatedPosts: { data: [] },
+        postModules: { data: [] },
         ...remainder,
       },
     };

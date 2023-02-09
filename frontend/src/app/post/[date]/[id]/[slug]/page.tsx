@@ -154,7 +154,6 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
               components={{
                 p({ node, children }) {
                   const postModule = (node.position?.start.line ?? 0) + 1;
-                  const postModuleMod = postModule % (moduleSpacing * 2);
                   const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
                   const text = children?.[0]?.toString();
                   if (text && text.startsWith("https://")) {
