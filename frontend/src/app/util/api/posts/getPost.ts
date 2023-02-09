@@ -5,7 +5,14 @@ export default async function getPost(postId: number): Promise<{
   data: App.Post;
 }> {
   const queryString = qs.stringify({
-    populate: ["leadPhoto", "authors", "groups", "primaryGroup", "streams"],
+    populate: [
+      "leadPhoto",
+      "authors",
+      "groups",
+      "primaryGroup",
+      "streams",
+      "relatedPosts",
+    ],
     fields: ["*"],
   });
   const res = await makeApiCall(`/api/posts/${postId}?${queryString}`, {
