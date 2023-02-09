@@ -67,6 +67,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::post.post"
+    },
+    "postModules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post-module.post-module"
     }
   }
 }

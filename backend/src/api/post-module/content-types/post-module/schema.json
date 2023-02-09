@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_modules",
+  "info": {
+    "singularName": "post-module",
+    "pluralName": "post-modules",
+    "displayName": "Post Module"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "actionText": {
+      "type": "string"
+    }
+  }
+}
