@@ -4,19 +4,23 @@ import { makeApiCall } from "@/app/util/api";
 export default async function getPost(postId: number): Promise<{
   data: App.Post;
 }> {
-  const queryString = qs.stringify({
-    populate: [
-      "leadPhoto",
-      "authors",
-      "groups",
-      "primaryGroup",
-      "streams",
-      "relatedPosts",
-    ],
-    fields: ["*"],
-  });
-  const res = await makeApiCall(`/api/posts/${postId}?${queryString}`, {
-    revalidate: 300,
-  });
-  return res.json();
+  const query = {
+    publicationState:
+      process.env.NODE_ENV === "development" ? "preview" : "live",
+    populate: {
+      leadPhoto: "*",
+      authors: "*",
+      groups: "*",
+      primaryGroup: "*",
+      streams: "*",
+      relatedPosts: "*",
+      postModules: "*",
+    },
+  };
+  const queryString = qs.stringify(query, { encodeValuesOnly: true });
+  return (
+    await makeApiCall(`/api/posts/${postId}?${queryString}`, {
+      revalidate: 300,
+    })
+  ).json();
 }

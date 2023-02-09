@@ -30,11 +30,11 @@ declare namespace App {
     id: number;
     attributes: {
       gridSlots: (
-        | GridSlots.AutoPost
-        | GridSlots.Feed
-        | GridSlots.Newsletter
-        | GridSlots.Stream
-        | GridSlots.Text
+        | Modules.AutoPost
+        | Modules.Feed
+        | Modules.Newsletter
+        | Modules.Stream
+        | Modules.Text
       )[];
       title: string;
       createdAt: string;
@@ -44,7 +44,7 @@ declare namespace App {
       groups: { data: Group[] };
     };
   };
-  namespace GridSlots {
+  namespace Modules {
     type Generic = {
       id: number;
       __component: string;
@@ -80,6 +80,15 @@ declare namespace App {
       coverImage: { data: App.Photo };
     };
   }
+  type PostModule = {
+    id: number;
+    attributes: {
+      title: string;
+      url: string;
+      body: string;
+      actionText: string;
+    };
+  };
   type Post = {
     id: number;
     attributes: {
@@ -107,6 +116,9 @@ declare namespace App {
         data: Stream[];
       };
       relatedPosts: { data: RelatedPost[] };
+      postModules: {
+        data: PostModule[];
+      };
     };
   };
   type RelatedPost = {

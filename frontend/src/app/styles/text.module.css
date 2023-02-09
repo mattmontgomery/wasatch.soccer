@@ -70,20 +70,29 @@
   outline: 0;
 }
 
-.body .related {
+.body .postModule {
   padding: 1rem 0;
   margin: 2rem 0;
   border-top: 1px solid var(--theme-alternate);
   border-bottom: 1px solid var(--theme-alternate);
 }
-.body .related .relatedBody {
+.body .postModule .postModuleBody {
+  margin: 1rem 0;
+  font-size: 85%;
+}
+.body .postModule .postModuleAction {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 90%;
+}
+.body .postModule .body {
   font-weight: bold;
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
   font-size: 11pt;
 }
-.body .related h5 {
+.body .postModule h5 {
   color: initial;
   font-size: 14pt;
   font-weight: 400;
@@ -93,7 +102,7 @@
 }
 
 @media (min-width: 36rem) {
-  .body .related {
+  .body .postModule {
     float: right;
     margin: 0 0 2rem 2rem;
     width: 40%;

@@ -33,7 +33,7 @@ export function PodcastCard({ feed }: { feed: Podcast }) {
     </Card>
   );
 }
-export function NewsletterCard({ title, body, url }: App.GridSlots.Newsletter) {
+export function NewsletterCard({ title, body, url }: App.Modules.Newsletter) {
   return (
     <Card className={`${homepageStyles.card}`}>
       <h2>{title}</h2>
@@ -51,7 +51,7 @@ export function NewsletterCard({ title, body, url }: App.GridSlots.Newsletter) {
   );
 }
 
-export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
+export function TextCard({ title, body, coverImage, url }: App.Modules.Text) {
   const image = coverImage.data
     ? getPhotoRaw(coverImage.data, "medium")?.url
     : "";
@@ -91,7 +91,7 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
     </Card>
   );
 }
-export function StreamCard({ coverImage, stream }: App.GridSlots.Stream) {
+export function StreamCard({ coverImage, stream }: App.Modules.Stream) {
   const url = getStreamUrl(stream.data);
   const image = coverImage.data
     ? getPhotoRaw(coverImage.data, "medium")?.url

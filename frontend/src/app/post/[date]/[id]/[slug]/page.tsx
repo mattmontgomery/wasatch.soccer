@@ -27,6 +27,8 @@ import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
+import { useMemo } from "react";
+import TextModule from "./TextModule";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -35,7 +37,7 @@ type PageProps = {
 export default async function PostPage({ params: { id, slug } }: PageProps) {
   const { data } = await getPost(id);
   if (!data) {
-    return notFound();
+    notFound();
   }
   const config = await getConfig();
   const leadPhoto = getPhoto(data, "original");
@@ -52,6 +54,11 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
     pagination: { pageSize: 5 },
   });
   const streams = data.attributes.streams?.data ?? [];
+  const bodyLength = data.attributes.body?.split("\n\n").length;
+  const modules = [data.attributes.postModules.data.length, bodyLength];
+
+  const moduleSpacing = bodyLength > 20 ? 6 : 4;
+
   return (
     <main className={`${pageStyles.main}`}>
       <ArticleJsonLd
@@ -146,6 +153,9 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
             <ReactMarkdown
               components={{
                 p({ node, children }) {
+                  const postModule = (node.position?.start.line ?? 0) + 1;
+                  const postModuleMod = postModule % (moduleSpacing * 2);
+                  const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
                   const text = children?.[0]?.toString();
                   if (text && text.startsWith("https://")) {
                     return <Embed url={text} />;
@@ -154,6 +164,20 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                       <Related
                         relatedPosts={data.attributes.relatedPosts?.data ?? []}
                       />
+                    );
+                  } else if (
+                    data.attributes.postModules.data[postModuleIndex]
+                  ) {
+                    return (
+                      <>
+                        <TextModule
+                          key={`${node.position?.start.line}-a`}
+                          postModule={
+                            data.attributes.postModules.data[postModuleIndex]
+                          }
+                        />
+                        <p key={`${node.position?.start.line}-b`}>{children}</p>
+                      </>
                     );
                   } else {
                     return <p>{children}</p>;
