@@ -11,6 +11,7 @@ export type PostHit = Hit<{
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  commentsEnabled: boolean;
   authors: ({
     id: number;
   } & App.Author["attributes"])[];
@@ -31,8 +32,15 @@ export type PostHits = Hits<PostHit>;
 
 export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
   return hits.map((hit) => {
-    const { authors, groups, streams, leadPhoto, primaryGroup, ...remainder } =
-      hit;
+    const {
+      authors,
+      groups,
+      streams,
+      leadPhoto,
+      primaryGroup,
+      commentsEnabled = false,
+      ...remainder
+    } = hit;
 
     return {
       id: hit.id,
@@ -89,6 +97,7 @@ export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
         },
         relatedPosts: { data: [] },
         postModules: { data: [] },
+        commentsEnabled,
         ...remainder,
       },
     };
