@@ -29,6 +29,7 @@ import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
 import TextModule from "./TextModule";
 import Script from "next/script";
+import Comments from "./Comments";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -192,13 +193,8 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
         </article>
         {data.attributes.commentsEnabled && (
           <section className={postStyles.comments}>
-            <Script
-              defer
-              src="https://cdn.commento.io/js/commento.js"
-              data-no-fonts="true"
-              data-page-id={`post:${data.id}`}
-            ></Script>
             <div id="commento" />
+            <Comments postId={data.id} />
           </section>
         )}
       </div>
