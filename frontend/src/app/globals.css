@@ -118,10 +118,5 @@ h5 {
 }
 
 #commento-error {
-  font-size: 0;
-}
-#commento-error::after {
-  font-size: initial;
-  content: "Comments could not be loaded!";
   color: var(--theme-primary);
 }
