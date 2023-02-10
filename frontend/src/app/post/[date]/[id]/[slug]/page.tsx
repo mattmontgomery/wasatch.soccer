@@ -231,7 +231,10 @@ export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const { data } = await getPost(id);
-  if (!data || (!data.attributes.publishedAt && process.env.SHOW_UNPUBLISHED)) {
+  if (
+    !data ||
+    (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED)
+  ) {
     notFound();
   }
   const metadataPhoto = getMetadataPhoto(data);
