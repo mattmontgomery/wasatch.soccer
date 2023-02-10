@@ -79,3 +79,9 @@
 .commaSeparatedList span:not(:empty):not(:last-child):after {
   content: ", ";
 }
+
+.comments {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 4px solid var(--theme-alternate);
+}

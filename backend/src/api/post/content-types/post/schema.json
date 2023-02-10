@@ -72,6 +72,10 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::post-module.post-module"
+    },
+    "commentsEnabled": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

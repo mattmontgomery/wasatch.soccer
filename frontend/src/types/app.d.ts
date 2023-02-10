@@ -92,14 +92,17 @@ declare namespace App {
   type Post = {
     id: number;
     attributes: {
-      headline: string;
       createdAt: string;
-      updatedAt: string;
       publishedAt: string;
+      updatedAt: string;
+
+      body: string;
+      headline: string;
       published: string;
       slug: string;
       summary: string;
-      body: string;
+      commentsEnabled: boolean;
+
       leadPhoto: {
         data: Photo | null;
       };
@@ -115,7 +118,9 @@ declare namespace App {
       streams: {
         data: Stream[];
       };
-      relatedPosts: { data: RelatedPost[] };
+      relatedPosts: {
+        data: RelatedPost[];
+      };
       postModules: {
         data: PostModule[];
       };

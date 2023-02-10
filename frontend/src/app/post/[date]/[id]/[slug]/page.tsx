@@ -29,6 +29,7 @@ import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
 import { useMemo } from "react";
 import TextModule from "./TextModule";
+import Script from "next/script";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -83,9 +84,9 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
             : []
         }
       />
-      <article className={pageStyles.post}>
+      <div className={pageStyles.post}>
         <Redirect slugFromPath={slug} post={data} />
-        <section className={pageStyles.section}>
+        <article className={pageStyles.section}>
           <header>
             {primaryGroup && (
               <h5 className={postStyles.groupTag}>
@@ -187,8 +188,19 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
               {data.attributes.body}
             </ReactMarkdown>
           </div>
-        </section>
-      </article>
+        </article>
+        {data.attributes.commentsEnabled && (
+          <section className={postStyles.comments}>
+            <Script
+              defer
+              src="https://cdn.commento.io/js/commento.js"
+              data-no-fonts="true"
+              data-page-id={`post:${data.id}`}
+            ></Script>
+            <div id="commento" />
+          </section>
+        )}
+      </div>
       <div className={postStyles.rightRail}>
         <h3>Latest News</h3>
         <Posts posts={posts.data} />
