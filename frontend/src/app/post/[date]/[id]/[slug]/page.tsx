@@ -36,7 +36,10 @@ type PageProps = {
 
 export default async function PostPage({ params: { id, slug } }: PageProps) {
   const { data } = await getPost(id);
-  if (!data || (!data.attributes.publishedAt && process.env.SHOW_UNPUBLISHED)) {
+  if (
+    !data ||
+    (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED)
+  ) {
     notFound();
   }
   const config = await getConfig();
