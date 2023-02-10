@@ -27,7 +27,6 @@ import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
-import { useMemo } from "react";
 import TextModule from "./TextModule";
 import Script from "next/script";
 
@@ -37,7 +36,7 @@ type PageProps = {
 
 export default async function PostPage({ params: { id, slug } }: PageProps) {
   const { data } = await getPost(id);
-  if (!data) {
+  if (!data || (!data.attributes.publishedAt && process.env.SHOW_UNPUBLISHED)) {
     notFound();
   }
   const config = await getConfig();
@@ -56,7 +55,6 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
   });
   const streams = data.attributes.streams?.data ?? [];
   const bodyLength = data.attributes.body?.split("\n\n").length;
-  const modules = [data.attributes.postModules.data.length, bodyLength];
 
   const moduleSpacing = bodyLength > 20 ? 6 : 4;
 
@@ -230,6 +228,9 @@ export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const { data } = await getPost(id);
+  if (!data || (!data.attributes.publishedAt && process.env.SHOW_UNPUBLISHED)) {
+    notFound();
+  }
   const metadataPhoto = getMetadataPhoto(data);
   return {
     alternates: {
