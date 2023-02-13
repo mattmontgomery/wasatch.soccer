@@ -136,7 +136,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfig();
   return {
     title: {
-      default: config.siteName,
+      default: `${config.siteName} | ${config.homepageTitleText}`,
       template: `%s | ${config.siteName}`,
     },
     viewport: "width=device-width",
