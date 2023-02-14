@@ -220,7 +220,7 @@ export async function generateStaticParams() {
     },
   });
 
-  return posts.data.map(getPathnamePieces);
+  return posts.data?.map(getPathnamePieces);
 }
 
 export async function generateMetadata({

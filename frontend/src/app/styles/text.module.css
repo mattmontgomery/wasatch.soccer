@@ -100,6 +100,14 @@
   /* text-align: right; */
   text-transform: uppercase;
 }
+.relatedBody {
+  font-size: 90%;
+  display: grid;
+  row-gap: 1rem;
+}
+.relatedBody div:before {
+  content: "• ";
+}
 
 @media (min-width: 36rem) {
   .body .postModule {
