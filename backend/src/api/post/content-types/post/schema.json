@@ -76,6 +76,13 @@
     "commentsEnabled": {
       "type": "boolean",
       "default": false
+    },
+    "photoGallery": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
