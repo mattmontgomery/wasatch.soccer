@@ -96,6 +96,7 @@ export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
           }),
         },
         relatedPosts: { data: [] },
+        photoGallery: { data: [] },
         postModules: { data: [] },
         commentsEnabled,
         ...remainder,

@@ -108,6 +108,21 @@
 .relatedBody div:before {
   content: "• ";
 }
+.photoGallery {
+  display: grid;
+  row-gap: 1rem;
+}
+.photoGallery .caption {
+  font-size: 9pt;
+  text-align: right;
+}
+.photoGallery div {
+  position: relative;
+}
+.photoGallery div img {
+  width: 100%;
+  height: auto;
+}
 
 @media (min-width: 36rem) {
   .body .postModule {

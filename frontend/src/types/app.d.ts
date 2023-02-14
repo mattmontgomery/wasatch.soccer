@@ -124,6 +124,9 @@ declare namespace App {
       postModules: {
         data: PostModule[];
       };
+      photoGallery?: {
+        data: Photo[];
+      };
     };
   };
   type RelatedPost = {

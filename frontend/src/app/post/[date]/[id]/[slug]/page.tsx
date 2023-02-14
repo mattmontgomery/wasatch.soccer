@@ -30,6 +30,7 @@ import Related from "./Related";
 import TextModule from "./TextModule";
 import Script from "next/script";
 import Comments from "./Comments";
+import Gallery from "./Gallery";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -165,6 +166,12 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                     return (
                       <Related
                         relatedPosts={data.attributes.relatedPosts?.data ?? []}
+                      />
+                    );
+                  } else if (text === "[[photoGallery]]") {
+                    return (
+                      <Gallery
+                        photos={data.attributes.photoGallery?.data ?? []}
                       />
                     );
                   } else if (

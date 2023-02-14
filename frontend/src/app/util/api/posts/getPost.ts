@@ -15,6 +15,7 @@ export default async function getPost(postId: number): Promise<{
       streams: "*",
       relatedPosts: "*",
       postModules: "*",
+      photoGallery: "*",
     },
   };
   const queryString = qs.stringify(query, { encodeValuesOnly: true });

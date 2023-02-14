@@ -13,7 +13,7 @@ export function getPhoto(
 export function getPhotoRaw(
   photo: App.Photo,
   format: string = "large"
-): App.PhotoBasics | null {
+): App.PhotoBasics {
   if (format === "original") {
     return photo.attributes;
   }
