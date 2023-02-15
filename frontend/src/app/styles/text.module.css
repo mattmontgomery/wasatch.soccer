@@ -93,7 +93,7 @@
   font-size: 11pt;
 }
 .body .postModule h5 {
-  color: initial;
+  color: inherit;
   font-size: 14pt;
   font-weight: 400;
   margin-top: 0;
