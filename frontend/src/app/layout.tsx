@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import Footer from "./components/Footer";
-import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
