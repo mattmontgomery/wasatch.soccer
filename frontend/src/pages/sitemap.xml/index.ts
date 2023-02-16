@@ -4,6 +4,7 @@ import { NextApiResponse } from "next";
 import { format, subDays } from "date-fns";
 
 import { js2xml, Element } from "xml-js";
+import { getFullPathname } from "@/app/util/urls";
 
 export default async function generateSitemap() {}
 
