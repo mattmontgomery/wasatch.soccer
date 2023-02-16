@@ -1,4 +1,4 @@
-import { getFullPathname, getPathname, getPosts } from "@/app/util/api";
+import { getPosts } from "@/app/util/api";
 import { NextApiResponse } from "next";
 
 import { format, subDays } from "date-fns";

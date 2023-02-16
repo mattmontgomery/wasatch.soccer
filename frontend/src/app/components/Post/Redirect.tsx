@@ -11,8 +11,8 @@ export function useRedirect(slugFromPath: string, post: App.Post): void {
       return;
     }
     const slug = post.attributes.slug;
-    const url = getPostUrl(post);
-    if (slug && slugFromPath !== slug) {
+    if (slug && decodeURI(slugFromPath) !== slug) {
+      const url = getPostUrl(post);
       router.replace(url);
     }
   }, [slugFromPath, post, router]);

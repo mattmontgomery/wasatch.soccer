@@ -3,10 +3,11 @@ import Link from "next/link";
 import { Relative } from "@/app/components/Post/Published";
 import Authors from "@/app/components/Post/Author";
 import Streams from "@/app/components/Post/Streams";
-import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
+import { getPhoto, getPhotoPath } from "@/app/util/api";
 import styles from "./postGrid.module.css";
 import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import Pagination from "./Pagination";
+import { getPostUrl } from "../util/urls";
 
 export function Card({
   children,
@@ -33,7 +34,7 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
   return (
     <Card hero={props.hero}>
       <Link
-        href={getPathname(props)}
+        href={getPostUrl(props)}
         className={photo ? styles.image : styles.noImage}
       >
         {photo && (
@@ -69,7 +70,7 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
           <></>
         )}
       </Link>
-      <Link href={getPathname(props)}>
+      <Link href={getPostUrl(props)}>
         <h2 className={styles.headline}>{props.attributes.headline}</h2>
       </Link>
       <div>

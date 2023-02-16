@@ -20,33 +20,6 @@ export function getPhotoRaw(
   return photo.attributes.formats[format] ?? photo.attributes;
 }
 
-export function formatDateForPathname(date: string) {
-  return date ? format(new Date(date), "yyyy-MM-dd") : "";
-}
-
-export function getPathnamePieces(post: App.Post): {
-  date: string;
-  id: string;
-  slug: string;
-} {
-  const date = formatDateForPathname(
-    post.attributes.published ?? post.attributes.publishedAt
-  );
-  return {
-    date,
-    id: String(post.id),
-    slug: post.attributes.slug,
-  };
-}
-
-export function getPathname(post: App.Post): string {
-  const { date, id, slug } = getPathnamePieces(post);
-  return `/post/${date}/${id}/${slug}`;
-}
-export function getFullPathname(post: App.Post): string {
-  return `${process.env.SITE_BASE}${getPathname(post)}`;
-}
-
 export function getPhotoPath(path: string) {
   return path;
 }

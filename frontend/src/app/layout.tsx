@@ -92,7 +92,6 @@ export default async function RootLayout({
         }
         `}
         </style>
-        {typeof window !== "undefined" && <Top />}
         <div className={styles.grid}>
           <header className={styles.header}>
             <div className={styles.wordmark}>

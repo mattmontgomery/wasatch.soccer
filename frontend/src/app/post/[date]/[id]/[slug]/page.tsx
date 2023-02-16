@@ -3,13 +3,7 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { ArticleJsonLd } from "next-seo";
 
-import {
-  getPathnamePieces,
-  getPhoto,
-  getPhotoPath,
-  getPost,
-  getPosts,
-} from "@/app/util/api";
+import { getPhoto, getPhotoPath, getPost, getPosts } from "@/app/util/api";
 import { Redirect } from "@/app/components/Post/Redirect";
 import { Embed } from "@/app/components/Post/Embed";
 import Published from "@/app/components/Post/Published";
@@ -23,7 +17,12 @@ import Streams from "@/app/components/Post/Streams";
 
 import Posts from "./Posts";
 import { notFound } from "next/navigation";
-import { getAbsolutePath, getAuthorUrl, getPostUrl } from "@/app/util/urls";
+import {
+  getAbsolutePath,
+  getAuthorUrl,
+  getPathnamePieces,
+  getPostUrl,
+} from "@/app/util/urls";
 import { getConfig } from "@/app/util/config";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";

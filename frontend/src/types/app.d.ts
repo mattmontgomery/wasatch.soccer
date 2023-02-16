@@ -131,7 +131,10 @@ declare namespace App {
   };
   type RelatedPost = {
     id: number;
-    attributes: Pick<Post["attributes"], "headline" | "slug" | "published">;
+    attributes: Pick<
+      Post["attributes"],
+      "headline" | "slug" | "published" | "publishedAt" | "createdAt"
+    >;
   };
   type Photo = {
     attributes: {
