@@ -1,4 +1,5 @@
-import { formatDateForPathname, getPosts } from "@/app/util/api";
+import { getPosts } from "@/app/util/api";
+import { getPostUrl, getPostUrlFromPieces } from "@/app/util/urls";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function RevalidateHandler(
@@ -75,12 +76,15 @@ export const paths: Record<
   post: (entry: {
     id: number;
     slug: string;
+    createdAt?: string;
     published?: string;
     publishedAt?: string;
   }) => [
-    `/post/${formatDateForPathname(
-      entry.published ?? entry.publishedAt ?? ""
-    )}/${entry.id}/${entry.slug}`,
+    getPostUrlFromPieces({
+      slug: entry.slug,
+      id: String(entry.id),
+      date: entry.published ?? entry.publishedAt ?? entry.createdAt ?? "-",
+    }),
     async (event) => {
       if (event === "entry.publish") {
         return "/";

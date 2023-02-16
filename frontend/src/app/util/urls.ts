@@ -30,6 +30,17 @@ export function getPathnamePieces(post: App.Post | App.RelatedPost): {
 
 export function getPostUrl(post: App.Post | App.RelatedPost): string {
   const { date, id, slug } = getPathnamePieces(post);
+  return getPostUrlFromPieces({ date, id, slug });
+}
+export function getPostUrlFromPieces({
+  date,
+  id,
+  slug,
+}: {
+  date: string;
+  id: string;
+  slug: string;
+}) {
   return `/post/${date}/${id}/${slug}`;
 }
 export function getStreamUrl(stream: App.Stream) {
