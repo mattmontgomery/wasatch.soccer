@@ -20,7 +20,7 @@ export default async function CustomPage({
   params: { slug = "homepage", page = "1" },
 }: PageProps): Promise<React.ReactElement> {
   const resp = await fetchPage(slug);
-  if (resp.data.length === 0) {
+  if (resp.data?.length === 0) {
     return notFound();
   }
   const data = resp.data[0];
