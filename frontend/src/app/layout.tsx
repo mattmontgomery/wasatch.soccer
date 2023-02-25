@@ -9,19 +9,6 @@ import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
 import { getSiteTitle } from "./util/site";
 
-/**
- * import { SiteLinksSearchBoxJsonLd } from "next-seo";
-        <SiteLinksSearchBoxJsonLd
-          url={process.env.SITE_BASE ?? ""}
-          potentialActions={[
-            {
-              queryInput: "required_name=search_term_string",
-              target: `/search/{search_term_string}`,
-            },
-          ]}
-        />
- */
-
 const headlineFont = Montserrat({
   subsets: ["latin"],
   style: ["normal"],

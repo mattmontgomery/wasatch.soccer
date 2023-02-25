@@ -1,3 +1,8 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
 .header {
   font-family: var(--headline-font);
   padding: 1rem;
@@ -11,12 +16,12 @@
 }
 .header h5 {
   font-family: var(----headline-font);
-  margin-bottom: 0.5rem;
   font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 .headerImage {
   position: relative;
-  width: 400px;
+  width: 300px;
   max-width: 100%;
   height: auto;
   object-fit: contain;
@@ -26,7 +31,7 @@
   display: block;
   position: relative;
   width: auto;
-  height: 85px;
+  height: 75px;
 }
 .headerImageContainer img {
   object-fit: contain;
@@ -47,6 +52,7 @@
   display: flex;
   column-gap: 1rem;
   font-size: 10pt;
+  padding: 0;
 }
 .navigation a {
   font-weight: 800;
@@ -80,6 +86,11 @@
   flex-direction: column;
   row-gap: 0.5rem;
 }
+@media screen and (min-width: 48rem) {
+  .headerImageContainer {
+    height: 150px;
+  }
+}
 @media screen and (min-width: 72rem) {
   .footer {
     display: grid;
@@ -92,7 +103,7 @@
     font-size: 13pt;
   }
   .header {
-    margin-bottom: 4rem;
+    margin-bottom: 0;
   }
   .grid {
     max-width: 72rem;
