@@ -1,5 +1,8 @@
 export default function ({ env }) {
   return {
+    publisher: {
+      enabled: true,
+    },
     meilisearch: {
       config: {
         post: {
