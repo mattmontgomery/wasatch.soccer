@@ -1,13 +1,18 @@
+import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Relative } from "@/app/components/Post/Published";
 import Authors from "@/app/components/Post/Author";
 import Streams from "@/app/components/Post/Streams";
 import { getPhoto, getPhotoPath } from "@/app/util/api";
-import styles from "./postGrid.module.css";
-import React, { Fragment, PropsWithChildren, useMemo } from "react";
+import { getPostUrl } from "@/app/util/urls";
+
+import { CommentIcon } from "./Comment";
+
 import Pagination from "./Pagination";
-import { getPostUrl } from "../util/urls";
+
+import styles from "./postGrid.module.css";
 
 export function Card({
   children,
@@ -47,6 +52,11 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
             src={getPhotoPath(photo.url)}
             fill
           />
+        )}
+        {props.attributes.commentsEnabled && (
+          <span className={styles.comments} aria-label="Comments Enabled">
+            <CommentIcon />
+          </span>
         )}
         {primaryGroup ? (
           <h5

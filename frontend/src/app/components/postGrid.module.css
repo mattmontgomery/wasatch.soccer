@@ -81,19 +81,31 @@
   bottom: auto;
 }
 .primaryGroup.primaryGroupSection {
-  font-size: 18pt;
+  font-size: 12pt;
   color: white;
-  text-shadow: 1px 1px 6px RGBA(0, 0, 0, 0.8), 8px 8px 24px black;
-  padding: 1rem;
+  text-shadow: 1px 1px 6px RGBA(0, 0, 0, 0.8);
   text-transform: uppercase;
-  top: 0;
+  top: 0.5rem;
   bottom: auto;
+  border-bottom: 2px solid var(--theme-alternate);
 }
 .posts {
   display: grid;
   row-gap: 2rem;
   grid-template-columns: 100%;
   grid-template-rows: min-content min-content;
+}
+.comments {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem;
+  z-index: 10;
+}
+.comments svg {
+  fill: white;
+  width: 20px;
+  height: 20px;
 }
 @media screen and (min-width: 36rem) {
   .post .image {
