@@ -52,7 +52,9 @@ async function revalidate(
   }
   if (typeof path === "function") {
     const p = await path(event);
-    if (p) {
+    if (Array.isArray(p)) {
+      await Promise.all(p.map((_p) => res.revalidate(_p)));
+    } else if (p) {
       await res.revalidate(p);
     }
   }
