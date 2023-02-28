@@ -1,5 +1,5 @@
-import { getPosts } from "@/app/util/api";
-import { getPostUrl, getPostUrlFromPieces } from "@/app/util/urls";
+import { getPost, getPosts } from "@/app/util/api";
+import { getPostUrlFromPieces, getStreamUrl } from "@/app/util/urls";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function RevalidateHandler(
@@ -40,7 +40,7 @@ export default async function RevalidateHandler(
 type RevalidateType =
   | string
   | ((event: string) => string)
-  | ((event: string) => Promise<string>);
+  | ((event: string) => Promise<string | string[]>);
 
 async function revalidate(
   res: NextApiResponse,
@@ -79,7 +79,17 @@ export const paths: Record<
     createdAt?: string;
     published?: string;
     publishedAt?: string;
-  }) => [
+  }) => revalidatePost(entry),
+};
+
+function revalidatePost(entry: {
+  id: number;
+  slug: string;
+  createdAt?: string;
+  published?: string;
+  publishedAt?: string;
+}): RevalidateType[] {
+  return [
     getPostUrlFromPieces({
       slug: entry.slug,
       id: String(entry.id),
@@ -99,6 +109,10 @@ export const paths: Record<
           "entry.delete",
         ].includes(event)
       ) {
+        const post = await getPost(entry.id);
+        const streamUrls: string[] = post.data.attributes.streams.data.map(
+          (stream) => getStreamUrl(stream)
+        );
         // if in the first 18 posts
         const posts = await getPosts({
           pagination: {
@@ -107,10 +121,13 @@ export const paths: Record<
           },
         });
         // if the post is one the homepage and has been updated, send a revalidate request
-        return posts.data.find((post) => post.id === entry.id) ? "/" : "";
+        return [
+          posts.data.find((post) => post.id === entry.id) ? "/" : "",
+          ...streamUrls,
+        ];
       } else {
         return "";
       }
     },
-  ],
-};
+  ];
+}
