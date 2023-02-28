@@ -36,3 +36,9 @@
     font-size: 48pt;
   }
 }
+
+@media screen and (min-width: 96rem) {
+  .main {
+    max-width: 96rem;
+  }
+}

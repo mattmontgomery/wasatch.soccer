@@ -27,7 +27,6 @@ import { getConfig } from "@/app/util/config";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
 import TextModule from "./TextModule";
-import Script from "next/script";
 import Comments from "./Comments";
 import Gallery from "./Gallery";
 

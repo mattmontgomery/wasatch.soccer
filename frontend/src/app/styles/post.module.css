@@ -85,3 +85,10 @@
   padding-top: 2rem;
   border-top: 4px solid var(--theme-alternate);
 }
+
+@media (min-width: 96rem) {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+}

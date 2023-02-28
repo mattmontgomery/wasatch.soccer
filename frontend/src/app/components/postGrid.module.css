@@ -124,10 +124,13 @@
 }
 @media screen and (min-width: 72rem) {
   .posts {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .post {
+    grid-column: span 4;
   }
   .postHero {
-    grid-column: 1 / span 2;
+    grid-column: span 8;
     grid-row: span 2;
     grid-template-rows: 1fr min-content min-content;
   }
@@ -136,8 +139,17 @@
   }
   .postHero .image,
   .postHero .noImage {
-    min-height: 550px;
+    min-height: 400px;
     height: 100%;
     position: relative;
+  }
+}
+
+@media screen and (min-width: 96rem) {
+  .post {
+    grid-column: span 3;
+  }
+  .postHero {
+    grid-column: span 6;
   }
 }
