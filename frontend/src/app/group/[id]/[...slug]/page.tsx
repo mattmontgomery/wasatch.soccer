@@ -28,7 +28,7 @@ export default async function AuthorsPage({
       },
     },
     pagination: {
-      pageSize: 9,
+      pageSize: 12,
       page,
     },
   });
