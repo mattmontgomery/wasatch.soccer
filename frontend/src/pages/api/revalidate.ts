@@ -40,7 +40,7 @@ export default async function RevalidateHandler(
 type RevalidateType =
   | string
   | ((event: string) => string)
-  | ((event: string) => Promise<string | string[]>);
+  | ((event: string) => Promise<string>);
 
 async function revalidate(
   res: NextApiResponse,
@@ -118,6 +118,26 @@ function revalidatePost(entry: {
         });
         // if the post is one the homepage and has been updated, send a revalidate request
         return posts.data.find((post) => post.id === entry.id) ? "/" : "";
+      } else {
+        return "";
+      }
+    },
+    async (event) => {
+      if (event === "entry.publish") {
+        return "/";
+      }
+      if (
+        entry.publishedAt &&
+        [
+          "entry.update",
+          "entry.unpublish",
+          "media.update",
+          "media.create",
+          "entry.delete",
+        ].includes(event)
+      ) {
+        const post = await getPost(entry.id);
+        return post.data.attributes.streams.map(() => {});
       } else {
         return "";
       }
