@@ -28,11 +28,14 @@ export default async function RevalidateHandler(
         collectedPaths.push(p);
       }
     }
-    for await (const p of collectedPaths) {
+    const collect = Object.keys(
+      collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
+    );
+    for await (const p of collect) {
       await revalidate(res, p);
     }
     res.json({
-      meta: collectedPaths,
+      meta: collect,
       ok: 1,
     });
   } else {
@@ -60,9 +63,11 @@ type RevalidatePromiseType = (event: Events) => Promise<string[]>;
 async function revalidate(res: NextApiResponse, path: string): Promise<void> {
   console.info(`[revalidate] ${path}`);
   try {
-    return res.revalidate(path).catch((reason) => {});
+    return res.revalidate(path).catch((reason) => {
+      throw reason;
+    });
   } catch (e) {
-    console.info(`[revalidate] ${path} failure`);
+    console.info(`[revalidate] ${path} failure for ${e}`);
   }
 }
 
