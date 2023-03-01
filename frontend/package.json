@@ -17,7 +17,7 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
     "meilisearch": "^0.31.1",
-    "next": "13.2.1",
+    "next": "13.2.2",
     "next-seo": "^5.15.0",
     "podparse": "^1.5.1",
     "qs": "^6.11.0",
