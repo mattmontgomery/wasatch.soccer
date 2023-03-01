@@ -156,7 +156,5 @@ async function getPostRevalidations(
     );
   }
 
-  console.log(revalidations);
-
   return revalidations;
 }
