@@ -46,6 +46,9 @@ export function getPostUrlFromPieces({
 export function getStreamUrl(stream: App.Stream) {
   return `/streams/${stream.id}/${stream.attributes.slug}`;
 }
+export function getGroupUrl(group: App.Group) {
+  return `/groups/${group.id}/${group.attributes.slug}`;
+}
 
 export function getAbsolutePath(url: string): string {
   return `${process.env.SITE_BASE}${url}`;
