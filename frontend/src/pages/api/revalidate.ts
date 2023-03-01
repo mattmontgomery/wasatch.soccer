@@ -122,25 +122,5 @@ function revalidatePost(entry: {
         return "";
       }
     },
-    async (event) => {
-      if (event === "entry.publish") {
-        return "/";
-      }
-      if (
-        entry.publishedAt &&
-        [
-          "entry.update",
-          "entry.unpublish",
-          "media.update",
-          "media.create",
-          "entry.delete",
-        ].includes(event)
-      ) {
-        const post = await getPost(entry.id);
-        return post.data.attributes.streams.map(() => {});
-      } else {
-        return "";
-      }
-    },
   ];
 }
