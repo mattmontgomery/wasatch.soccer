@@ -4,9 +4,5 @@
     "dev:frontend": "npm run dev --workspace=frontend",
     "dev:backend": "npm run dev --workspace=backend",
     "dev": "npx npm-run-all -p dev:*"
-  },
-  "workspaces": [
-    "frontend",
-    "backend"
-  ]
+  }
 }
