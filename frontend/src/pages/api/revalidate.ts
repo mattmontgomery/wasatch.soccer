@@ -1,5 +1,5 @@
 import { getPost, getPosts } from "@/app/util/api";
-import { getPostUrlFromPieces, getStreamUrl } from "@/app/util/urls";
+import { getPostUrlFromPieces } from "@/app/util/urls";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function RevalidateHandler(
@@ -52,9 +52,7 @@ async function revalidate(
   }
   if (typeof path === "function") {
     const p = await path(event);
-    if (Array.isArray(p)) {
-      await Promise.all(p.map((_p) => res.revalidate(_p)));
-    } else if (p) {
+    if (p) {
       await res.revalidate(p);
     }
   }
@@ -111,10 +109,6 @@ function revalidatePost(entry: {
           "entry.delete",
         ].includes(event)
       ) {
-        const post = await getPost(entry.id);
-        const streamUrls: string[] = post.data.attributes.streams.data.map(
-          (stream) => getStreamUrl(stream)
-        );
         // if in the first 18 posts
         const posts = await getPosts({
           pagination: {
@@ -123,10 +117,7 @@ function revalidatePost(entry: {
           },
         });
         // if the post is one the homepage and has been updated, send a revalidate request
-        return [
-          posts.data.find((post) => post.id === entry.id) ? "/" : "",
-          ...streamUrls,
-        ];
+        return posts.data.find((post) => post.id === entry.id) ? "/" : "";
       } else {
         return "";
       }
