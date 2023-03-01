@@ -6,7 +6,6 @@ export default async function makeApiCall(
 ): Promise<Response> {
   return fetch(`${API_BASE}${path}`, {
     method: "GET",
-    cache: "force-cache",
     next: {
       revalidate: options.revalidate ?? 60,
     },
