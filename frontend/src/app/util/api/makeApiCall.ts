@@ -8,7 +8,7 @@ export default async function makeApiCall(
     method: "GET",
     cache: "force-cache",
     next: {
-      revalidate: options.revalidate,
+      revalidate: options.revalidate ?? 60,
     },
     headers: {
       Authorization: `bearer ${process.env.API_TOKEN}`,
