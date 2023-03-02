@@ -12,14 +12,13 @@
   grid-template-rows: auto 1fr min-content;
   position: relative;
 }
-.post .image {
+.post .image,
+.post .noImage {
   position: relative;
   height: 250px;
 }
 
 .post .noImage {
-  position: relative;
-  height: 250px;
   background-image: var(--no-background-image);
 }
 
@@ -118,7 +117,8 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
   }
-  .post .image {
+  .post .image,
+  .post .noImage {
     height: 225px;
   }
 }
