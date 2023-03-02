@@ -58,10 +58,14 @@
 
 .embed {
   margin-bottom: 1rem;
+  min-width: 50%;
   max-width: 100%;
 }
 .embed iframe {
   max-width: 100%;
+}
+.embed .twitter-tweet {
+  margin: auto !important;
 }
 
 .embed blockquote {
@@ -88,7 +92,7 @@
 
 @media (min-width: 96rem) {
   .posts {
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
     column-gap: 1rem;
   }
 }

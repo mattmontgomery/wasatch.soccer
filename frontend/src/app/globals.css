@@ -124,3 +124,6 @@ h5 {
 .commento-root * {
   color: var(--foreground-rgb);
 }
+.rsme-twitter-embed .twitter-tweet.twitter-tweet-rendered {
+  margin: auto !important;
+}

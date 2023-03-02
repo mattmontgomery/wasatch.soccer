@@ -54,7 +54,7 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
         $ne: id,
       },
     },
-    pagination: { pageSize: 5 },
+    pagination: { pageSize: 8 },
   });
   const streams = data.attributes.streams?.data ?? [];
   const bodyLength = data.attributes.body?.split("\n\n").length;

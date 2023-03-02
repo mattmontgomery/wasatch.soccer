@@ -112,8 +112,8 @@
 }
 @media screen and (min-width: 96rem) {
   .main {
-    grid-template-columns: minmax(48rem, 56rem) auto;
-    column-gap: 4rem;
+    grid-template-columns: minmax(48rem, 56rem) 20rem;
+    column-gap: 8rem;
   }
   .leadPhoto {
     height: 600px;
