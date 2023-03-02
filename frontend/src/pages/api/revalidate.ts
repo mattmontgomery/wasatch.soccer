@@ -63,7 +63,7 @@ async function revalidate(res: NextApiResponse, path: string): Promise<void> {
   console.info(`[revalidate] ${path}`);
   try {
     return res.revalidate(path).catch((reason) => {
-      throw reason;
+      console.info(`[revalidate] ${path} failure for ${reason}`);
     });
   } catch (e) {
     console.info(`[revalidate] ${path} failure for ${e}`);
@@ -147,7 +147,10 @@ async function getPostRevalidations(
     }
   }
   // if the post is published
-  if (post.data.attributes.publishedAt) {
+  if (
+    post.data.attributes.publishedAt &&
+    (event === "entry.publish" || event === "entry.unpublish")
+  ) {
     const streams = post.data.attributes.streams.data;
     revalidations.push(
       ...streams?.map((stream) => {
