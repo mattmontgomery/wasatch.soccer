@@ -31,9 +31,8 @@ export default async function RevalidateHandler(
     const collect = Object.keys(
       collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
     );
-    for await (const p of collect) {
-      await revalidate(res, p);
-    }
+    const responses = await Promise.all(collect.map((p) => revalidate(res, p)));
+    console.info(responses);
     res.json({
       meta: collect,
       ok: 1,
@@ -121,7 +120,9 @@ async function getPostRevalidations(
   if (event === "entry.publish" && post.data.attributes.publishedAt) {
     revalidations.push("/");
   }
-  revalidations.push(getPostUrl(post.data));
+  if (event !== "entry.publish") {
+    revalidations.push(getPostUrl(post.data));
+  }
   // if the post is updated and the
   if (
     post.data.attributes.publishedAt &&
