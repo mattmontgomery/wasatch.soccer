@@ -98,16 +98,18 @@ export default async function RootLayout({
                   {config.siteName}
                 </Link>
               </h1>
-              <h5>{config.siteDescription}</h5>
             </div>
-            <nav className={styles.navigation}>
-              <Link href="/">Home</Link>{" "}
-              {config.navigationItems.map((navItem, idx) => (
-                <Link href={navItem.url} key={idx}>
-                  {navItem.label}
-                </Link>
-              ))}
-            </nav>
+            <div className={styles.navigationSection}>
+              <h5>{config.siteDescription}</h5>
+              <nav className={styles.navigation}>
+                <Link href="/">Home</Link>{" "}
+                {config.navigationItems.map((navItem, idx) => (
+                  <Link href={navItem.url} key={idx}>
+                    {navItem.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </header>
           {children}
           <Footer config={config} />

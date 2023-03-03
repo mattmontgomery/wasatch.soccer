@@ -53,7 +53,6 @@
 .navigation {
   display: flex;
   column-gap: 1rem;
-  font-size: 10pt;
   padding: 0;
 }
 .navigation a {
@@ -88,8 +87,26 @@
   row-gap: 0.5rem;
 }
 @media screen and (min-width: 48rem) {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .header h1 {
+    margin-bottom: 0;
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-rows: repeat(4, min-content);
+    row-gap: 0.25rem;
+    text-align: right;
+  }
+  .navigationSection {
+    display: grid;
+    align-items: end;
+  }
   .headerImageContainer {
-    height: 150px;
+    height: 175px;
   }
 }
 @media screen and (min-width: 72rem) {
