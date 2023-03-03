@@ -117,23 +117,17 @@ async function getPostRevalidations(
 
   const post = await getPost(postId);
 
-  if (event === "entry.publish" && post.data.attributes.publishedAt) {
-    revalidations.push("/");
+  if (!post.data.attributes.publishedAt) {
+    return [];
   }
-  if (event !== "entry.publish") {
+
+  if (event === "entry.publish") {
+    revalidations.push("/");
+  } else {
     revalidations.push(getPostUrl(post.data));
   }
-  // if the post is updated and the
-  if (
-    post.data.attributes.publishedAt &&
-    [
-      "entry.update",
-      "entry.unpublish",
-      "media.update",
-      "media.create",
-      "entry.delete",
-    ].includes(event)
-  ) {
+  // if the post is on the homepage, and it's not newly published, revalidate the homepage
+  if (!revalidations.includes("/")) {
     // if in the first 18 posts
     const posts = await getPosts({
       pagination: {
@@ -147,10 +141,7 @@ async function getPostRevalidations(
     }
   }
   // if the post is published
-  if (
-    post.data.attributes.publishedAt &&
-    (event === "entry.publish" || event === "entry.unpublish")
-  ) {
+  if (event === "entry.publish" || event === "entry.unpublish") {
     const streams = post.data.attributes.streams.data;
     revalidations.push(
       ...streams?.map((stream) => {
