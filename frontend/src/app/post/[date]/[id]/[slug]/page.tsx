@@ -27,8 +27,8 @@ import { getConfig } from "@/app/util/config";
 import getMetadataPhoto from "@/app/util/api/posts/getMetadataPhoto";
 import Related from "./Related";
 import TextModule from "./TextModule";
-import Comments from "./Comments";
 import Gallery from "./Gallery";
+import Commento from "./Commento";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -199,7 +199,7 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
         {data.attributes.commentsEnabled && (
           <section className={postStyles.comments}>
             <div id="commento" />
-            <Comments postId={data.id} />
+            <Commento pageId={`post:${data.id}`} />
           </section>
         )}
       </div>
