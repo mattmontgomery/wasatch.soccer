@@ -6,6 +6,7 @@ import { Posts } from "@/app/components/PostGrid";
 import { getAuthor, getPosts } from "@/app/util/api";
 
 import styles from "@/app/page.module.css";
+import layoutStyles from "@/app/layout.module.css";
 import textStyles from "@/app/styles/text.module.css";
 import authorStyles from "./authorPage.module.css";
 import { SocialIcon } from "react-social-icons";
@@ -41,7 +42,7 @@ export default async function AuthorsPage({
     },
   });
   return (
-    <main className={`${styles.main} ${styles.main4}`}>
+    <main className={`${styles.main} ${styles.main4} ${layoutStyles.main}`}>
       <div className={styles.pageHeader}>
         <h2>{author.data.attributes.name}</h2>
         <h5>{author.data.attributes.title}</h5>

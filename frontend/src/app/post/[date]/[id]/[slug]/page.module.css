@@ -1,6 +1,5 @@
 .main {
   display: block;
-  padding: 1rem;
 }
 
 .section {
@@ -114,7 +113,7 @@
   .main {
     grid-template-columns: minmax(48rem, 56rem) 20rem;
     column-gap: 8rem;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .leadPhoto {
     height: 600px;

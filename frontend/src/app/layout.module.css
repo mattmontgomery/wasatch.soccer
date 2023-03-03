@@ -1,11 +1,13 @@
 .grid {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 4rem;
+  padding: 1rem;
+}
+.main {
 }
 .header {
   font-family: var(--headline-font);
-  padding: 1rem;
 }
 .header h1 {
   font-family: var(--headline-font);
@@ -61,7 +63,6 @@
 }
 .footer {
   margin-top: 4rem;
-  padding: 1rem;
   font-size: 9pt;
   display: flex;
   flex-direction: column;
