@@ -12,7 +12,7 @@
     "types:generate": "strapi ts:generate-types --verbose"
   },
   "dependencies": {
-    "@strapi/admin": "4.6.1",
+    "@strapi/admin": "4.7.1",
     "@strapi/database": "4.6.1",
     "@strapi/plugin-i18n": "4.6.1",
     "@strapi/plugin-users-permissions": "4.6.1",
