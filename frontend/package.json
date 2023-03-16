@@ -13,11 +13,8 @@
     "@meilisearch/instant-meilisearch": "^0.11.1",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "encoding": "^0.1.13",
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
     "meilisearch": "^0.31.1",
-    "next": "13.2.3",
+    "next": "13.2.4",
     "next-seo": "^5.15.0",
     "podparse": "^1.5.1",
     "qs": "^6.11.1",
@@ -28,15 +25,18 @@
     "react-markdown": "^8.0.5",
     "react-social-icons": "^5.15.0",
     "react-social-media-embed": "^2.3.4",
+    "remark-gfm": "^3.0.1",
     "swr": "^2.1.0",
     "typescript": "4.9.5",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@types/node": "18.14.6",
+    "@types/node": "18.15.3",
     "@types/qs": "^6.9.7",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "@types/react-instantsearch-dom": "^6.12.3"
+    "@types/react-instantsearch-dom": "^6.12.3",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4"
   }
 }

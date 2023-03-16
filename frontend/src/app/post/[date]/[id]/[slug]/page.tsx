@@ -29,6 +29,7 @@ import Related from "./Related";
 import TextModule from "./TextModule";
 import Gallery from "./Gallery";
 import Commento from "./Commento";
+import MarkdownText from "@/app/components/MarkdownText";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -152,7 +153,7 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
             </div>
           </div>
           <div className={textStyles.body}>
-            <ReactMarkdown
+            <MarkdownText
               components={{
                 p({ node, children }) {
                   const postModule = (node.position?.start.line ?? 0) + 1;
@@ -193,7 +194,7 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
               }}
             >
               {data.attributes.body}
-            </ReactMarkdown>
+            </MarkdownText>
           </div>
         </article>
         {data.attributes.commentsEnabled && (
