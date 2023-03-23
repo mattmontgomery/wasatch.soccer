@@ -30,6 +30,8 @@ import TextModule from "./TextModule";
 import Gallery from "./Gallery";
 import Commento from "./Commento";
 import MarkdownText from "@/app/components/MarkdownText";
+import { AreaHTMLAttributes, Attributes, ReactNode } from "react";
+import { ReactElement } from "react-markdown/lib/react-markdown";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -159,8 +161,21 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                   const postModule = (node.position?.start.line ?? 0) + 1;
                   const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
                   const text = children?.[0]?.toString();
+                  const firstChild = children?.[0];
                   if (text && text.startsWith("https://")) {
                     return <Embed url={text} />;
+                  } else if ((firstChild as ReactElement)?.type === "a") {
+                    return (
+                      <Embed
+                        url={
+                          (
+                            (firstChild as ReactElement)?.props as {
+                              href: string;
+                            }
+                          ).href
+                        }
+                      />
+                    );
                   } else if (text === "[[relatedPosts]]") {
                     return (
                       <Related
