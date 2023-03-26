@@ -30,7 +30,12 @@ import TextModule from "./TextModule";
 import Gallery from "./Gallery";
 import Commento from "./Commento";
 import MarkdownText from "@/app/components/MarkdownText";
-import { AreaHTMLAttributes, Attributes, ReactNode } from "react";
+import {
+  AreaHTMLAttributes,
+  Attributes,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 import { ReactElement } from "react-markdown/lib/react-markdown";
 
 type PageProps = {
@@ -162,9 +167,19 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                   const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
                   const text = children?.[0]?.toString();
                   const firstChild = children?.[0];
+                  const firstChildHasText = (
+                    (firstChild as ReactElement)?.props as PropsWithChildren
+                  )?.children?.toString();
+                  const firstChildHref = (
+                    (firstChild as ReactElement)?.props as { href?: string }
+                  )?.href?.toString();
                   if (text && text.startsWith("https://")) {
                     return <Embed url={text} />;
-                  } else if ((firstChild as ReactElement)?.type === "a") {
+                  } else if (
+                    (firstChild as ReactElement)?.type === "a" &&
+                    firstChildHasText === firstChildHref
+                  ) {
+                    console.log((firstChild as ReactElement).props);
                     return (
                       <Embed
                         url={
