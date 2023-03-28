@@ -1,11 +1,13 @@
-import { Montserrat } from "@next/font/google";
+import { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import Footer from "./components/Footer";
-import Top from "./components/Top";
 import "./globals.css";
 import styles from "./layout.module.css";
 import { getConfig } from "./util/config";
+import { getSiteTitle } from "./util/site";
 
 const headlineFont = Montserrat({
   subsets: ["latin"],
@@ -21,6 +23,7 @@ export default async function RootLayout({
   const config = await getConfig();
   const logoLightMode = config.logo.light;
   const logoDarkMode = config.logo.dark;
+  const siteName = await getSiteTitle();
   return (
     <html lang="en">
       {/*
@@ -29,7 +32,28 @@ export default async function RootLayout({
       */}
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`RSS feed for ${config.siteName}`}
+          href="/rss.xml"
+        />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PRYEH8MYJ1"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PRYEH8MYJ1');`,
+          }}
+        />
       </head>
       <body className={`${headlineFont.variable}`}>
         <style>
@@ -54,7 +78,6 @@ export default async function RootLayout({
         }
         `}
         </style>
-        {typeof window !== "undefined" && <Top />}
         <div className={styles.grid}>
           <header className={styles.header}>
             <div className={styles.wordmark}>
@@ -75,16 +98,18 @@ export default async function RootLayout({
                   {config.siteName}
                 </Link>
               </h1>
-              <h5>{config.siteDescription}</h5>
             </div>
-            <nav className={styles.navigation}>
-              <Link href="/">Home</Link>{" "}
-              {config.navigationItems.map((navItem, idx) => (
-                <Link href={navItem.url} key={idx}>
-                  {navItem.label}
-                </Link>
-              ))}
-            </nav>
+            <div className={styles.navigationSection}>
+              <h5>{config.siteDescription}</h5>
+              <nav className={styles.navigation}>
+                <Link href="/">Home</Link>{" "}
+                {config.navigationItems.map((navItem, idx) => (
+                  <Link href={navItem.url} key={idx}>
+                    {navItem.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </header>
           {children}
           <Footer config={config} />
@@ -92,4 +117,37 @@ export default async function RootLayout({
       </body>
     </html>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getConfig();
+  return {
+    title: {
+      default: `${config.siteName} | ${config.homepageTitleText}`,
+      template: `%s | ${config.siteName}`,
+    },
+    viewport: "width=device-width",
+    description: config.siteDescription,
+    openGraph: {
+      type: "website",
+      title: {
+        default: config.siteName,
+        template: `%s | ${config.siteName}`,
+      },
+      siteName: config.siteName,
+    },
+    twitter: {
+      card: "summary",
+      title: {
+        default: config.siteName,
+        template: `%s`,
+      },
+      site: `@${config.social.twitter.replace(new RegExp(".+/"), "")}`,
+      description: config.siteDescription,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }

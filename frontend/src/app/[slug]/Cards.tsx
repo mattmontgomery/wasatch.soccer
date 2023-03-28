@@ -5,11 +5,11 @@ import { Card } from "@/app/components/PostGrid";
 import type { Podcast } from "podparse";
 import Image from "next/image";
 import Link from "next/link";
-import { getPhoto, getPhotoPath, getPhotoRaw } from "../util/api";
+import { getPhotoRaw } from "../util/api";
 
 import podcastStyles from "@/app/styles/podcast.module.css";
 import homepageStyles from "@/app/styles/homepage.module.css";
-import textStyles from "@/app/text.module.css";
+import textStyles from "@/app/styles/text.module.css";
 import { getStreamUrl } from "../util/urls";
 
 export function PodcastCard({ feed }: { feed: Podcast }) {
@@ -33,7 +33,7 @@ export function PodcastCard({ feed }: { feed: Podcast }) {
     </Card>
   );
 }
-export function NewsletterCard({ title, body, url }: App.GridSlots.Newsletter) {
+export function NewsletterCard({ title, body, url }: App.Modules.Newsletter) {
   return (
     <Card className={`${homepageStyles.card}`}>
       <h2>{title}</h2>
@@ -51,7 +51,7 @@ export function NewsletterCard({ title, body, url }: App.GridSlots.Newsletter) {
   );
 }
 
-export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
+export function TextCard({ title, body, coverImage, url }: App.Modules.Text) {
   const image = coverImage.data
     ? getPhotoRaw(coverImage.data, "medium")?.url
     : "";
@@ -63,13 +63,25 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
           {url ? (
             <Link href={url}>
               <Image
-                alt={coverImage.data.attributes.caption}
+                alt={
+                  coverImage.data.attributes.alternativeText ??
+                  coverImage.data.attributes.caption ??
+                  title
+                }
                 src={image}
                 fill
               />
             </Link>
           ) : (
-            <Image alt={coverImage.data.attributes.caption} src={image} fill />
+            <Image
+              alt={
+                coverImage.data.attributes.alternativeText ??
+                coverImage.data.attributes.caption ??
+                title
+              }
+              src={image}
+              fill
+            />
           )}
         </div>
       )}
@@ -79,7 +91,7 @@ export function TextCard({ title, body, coverImage, url }: App.GridSlots.Text) {
     </Card>
   );
 }
-export function StreamCard({ coverImage, stream }: App.GridSlots.Stream) {
+export function StreamCard({ coverImage, stream }: App.Modules.Stream) {
   const url = getStreamUrl(stream.data);
   const image = coverImage.data
     ? getPhotoRaw(coverImage.data, "medium")?.url
@@ -92,13 +104,25 @@ export function StreamCard({ coverImage, stream }: App.GridSlots.Stream) {
           {url ? (
             <Link href={url}>
               <Image
-                alt={coverImage.data.attributes.caption}
+                alt={
+                  coverImage.data.attributes.alternativeText ??
+                  coverImage.data.attributes.caption ??
+                  title
+                }
                 src={image}
                 fill
               />
             </Link>
           ) : (
-            <Image alt={coverImage.data.attributes.caption} src={image} fill />
+            <Image
+              alt={
+                coverImage.data.attributes.alternativeText ??
+                coverImage.data.attributes.caption ??
+                title
+              }
+              src={image}
+              fill
+            />
           )}
         </div>
       )}

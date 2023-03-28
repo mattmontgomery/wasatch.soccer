@@ -62,6 +62,27 @@
       "relation": "manyToMany",
       "target": "api::stream.stream",
       "inversedBy": "posts"
+    },
+    "relatedPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post"
+    },
+    "postModules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post-module.post-module"
+    },
+    "commentsEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "photoGallery": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

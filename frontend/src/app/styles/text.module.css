@@ -1,0 +1,133 @@
+.body {
+  font-size: 115%;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.body a {
+  color: var(--theme-primary);
+}
+
+.body h1,
+.body h2,
+.body h3,
+.body h4,
+.body h5,
+.body h6 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--theme-primary);
+  font-size: 125%;
+}
+
+@media screen and (min-width: 72rem) {
+  .body h1,
+  .body h2,
+  .body h3,
+  .body h4,
+  .body h5,
+  .body h6 {
+    font-size: 150%;
+  }
+}
+
+.body ul,
+.body ol {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+.body ul li,
+.body ol li {
+  margin-bottom: 0.5rem;
+}
+.body ul li:last-of-type,
+.body ol li:last-of-type {
+  margin-bottom: 0;
+}
+.body p,
+.body blockquote {
+  margin-bottom: 1rem;
+}
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.body img {
+  max-width: 100%;
+}
+
+.body blockquote {
+  border-left: 4px solid var(--theme-primary);
+  padding-left: 1rem;
+}
+
+.body hr {
+  margin: 2rem 0;
+  padding: 0;
+  border: none;
+  border-top: 4px solid var(--theme-primary);
+  outline: 0;
+}
+
+.body .postModule {
+  padding: 1rem 0;
+  margin: 2rem 0;
+  border-top: 1px solid var(--theme-alternate);
+  border-bottom: 1px solid var(--theme-alternate);
+}
+.body .postModule .postModuleBody {
+  margin: 1rem 0;
+  font-size: 85%;
+}
+.body .postModule .postModuleAction {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 90%;
+}
+.body .postModule .body {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  font-size: 11pt;
+}
+.body .postModule h5 {
+  color: inherit;
+  font-size: 14pt;
+  font-weight: 400;
+  margin-top: 0;
+  /* text-align: right; */
+  text-transform: uppercase;
+}
+.relatedBody {
+  font-size: 90%;
+  display: grid;
+  row-gap: 1rem;
+}
+.relatedBody div:before {
+  content: "• ";
+}
+.photoGallery {
+  display: grid;
+  row-gap: 1rem;
+}
+.photoGallery .caption {
+  font-size: 9pt;
+  text-align: right;
+}
+.photoGallery div {
+  position: relative;
+}
+.photoGallery div img {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 36rem) {
+  .body .postModule {
+    float: right;
+    margin: 0 0 2rem 2rem;
+    width: 40%;
+  }
+}

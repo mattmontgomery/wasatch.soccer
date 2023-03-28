@@ -1,6 +1,5 @@
 .main {
   column-gap: 2rem;
-  padding: 1rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
   row-gap: 2rem;
@@ -13,6 +12,9 @@
   font-size: 24pt;
   padding-bottom: 1rem;
   border-bottom: 4px solid var(--theme-primary);
+}
+.pageHeader.noBorder {
+  border-bottom: 0;
 }
 .pageHeader h2 {
   font-size: 24pt;
@@ -28,7 +30,14 @@
   .main {
     max-width: 72rem;
   }
-  .pageHeader, .pageHeader h2 {
+  .pageHeader,
+  .pageHeader h2 {
     font-size: 48pt;
+  }
+}
+
+@media screen and (min-width: 96rem) {
+  .main {
+    max-width: 96rem;
   }
 }

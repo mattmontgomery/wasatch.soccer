@@ -11,7 +11,11 @@ export function Embed({ url }: { url: string }): React.ReactElement {
   const { data, error, isLoading } = useSWR(`/api/embed?url=${url}`, fetcher);
 
   if (isLoading || error || !data || data.errors?.length) {
-    return <p>{url}</p>;
+    return (
+      <p>
+        <a href={url}>Embed: {url}</a>
+      </p>
+    );
   }
   if (data.data.provider_name === "Twitter") {
     return (

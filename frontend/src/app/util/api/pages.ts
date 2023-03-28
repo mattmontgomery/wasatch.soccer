@@ -2,7 +2,7 @@ import QueryString from "qs";
 import { makeApiCall } from "../api";
 
 export async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
-  const queryString = QueryString.stringify({
+  const query = {
     filters: {
       slug: {
         $eq: slug,
@@ -19,6 +19,7 @@ export async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
               "pinnedPost.leadPhoto",
               "pinnedPost.authors",
               "pinnedPost.groups",
+              "pinnedPost.primaryGroup",
             ],
           },
           "modules.stream": {
@@ -36,6 +37,7 @@ export async function fetchPage(slug: string): Promise<{ data: App.Page[] }> {
         },
       },
     },
-  });
+  };
+  const queryString = QueryString.stringify(query);
   return (await makeApiCall(`/api/pages?${queryString}`)).json();
 }

@@ -30,11 +30,11 @@ declare namespace App {
     id: number;
     attributes: {
       gridSlots: (
-        | GridSlots.AutoPost
-        | GridSlots.Feed
-        | GridSlots.Newsletter
-        | GridSlots.Stream
-        | GridSlots.Text
+        | Modules.AutoPost
+        | Modules.Feed
+        | Modules.Newsletter
+        | Modules.Stream
+        | Modules.Text
       )[];
       title: string;
       createdAt: string;
@@ -44,7 +44,7 @@ declare namespace App {
       groups: { data: Group[] };
     };
   };
-  namespace GridSlots {
+  namespace Modules {
     type Generic = {
       id: number;
       __component: string;
@@ -80,25 +80,37 @@ declare namespace App {
       coverImage: { data: App.Photo };
     };
   }
+  type PostModule = {
+    id: number;
+    attributes: {
+      title: string;
+      url: string;
+      body: string;
+      actionText: string;
+    };
+  };
   type Post = {
     id: number;
     attributes: {
-      headline: string;
       createdAt: string;
-      updatedAt: string;
       publishedAt: string;
+      updatedAt: string;
+
+      body: string;
+      headline: string;
       published: string;
       slug: string;
       summary: string;
-      body: string;
+      commentsEnabled: boolean;
+
       leadPhoto: {
-        data: Photo;
+        data: Photo | null;
       };
       groups: {
         data: Group[];
       };
       primaryGroup: {
-        data: Group;
+        data: Group | null;
       };
       authors: {
         data: Author[];
@@ -106,21 +118,43 @@ declare namespace App {
       streams: {
         data: Stream[];
       };
+      relatedPosts: {
+        data: RelatedPost[];
+      };
+      postModules: {
+        data: PostModule[];
+      };
+      photoGallery?: {
+        data: Photo[];
+      };
     };
+  };
+  type RelatedPost = {
+    id: number;
+    attributes: Pick<
+      Post["attributes"],
+      "headline" | "slug" | "published" | "publishedAt" | "createdAt"
+    >;
   };
   type Photo = {
     attributes: {
+      alternativeText: string;
       caption: string;
       height: number;
       width: number;
       url: string;
       formats: Record<string, PhotoBasics>;
-    };
-  } & PhotoBasics;
+    } & PhotoBasics;
+  };
   type PhotoBasics = {
+    ext: string;
+    hash: string;
     height: number;
-    width: number;
+    mime: string;
+    path: string;
+    size: number;
     url: string;
+    width: number;
   };
   type Author = {
     id: number;

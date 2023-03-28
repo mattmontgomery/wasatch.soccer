@@ -1,110 +1,6 @@
 import qs from "qs";
 import format from "date-fns/format";
 
-const API_BASE = process.env.API_BASE;
-
-export async function makeApiCall(
-  path: string,
-  options: { revalidate: number } = { revalidate: 120 }
-): Promise<Response> {
-  return fetch(`${API_BASE}${path}`, {
-    method: "GET",
-    cache: "force-cache",
-    next: {
-      revalidate: options.revalidate,
-    },
-    headers: {
-      Authorization: `bearer ${process.env.API_TOKEN}`,
-    },
-  });
-}
-
-export async function getPosts({
-  sort = ["published:desc", "publishedAt:desc"],
-  pagination = {},
-  filters = {},
-  populate = "*",
-}: {
-  filters?: {
-    id?:
-      | {
-          $ne?: number;
-        }
-      | { $eq?: number };
-    authors?: {
-      id: {
-        $eq: number;
-      };
-      slug: {
-        $eq: string;
-      };
-    };
-    groups?: {
-      id:
-        | {
-            $eq: number;
-          }
-        | {
-            $in: number[];
-          };
-    };
-    published?: {
-      $gte?: string;
-      $lte?: string;
-    };
-    streams?: {
-      id: {
-        $eq: number;
-      };
-    };
-  };
-  pagination?: {
-    pageSize?: number;
-    page?: number;
-    withCount?: number;
-  };
-  populate?: string | string[];
-  sort?: string[];
-} = {}): Promise<{
-  data: App.Post[];
-  meta: Required<App.Meta>;
-}> {
-  const now = new Date().toISOString();
-  const queryString = qs.stringify(
-    {
-      populate,
-      pagination,
-      sort,
-      publicationState:
-        process.env.NODE_ENV === "development" ? "preview" : "live",
-      filters: {
-        ...filters,
-        published: {
-          ...(filters.published ? filters.published : {}),
-          // ...(process.env.NODE_ENV === "development" ? {} : { $lte: now }),
-        },
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
-  const res = await makeApiCall(`/api/posts?${queryString}`);
-  return res.json();
-}
-
-export async function getPost(postId: number): Promise<{
-  data: App.Post;
-}> {
-  const queryString = qs.stringify({
-    populate: ["leadPhoto", "authors", "groups", "primaryGroup", "streams"],
-  });
-  const res = await makeApiCall(`/api/posts/${postId}?${queryString}`, {
-    revalidate: 300,
-  });
-  return res.json();
-}
-
 export function getPhoto(
   data: App.Post,
   format: string = "large"
@@ -117,93 +13,26 @@ export function getPhoto(
 export function getPhotoRaw(
   photo: App.Photo,
   format: string = "large"
-): App.PhotoBasics | null {
+): App.PhotoBasics {
   if (format === "original") {
     return photo.attributes;
   }
   return photo.attributes.formats[format] ?? photo.attributes;
 }
 
-export function formatDateForPathname(date: string) {
-  return date ? format(new Date(date), "yyyy-MM-dd") : "";
-}
-
-export function getPathnamePieces(post: App.Post): {
-  date: string;
-  id: string;
-  slug: string;
-} {
-  const date = formatDateForPathname(
-    post.attributes.published ?? post.attributes.publishedAt
-  );
-  return {
-    date,
-    id: String(post.id),
-    slug: post.attributes.slug,
-  };
-}
-
-export function getPathname(post: App.Post): string {
-  const { date, id, slug } = getPathnamePieces(post);
-  return `/post/${date}/${id}/${slug}`;
-}
-export function getFullPathname(post: App.Post): string {
-  return `${process.env.SITE_BASE}${getPathname(post)}`;
-}
-
 export function getPhotoPath(path: string) {
   return path;
 }
 
-export async function getAuthor(
-  authorId: number
-): Promise<{ data: App.Author }> {
-  if (typeof authorId !== "number") {
-    throw "Not a valid group";
-  }
-  const queryString = qs.stringify({
-    populate: ["photo", "socialLinks"],
-  });
-  const res = await makeApiCall(`/api/authors/${authorId}?${queryString}`, {
-    revalidate: 60 * 60 * 8, // eight hours
-  });
-  return res.json();
-}
+export { default as getPosts } from "@/app/util/api/posts/getPosts";
+export { default as getPost } from "@/app/util/api/posts/getPost";
 
-export async function getGroup(groupId: number): Promise<{ data: App.Group }> {
-  if (typeof groupId !== "number") {
-    throw "Not a valid group";
-  }
-  const res = await makeApiCall(`/api/groups/${groupId}`);
-  return res.json();
-}
-export async function getStream(
-  streamId: number
-): Promise<{ data: App.Stream }> {
-  if (typeof streamId !== "number") {
-    throw "Not a valid group";
-  }
-  const res = await makeApiCall(`/api/streams/${streamId}`);
-  return res.json();
-}
+export { default as getAuthors } from "@/app/util/api/authors/getAuthors";
+export { default as getAuthor } from "@/app/util/api/authors/getAuthor";
 
-export async function getSiteConfig(): Promise<{ data: App.SiteConfig }> {
-  const res = await makeApiCall(`/api/site-config?populate=*`);
-  return res.json();
-}
+export { default as getGroup } from "@/app/util/api/groups/getGroup";
+export { default as getStream } from "@/app/util/api/streams/getStream";
 
-export async function getAuthors({
-  displayOnMasthead = false,
-}: { displayOnMasthead?: boolean } = {}): Promise<{ data: App.Author[] }> {
-  const query = qs.stringify({
-    sort: ["name:asc"],
-    populate: ["photo"],
-    filters: displayOnMasthead
-      ? {
-          displayOnMasthead: { $eq: displayOnMasthead },
-        }
-      : {},
-  });
-  const res = await makeApiCall(`/api/authors?${query}`);
-  return res.json();
-}
+export { default as getSiteConfig } from "@/app/util/api/siteConfig/getSiteConfig";
+
+export { default as makeApiCall } from "@/app/util/api/makeApiCall";

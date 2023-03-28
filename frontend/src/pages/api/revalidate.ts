@@ -1,4 +1,5 @@
-import { formatDateForPathname, getPosts } from "@/app/util/api";
+import { getPost, getPosts } from "@/app/util/api";
+import { getGroupUrl, getPostUrl, getStreamUrl } from "@/app/util/urls";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function RevalidateHandler(
@@ -18,15 +19,22 @@ export default async function RevalidateHandler(
 
   if (model && typeof paths[model] !== "undefined") {
     const path = paths[model](entry);
-    if (Array.isArray(path)) {
-      for await (const p of path) {
-        await revalidate(res, event, p);
+    const collectedPaths: string[] = [];
+    for await (const p of path) {
+      if (typeof p === "function") {
+        const _paths = await p(event);
+        collectedPaths.push(..._paths);
+      } else if (typeof p === "string") {
+        collectedPaths.push(p);
       }
-    } else {
-      await revalidate(res, event, path);
     }
+    const collect = Object.keys(
+      collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
+    );
+    const responses = await Promise.all(collect.map((p) => revalidate(res, p)));
+    console.info(responses);
     res.json({
-      meta: path,
+      meta: collect,
       ok: 1,
     });
   } else {
@@ -36,24 +44,29 @@ export default async function RevalidateHandler(
   }
 }
 
+type Events =
+  | "entry.update"
+  | "entry.unpublish"
+  | "entry.publish"
+  | "media.update"
+  | "media.create"
+  | "entry.delete";
+
 type RevalidateType =
   | string
-  | ((event: string) => string)
-  | ((event: string) => Promise<string>);
+  | ((event: Events) => string[])
+  | RevalidatePromiseType;
 
-async function revalidate(
-  res: NextApiResponse,
-  event: string,
-  path: RevalidateType
-): Promise<void> {
-  if (typeof path === "string") {
-    await res.revalidate(path);
-  }
-  if (typeof path === "function") {
-    const p = await path(event);
-    if (p) {
-      await res.revalidate(p);
-    }
+type RevalidatePromiseType = (event: Events) => Promise<string[]>;
+
+async function revalidate(res: NextApiResponse, path: string): Promise<void> {
+  console.info(`[revalidate] ${path}`);
+  try {
+    return res.revalidate(path).catch((reason) => {
+      console.info(`[revalidate] ${path} failure for ${reason}`);
+    });
+  } catch (e) {
+    console.info(`[revalidate] ${path} failure for ${e}`);
   }
 }
 
@@ -64,49 +77,84 @@ export const paths: Record<
     slug: string;
     published?: string;
     publishedAt?: string;
-  }) => RevalidateType | RevalidateType[]
+  }) => RevalidateType[]
 > = {
-  page: (entry: { id: number; slug: string }) =>
+  page: (entry: { id: number; slug: string }) => [
     entry.slug === "homepage" ? "/" : `/${entry.slug}`,
-  stream: (entry: { id: number; slug: string }) =>
+  ],
+  stream: (entry: { id: number; slug: string }) => [
     `/streams/${entry.id}/${entry.slug}`,
-  author: (entry: { id: number; slug: string }) =>
+  ],
+  author: (entry: { id: number; slug: string }) => [
     `/authors/${entry.id}/${entry.slug}`,
+  ],
   post: (entry: {
     id: number;
     slug: string;
+    createdAt?: string;
     published?: string;
     publishedAt?: string;
-  }) => [
-    `/post/${formatDateForPathname(
-      entry.published ?? entry.publishedAt ?? ""
-    )}/${entry.id}/${entry.slug}`,
-    async (event) => {
-      if (event === "entry.publish") {
-        return "/";
-      }
-      if (
-        entry.publishedAt &&
-        [
-          "entry.update",
-          "entry.unpublish",
-          "media.update",
-          "media.create",
-          "entry.delete",
-        ].includes(event)
-      ) {
-        // if in the first 18 posts
-        const posts = await getPosts({
-          pagination: {
-            pageSize: 18,
-            page: 1,
-          },
-        });
-        // if the post is one the homepage and has been updated, send a revalidate request
-        return posts.data.find((post) => post.id === entry.id) ? "/" : "";
-      } else {
-        return "";
-      }
-    },
-  ],
+  }) => [revalidatePost(entry)],
 };
+
+function revalidatePost(entry: {
+  id: number;
+  slug: string;
+  createdAt?: string;
+  published?: string;
+  publishedAt?: string;
+}): RevalidatePromiseType {
+  return async (event: Events) => {
+    return await getPostRevalidations(entry.id, event);
+  };
+}
+
+async function getPostRevalidations(
+  postId: number,
+  event: Events
+): Promise<string[]> {
+  const revalidations: string[] = [];
+
+  const post = await getPost(postId);
+
+  if (!post.data.attributes.publishedAt) {
+    return [];
+  }
+
+  if (event === "entry.publish") {
+    revalidations.push("/");
+  } else {
+    revalidations.push(getPostUrl(post.data));
+  }
+  // if the post is on the homepage, and it's not newly published, revalidate the homepage
+  if (!revalidations.includes("/")) {
+    // if in the first 18 posts
+    const posts = await getPosts({
+      pagination: {
+        pageSize: 18,
+        page: 1,
+      },
+    });
+    // if the post is one the homepage and has been updated, send a revalidate request
+    if (posts.data.find((_post) => _post.id === post.data.id) ? "/" : "") {
+      revalidations.push("/");
+    }
+  }
+  // if the post is published
+  if (event === "entry.publish" || event === "entry.unpublish") {
+    const streams = post.data.attributes.streams.data;
+    revalidations.push(
+      ...streams?.map((stream) => {
+        return getStreamUrl(stream);
+      })
+    );
+    const groups = post.data.attributes.groups.data;
+    revalidations.push(
+      ...groups?.map((group) => {
+        return getGroupUrl(group);
+      })
+    );
+  }
+
+  return revalidations;
+}

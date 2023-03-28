@@ -1,23 +1,21 @@
-import {
-  getFullPathname,
-  getPathname,
-  getPhoto,
-  getPhotoPath,
-  getPosts,
-} from "@/app/util/api";
+import { getPhoto, getPhotoPath, getPosts } from "@/app/util/api";
 import { NextApiResponse } from "next";
 
 import { format, subDays } from "date-fns";
 
 import { js2xml } from "xml-js";
 import { getConfig } from "@/app/util/config";
+import { cache } from "react";
+import { getFullPathname, getPostUrl } from "@/app/util/urls";
 
 export default async function generateSitemap() {}
+
+const getPostsCached = cache(getPosts);
 
 export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const siteConfig = await getConfig();
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");
-  const posts = await getPosts({
+  const posts = await getPostsCached({
     populate: ["leadPhoto", "authors"],
     pagination: {
       pageSize: 50,
@@ -147,7 +145,7 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                         elements: [
                           {
                             type: "text",
-                            text: getPathname(post),
+                            text: getPostUrl(post),
                           },
                         ],
                       },

@@ -1,4 +1,7 @@
 User-Agent: *
 Allow: /
 
+User-Agent: *
+Disallow: /search
+
 Sitemap: https://www.wasatch.soccer/sitemap.xml

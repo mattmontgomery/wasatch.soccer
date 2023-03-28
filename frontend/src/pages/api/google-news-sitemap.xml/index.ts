@@ -1,9 +1,10 @@
-import { getFullPathname, getPosts } from "@/app/util/api";
+import { getPosts } from "@/app/util/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { format, subDays } from "date-fns";
 
 import { js2xml } from "xml-js";
+import { getFullPathname } from "@/app/util/urls";
 
 export default async function generateSitemap(
   _: NextApiRequest,

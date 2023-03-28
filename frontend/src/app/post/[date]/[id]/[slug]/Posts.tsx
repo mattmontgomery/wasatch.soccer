@@ -1,8 +1,9 @@
-import { getPathname, getPhoto, getPhotoPath, getPosts } from "@/app/util/api";
+import { getPhoto, getPhotoPath } from "@/app/util/api";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styles from "@/app/styles/post.module.css";
+import { getPostUrl } from "@/app/util/urls";
 
 export default function Posts({
   posts,
@@ -21,8 +22,10 @@ export default function Posts({
 function Post(props: App.Post): React.ReactElement {
   const photo = getPhoto(props, "small");
   return (
-    <Link href={getPathname(props)} className={styles.postCard}>
-      <div className={styles.postCardImage}>
+    <Link href={getPostUrl(props)} className={styles.postCard}>
+      <div
+        className={`${styles.postCardImage} ${!photo ? styles.noImage : ""}`}
+      >
         {photo && (
           <Image
             sizes="(max-width: 72rem) 100vw

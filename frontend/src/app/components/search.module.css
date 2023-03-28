@@ -1,0 +1,13 @@
+.search input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 4px solid var(--theme-alternate);
+  font-size: 24pt;
+  font-family: var(--headline-font);
+  font-weight: light;
+  padding: 0.25rem;
+}
+.search input:focus {
+  outline: none;
+}

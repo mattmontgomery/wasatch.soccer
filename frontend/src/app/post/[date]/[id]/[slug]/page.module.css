@@ -1,6 +1,5 @@
 .main {
   display: block;
-  padding: 1rem;
 }
 
 .section {
@@ -17,7 +16,6 @@
   font-weight: bold;
 }
 .details {
-  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
@@ -44,7 +42,6 @@
   font-size: 16pt;
   font-style: italic;
 }
-
 
 .leadPhoto {
   max-width: 100%;
@@ -93,7 +90,7 @@
     column-gap: 2rem;
   }
   .headline {
-    font-size: 48pt;
+    font-size: 42pt;
   }
   .summary {
     font-size: 14pt;
@@ -110,5 +107,15 @@
 @media screen and (min-width: 60rem) {
   .main {
     grid-template-columns: auto 300px;
+  }
+}
+@media screen and (min-width: 96rem) {
+  .main {
+    grid-template-columns: minmax(48rem, 56rem) 20rem;
+    column-gap: 8rem;
+    justify-content: space-between;
+  }
+  .leadPhoto {
+    height: 600px;
   }
 }

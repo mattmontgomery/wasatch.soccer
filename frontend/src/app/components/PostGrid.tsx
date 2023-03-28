@@ -1,12 +1,18 @@
+import React, { Fragment, PropsWithChildren, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Relative } from "@/app/components/Post/Published";
 import Authors from "@/app/components/Post/Author";
 import Streams from "@/app/components/Post/Streams";
-import { getPathname, getPhoto, getPhotoPath } from "@/app/util/api";
-import styles from "./postGrid.module.css";
-import { Fragment, PropsWithChildren, useMemo } from "react";
+import { getPhoto, getPhotoPath } from "@/app/util/api";
+import { getPostUrl } from "@/app/util/urls";
+
+import { CommentIcon } from "./Comment";
+
 import Pagination from "./Pagination";
+
+import styles from "./postGrid.module.css";
 
 export function Card({
   children,
@@ -18,7 +24,9 @@ export function Card({
 }): React.ReactElement {
   return (
     <div
-      className={`${styles.post} ${hero ? styles.postHero : ""} ${className}`}
+      className={`${styles.post} ${hero ? styles.postHero : ""} ${
+        className ?? ""
+      }`}
     >
       {children}
     </div>
@@ -31,7 +39,7 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
   return (
     <Card hero={props.hero}>
       <Link
-        href={getPathname(props)}
+        href={getPostUrl(props)}
         className={photo ? styles.image : styles.noImage}
       >
         {photo && (
@@ -44,6 +52,11 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
             src={getPhotoPath(photo.url)}
             fill
           />
+        )}
+        {props.attributes.commentsEnabled && (
+          <span className={styles.comments} aria-label="Comments Enabled">
+            <CommentIcon />
+          </span>
         )}
         {primaryGroup ? (
           <h5
@@ -67,7 +80,7 @@ export function Post(props: App.Post & { hero?: boolean; slot: number }) {
           <></>
         )}
       </Link>
-      <Link href={getPathname(props)}>
+      <Link href={getPostUrl(props)}>
         <h2 className={styles.headline}>{props.attributes.headline}</h2>
       </Link>
       <div>
@@ -113,6 +126,7 @@ export function Posts({
   pagination,
   pinnedPosts = [],
   posts,
+  postsClassName = "",
   slots = 20,
 }: {
   customSlots?: Slot[];
@@ -121,6 +135,7 @@ export function Posts({
   pagination?: App.Pagination;
   pinnedPosts?: { slot: number; post: App.Post }[];
   posts: App.Post[];
+  postsClassName?: string;
   slots?: number;
 }) {
   const Slots = useMemo(() => {
@@ -153,7 +168,7 @@ export function Posts({
         // find the next unused post
         const post = posts.slice(lastUsedPostIdx, posts.length);
         if (!post[0]) {
-          return <></>;
+          return <React.Fragment key={idx}></React.Fragment>;
         }
         lastUsedPostIdx++;
         return (
@@ -172,7 +187,7 @@ export function Posts({
     pagination && (pagination.pageCount > 1 || pagination.page > 1);
   return (
     <>
-      <section className={styles.posts}>{Slots}</section>
+      <section className={`${styles.posts} ${postsClassName}`}>{Slots}</section>
       {showPagination && (
         <Pagination
           pagination={pagination}
