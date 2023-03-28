@@ -13,7 +13,7 @@
     "@meilisearch/instant-meilisearch": "^0.11.1",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^2.0.0",
-    "meilisearch": "^0.31.1",
+    "meilisearch": "^0.32.0",
     "next": "13.2.4",
     "next-seo": "^5.15.0",
     "podparse": "^1.5.1",
