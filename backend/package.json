@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@strapi/admin": "4.8.1",
-    "@strapi/database": "4.8.1",
+    "@strapi/database": "4.9.1",
     "@strapi/plugin-i18n": "4.8.1",
     "@strapi/plugin-users-permissions": "4.8.1",
     "@strapi/provider-upload-aws-s3": "4.8.1",
