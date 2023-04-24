@@ -17,7 +17,7 @@
     "@strapi/plugin-i18n": "4.8.1",
     "@strapi/plugin-users-permissions": "4.8.1",
     "@strapi/provider-upload-aws-s3": "4.8.1",
-    "@strapi/strapi": "4.8.1",
+    "@strapi/strapi": "4.9.2",
     "pg": "^8.10.0",
     "strapi-plugin-meilisearch": "^0.9.1",
     "strapi-plugin-publisher": "^1.3.1",
