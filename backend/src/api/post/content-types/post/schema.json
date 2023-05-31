@@ -21,8 +21,7 @@
     },
     "summary": {
       "type": "text",
-      "required": true,
-      "minLength": 8
+      "required": true
     },
     "body": {
       "type": "richtext"
@@ -78,11 +77,12 @@
       "default": false
     },
     "photoGallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }
