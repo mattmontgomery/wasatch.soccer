@@ -179,7 +179,6 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                     (firstChild as ReactElement)?.type === "a" &&
                     firstChildHasText === firstChildHref
                   ) {
-                    console.log((firstChild as ReactElement).props);
                     return (
                       <Embed
                         url={
