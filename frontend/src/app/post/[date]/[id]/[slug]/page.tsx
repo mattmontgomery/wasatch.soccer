@@ -37,6 +37,7 @@ import {
   ReactNode,
 } from "react";
 import { ReactElement } from "react-markdown/lib/react-markdown";
+import LiveBlog from "./LiveBlog";
 
 type PageProps = {
   params: { id: number; slug: string };
@@ -190,6 +191,8 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                         }
                       />
                     );
+                  } else if (text?.startsWith("[[liveblog")) {
+                    return <LiveBlog id={text.match(/[0-9]+/i)?.[0]} />;
                   } else if (text === "[[relatedPosts]]") {
                     return (
                       <Related
