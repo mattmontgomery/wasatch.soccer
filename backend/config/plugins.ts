@@ -5,16 +5,32 @@ export default function ({ env }): PluginOptions {
     publisher: {
       enabled: true,
     },
-    meilisearch: {
+    search: {
+      enabled: true,
       config: {
-        post: {
-          settings: {
-            sortableAttributes: ["published", "publishedAt"],
-            synonyms: {
-              rsl: ["real salt lake"],
-            },
-          },
+        provider: "algolia",
+        providerOptions: {
+          apiKey: env("ALGOLIA_PROVIDER_ADMIN_API_KEY"),
+          applicationId: env("ALGOLIA_PROVIDER_APPLICATION_ID"),
         },
+        debug: true,
+        prefix: "wss_",
+        contentTypes: [
+          {
+            name: "api::post.post",
+            index: "posts",
+            fields: [
+              "headline",
+              "summary",
+              "body",
+              "slug",
+              "authors",
+              "published",
+              "commentsEnabled",
+              "leadPhoto",
+            ],
+          },
+        ],
       },
     },
     redis: {

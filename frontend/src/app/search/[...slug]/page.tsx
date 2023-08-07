@@ -1,5 +1,5 @@
 import { cache } from "react";
-import MeiliSearch from "meilisearch";
+import AlgoliaSearch from "algoliasearch";
 
 import { Posts } from "../../components/PostGrid";
 import { convertHitsToPosts, PostHit } from "@/app/util/api/posts";
@@ -8,21 +8,20 @@ import styles from "@/app/page.module.css";
 import Search from "@/app/components/Search";
 import { Metadata } from "next";
 
-const client = new MeiliSearch({
-  host: process.env.MEILISEARCH_HOST ?? "",
-  apiKey: process.env.MEILISEARCH_KEY ?? "",
-});
+const searchClient = AlgoliaSearch(
+  String(process.env.ALGOLIA_PROVIDER_APPLICATION_ID),
+  String(process.env.ALGOLIA_PROVIDER_SEARCH_KEY)
+);
 
 const search = cache(async (query: string) => {
-  const postsIndex = client.index(process.env.MEILISEARCH_POST_INDEX ?? "post");
-  const { hits } = await postsIndex.search<PostHit>(query, {
+  const postsIndex = searchClient.initIndex(
+    process.env.ALGOLIA_POST_INDEX ?? "wss_posts"
+  );
+  const results = await postsIndex.search(query, {
+    page: 0,
     hitsPerPage: 12,
-    limit: 12,
-    sort: ["published:desc", "publishedAt:desc"],
-    q: query,
-    matchingStrategy: "all",
   });
-  const posts = convertHitsToPosts(hits);
+  const posts = convertHitsToPosts(results.hits);
   return posts;
 });
 

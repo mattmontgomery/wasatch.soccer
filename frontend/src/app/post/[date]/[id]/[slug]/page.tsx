@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { ArticleJsonLd } from "next-seo";
 
@@ -30,12 +29,7 @@ import TextModule from "./TextModule";
 import Gallery from "./Gallery";
 import Commento from "./Commento";
 import MarkdownText from "@/app/components/MarkdownText";
-import {
-  AreaHTMLAttributes,
-  Attributes,
-  PropsWithChildren,
-  ReactNode,
-} from "react";
+import { PropsWithChildren } from "react";
 import { ReactElement } from "react-markdown/lib/react-markdown";
 import LiveBlog from "./LiveBlog";
 
