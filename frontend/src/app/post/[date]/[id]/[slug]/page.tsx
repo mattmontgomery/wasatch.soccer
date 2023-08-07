@@ -248,7 +248,7 @@ export async function generateStaticParams() {
   const posts = await getPosts({
     populate: "",
     pagination: {
-      pageSize: 100,
+      pageSize: 50,
     },
   });
 
