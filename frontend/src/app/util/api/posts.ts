@@ -43,7 +43,7 @@ export function convertHitsToPosts(hits: PostHit[]): App.Post[] {
         authors: { data: [] },
         groups: { data: [] },
         leadPhoto: {
-          data: { id: leadPhoto.id, attributes: leadPhoto },
+          data: leadPhoto ? { id: leadPhoto.id, attributes: leadPhoto } : null,
         },
         primaryGroup: {
           data: primaryGroup
