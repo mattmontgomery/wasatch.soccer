@@ -1,6 +1,4 @@
-import type { PluginOptions } from "@strapi/strapi";
-
-export default function ({ env }): PluginOptions {
+export default function ({ env }) {
   return {
     publisher: {
       enabled: true,
