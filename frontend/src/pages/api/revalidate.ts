@@ -59,14 +59,16 @@ type RevalidateType =
 
 type RevalidatePromiseType = (event: Events) => Promise<string[]>;
 
-async function revalidate(res: NextApiResponse, path: string): Promise<void> {
+async function revalidate(res: NextApiResponse, path: string): Promise<number> {
   console.info(`[revalidate] ${path}`);
   try {
-    return res.revalidate(path).catch((reason) => {
+    await res.revalidate(path).catch((reason) => {
       console.info(`[revalidate] ${path} failure for ${reason}`);
     });
+    return 1;
   } catch (e) {
     console.info(`[revalidate] ${path} failure for ${e}`);
+    return -1;
   }
 }
 
