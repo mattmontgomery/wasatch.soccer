@@ -8,7 +8,7 @@ export default function LiveBlog(props: { id?: string }): React.ReactElement {
       if (!document.querySelector("#LB24")) {
         location.reload();
       }
-    }, 2000);
+    }, 5000);
   }, [props.id]);
   return !props.id ? (
     <></>
