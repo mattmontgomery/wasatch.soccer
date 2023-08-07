@@ -252,7 +252,7 @@ export async function generateStaticParams() {
     },
   });
 
-  return posts.data?.map(getPathnamePieces);
+  return posts.data?.map(getPathnamePieces).filter((post) => !!post.slug);
 }
 
 export async function generateMetadata({
