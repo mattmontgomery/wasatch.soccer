@@ -13,6 +13,7 @@
     "algoliasearch": "^4.19.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
+    "lru-cache": "^10.0.0",
     "next": "13.4.13",
     "next-seo": "6.1.0",
     "podparse": "^1.5.1",

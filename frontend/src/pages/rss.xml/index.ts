@@ -5,23 +5,32 @@ import { format, subDays } from "date-fns";
 
 import { js2xml } from "xml-js";
 import { getConfig } from "@/app/util/config";
-import { cache } from "react";
+
 import { getFullPathname, getPostUrl } from "@/app/util/urls";
+import { LRUCache } from "lru-cache";
 
 export default async function generateSitemap() {}
 
-const getPostsCached = cache(getPosts);
+const cache = new LRUCache({
+  max: 500,
+  ttl: 60 * 30_000, // 30 minutes ttl
+});
 
 export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const siteConfig = await getConfig();
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");
-  const posts = await getPostsCached({
-    populate: ["leadPhoto", "authors"],
-    pagination: {
-      pageSize: 50,
-    },
-    sort: ["published:desc"],
-  });
+  const posts = cache.has("posts")
+    ? cache.get("posts")
+    : await getPosts({
+        populate: ["leadPhoto", "authors"],
+        pagination: {
+          pageSize: 50,
+        },
+        sort: ["published:desc"],
+      });
+  if (!cache.has("posts")) {
+    cache.set("posts", posts);
+  }
   const xml = js2xml(
     {
       elements: [
