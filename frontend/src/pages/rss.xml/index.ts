@@ -20,14 +20,14 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const siteConfig = await getConfig();
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");
   const posts = cache.has("posts")
-    ? cache.get("posts")
-    : await getPosts({
+    ? (cache.get("posts") as Awaited<ReturnType<typeof getPosts>>)
+    : (await getPosts({
         populate: ["leadPhoto", "authors"],
         pagination: {
           pageSize: 50,
         },
         sort: ["published:desc"],
-      });
+      })) ?? { data: [] };
   if (!cache.has("posts")) {
     cache.set("posts", posts);
   }
@@ -94,13 +94,13 @@ export async function getServerSideProps({ res }: { res: NextApiResponse }) {
                     {
                       type: "text",
                       text: new Date(
-                        posts.data?.[0]?.attributes.published ??
-                          posts.data?.[0]?.attributes.publishedAt
+                        posts?.data?.[0]?.attributes.published ??
+                          posts?.data?.[0]?.attributes.publishedAt
                       ).toUTCString(),
                     },
                   ],
                 },
-                ...posts.data?.map((post) => {
+                ...posts?.data?.map((post) => {
                   const photo = getPhoto(post, "large");
                   return {
                     type: "element",
