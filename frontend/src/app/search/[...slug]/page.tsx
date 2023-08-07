@@ -17,7 +17,7 @@ const search = cache(async (query: string) => {
   const postsIndex = searchClient.initIndex(
     process.env.ALGOLIA_POST_INDEX ?? "wss_posts"
   );
-  const results = await postsIndex.search(query, {
+  const results = await postsIndex.search<PostHit>(query, {
     page: 0,
     hitsPerPage: 12,
   });
