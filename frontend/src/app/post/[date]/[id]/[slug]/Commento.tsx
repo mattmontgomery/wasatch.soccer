@@ -1,7 +1,5 @@
 "use client";
 
-import Script from "next/script";
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 const COMMENTO_URL = `https://cdn.commento.io/js/commento.js`;

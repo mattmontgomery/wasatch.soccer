@@ -28,6 +28,7 @@ import Related from "./Related";
 import TextModule from "./TextModule";
 import Gallery from "./Gallery";
 import Commento from "./Commento";
+import Talk from "./Talk";
 import MarkdownText from "@/app/components/MarkdownText";
 import { PropsWithChildren } from "react";
 import { ReactElement } from "react-markdown/lib/react-markdown";
@@ -226,7 +227,11 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
         {data.attributes.commentsEnabled && (
           <section className={postStyles.comments}>
             <div id="commento" />
-            <Commento pageId={`post:${data.id}`} />
+            {data.id <= 224 ? (
+              <Commento pageId={`post:${data.id}`} />
+            ) : (
+              <Talk pageId={`post:${data.id}`} />
+            )}
           </section>
         )}
       </div>
