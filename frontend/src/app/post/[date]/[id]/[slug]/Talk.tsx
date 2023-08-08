@@ -31,7 +31,8 @@ export default function Commento({
     (d.head || d.body).appendChild(s);
     return () => {
       if (s) {
-        document.body.removeChild(s);
+        s.remove();
+        // document.querySelector("#coral_thread")?.remove();
       }
     };
   }, [pageId]);
