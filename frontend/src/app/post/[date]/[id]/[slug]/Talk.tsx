@@ -10,7 +10,7 @@ export default function Commento({
   useEffect(() => {
     var d = document,
       s = d.createElement("script");
-    s.src = "https://talk-lnkvqcympq-uc.a.run.app/assets/js/embed.js";
+    s.src = "https://talk.tools.football/assets/js/embed.js";
     s.async = false;
     s.defer = true;
     s.onload = function () {
@@ -18,7 +18,7 @@ export default function Commento({
       Coral.createStreamEmbed({
         id: "coral_thread",
         autoRender: true,
-        rootURL: "https://talk-lnkvqcympq-uc.a.run.app",
+        rootURL: "https://talk.tools.football",
         // Uncomment these lines and replace with the ID of the
         // story's ID and URL from your CMS to provide the
         // tightest integration. Refer to our documentation at
