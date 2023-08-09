@@ -19,7 +19,7 @@ export default function Commento({
         id: "coral_thread",
         autoRender: true,
         rootURL: "https://talk.tools.football",
-        customCSSURL: "http://talk-static.tools.football/wasatch.soccer.css",
+        customCSSURL: "https://talk-static.tools.football/wasatch.soccer.css",
         // Uncomment these lines and replace with the ID of the
         // story's ID and URL from your CMS to provide the
         // tightest integration. Refer to our documentation at
