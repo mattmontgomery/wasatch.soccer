@@ -9,11 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@extractus/oembed-extractor": "^4.0.0",
+    "@extractus/oembed-extractor": "^4.0.1",
     "algoliasearch": "^4.19.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
-    "lru-cache": "^10.0.0",
+    "lru-cache": "^10.0.1",
     "next": "13.4.13",
     "next-seo": "6.1.0",
     "podparse": "^1.5.1",
@@ -25,17 +25,17 @@
     "react-social-media-embed": "^2.3.5",
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
-    "swr": "^2.2.0",
+    "swr": "^2.2.1",
     "typescript": "5.1.6",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@types/node": "20.4.8",
+    "@types/node": "20.5.0",
     "@types/qs": "^6.9.7",
-    "@types/react": "18.2.18",
+    "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@types/react-instantsearch-dom": "^6.12.3",
-    "eslint": "8.46.0",
-    "eslint-config-next": "13.4.13"
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.17"
   }
 }
