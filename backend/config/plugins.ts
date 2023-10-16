@@ -20,7 +20,6 @@ export default function ({ env }) {
             fields: [
               "headline",
               "summary",
-              "body",
               "slug",
               "authors",
               "published",
