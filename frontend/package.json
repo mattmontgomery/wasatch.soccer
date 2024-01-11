@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@extractus/oembed-extractor": "^4.0.1",
-    "algoliasearch": "^4.19.1",
+    "algoliasearch": "^4.22.1",
     "date-fns": "^3.2.0",
     "date-fns-tz": "^2.0.0",
     "lru-cache": "^10.1.0",
