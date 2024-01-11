@@ -1,13 +1,11 @@
-import format from "date-fns-tz/format";
+import { format } from "date-fns/format";
 import { differenceInHours, differenceInMinutes, isFuture } from "date-fns";
 
 export default function Published(props: App.Post): React.ReactElement {
   const date = new Date(
     props.attributes.published ?? props.attributes.publishedAt
   );
-  const formattedDate = format(date, "MMM dd, yyyy", {
-    timeZone: process.env.TIMEZONE ?? "",
-  })
+  const formattedDate = format(date, "MMM dd, yyyy")
     .replace(/am/i, "a.m.")
     .replace(/pm/i, "p.m.");
   return <time dateTime={date.toISOString()}>{formattedDate}</time>;
@@ -27,9 +25,7 @@ export function Relative(props: App.Post) {
     hours === 0
       ? `${minutes}m ago`
       : hours > 16
-      ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`, {
-          timeZone: "Europe/Berlin",
-        })
+      ? format(date, thisYear ? `MMMM d` : `MMMM d, yyyy`)
       : `${hours}h ago`;
   return <>{relative}</>;
 }
