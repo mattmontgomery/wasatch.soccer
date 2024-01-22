@@ -19,7 +19,7 @@
     "@mattie-bundle/strapi-plugin-search": "^1.0.0-alpha.3",
     "@mattie-bundle/strapi-provider-search-algolia": "^1.0.0-alpha.3",
     "@strapi/admin": "4.17.0",
-    "@strapi/database": "4.17.0",
+    "@strapi/database": "4.17.1",
     "@strapi/plugin-i18n": "4.17.0",
     "@strapi/plugin-users-permissions": "4.17.0",
     "@strapi/provider-upload-aws-s3": "4.17.0",
