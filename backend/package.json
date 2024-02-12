@@ -21,7 +21,7 @@
     "@strapi/admin": "4.17.0",
     "@strapi/database": "4.17.0",
     "@strapi/plugin-i18n": "4.17.0",
-    "@strapi/plugin-users-permissions": "4.17.0",
+    "@strapi/plugin-users-permissions": "4.20.0",
     "@strapi/provider-upload-aws-s3": "4.17.0",
     "@strapi/strapi": "4.17.0",
     "pg": "^8.11.3",
