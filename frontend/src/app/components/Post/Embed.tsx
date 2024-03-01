@@ -8,8 +8,6 @@ export async function Embed({ url }: { url: string }) {
     ? await extract(url, { maxwidth: 720, maxheight: 480 })
     : null;
 
-  console.log(embedCode);
-
   // if (isLoading || error || !data || data.errors?.length) {
   //   return (
   //     <p>

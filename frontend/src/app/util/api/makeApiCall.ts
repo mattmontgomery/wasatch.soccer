@@ -4,7 +4,12 @@ export default async function makeApiCall(
   path: string,
   options: { revalidate: number } = { revalidate: 30 }
 ): Promise<Response> {
-  return fetch(`${API_BASE}${path}`, {
+  const url = `${API_BASE}${path}`;
+  console.info({
+    action: "fetch",
+    url,
+  });
+  return fetch(url, {
     method: "GET",
     next: {
       revalidate: options.revalidate ?? 60,
