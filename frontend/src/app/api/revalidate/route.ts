@@ -72,7 +72,7 @@ async function revalidate(path: string): Promise<number> {
   }
 }
 
-export const paths: Record<
+const paths: Record<
   string,
   (entry: {
     id: number;
