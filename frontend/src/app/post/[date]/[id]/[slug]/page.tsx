@@ -44,6 +44,10 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
     !data ||
     (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED)
   ) {
+    console.error(
+      "Could not load unpublished post, ",
+      data.attributes?.publishedAt
+    );
     notFound();
   }
   const config = await getConfig();

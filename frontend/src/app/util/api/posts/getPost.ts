@@ -21,7 +21,7 @@ export default async function getPost(postId: number): Promise<{
   const queryString = qs.stringify(query, { encodeValuesOnly: true });
   return (
     await makeApiCall(`/api/posts/${postId}?${queryString}`, {
-      revalidate: 300,
+      revalidate: 15,
     })
   ).json();
 }
