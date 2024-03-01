@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const responses = await Promise.all(collect.map((p) => revalidate(p)));
     try {
       const cfResponse = await cloudflarePurge(collectedPaths);
-      console.info("cloudflare response", cfResponse?.json());
+      console.info("cloudflare response", await cfResponse?.json());
     } catch (e) {
       console.error("Could not purge cloudflare URLs");
     }
