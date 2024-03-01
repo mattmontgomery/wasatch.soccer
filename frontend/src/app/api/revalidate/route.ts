@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getPost, getPosts } from "@/app/util/api";
 import { getGroupUrl, getPostUrl, getStreamUrl } from "@/app/util/urls";
 import { revalidatePath } from "next/cache";
@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const headerSecret = req.headers.get("x-secret");
 
   if (secret !== headerSecret) {
-    return Response.json(
+    return NextResponse.json(
       {
         ok: 0,
       },
@@ -35,12 +35,12 @@ export async function POST(req: NextRequest) {
     );
     const responses = await Promise.all(collect.map((p) => revalidate(p)));
     console.info(responses);
-    return Response.json({
+    return NextResponse.json({
       meta: responses,
       ok: 1,
     });
   } else {
-    return Response.json({
+    return NextResponse.json({
       ok: -1,
     });
   }
