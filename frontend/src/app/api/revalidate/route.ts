@@ -34,7 +34,11 @@ export async function POST(req: NextRequest) {
       collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
     );
     const responses = await Promise.all(collect.map((p) => revalidate(p)));
-    console.info(responses);
+    try {
+      await cloudflarePurge(collectedPaths);
+    } catch (e) {
+      console.error("Could not purge cloudflare URLs");
+    }
     return NextResponse.json({
       meta: responses,
       ok: 1,
@@ -159,4 +163,25 @@ async function getPostRevalidations(
   }
 
   return revalidations;
+}
+
+async function cloudflarePurge(prefixes: string[]) {
+  if (
+    !process.env.CLOUDFLARE_PURGE_ENDPOINT ||
+    !process.env.CLOUDFLARE_PURGE_KEY ||
+    !process.env.CLOUDFLARE_PURGE_EMAIL
+  ) {
+    return;
+  }
+  return fetch(process.env.CLOUDFLARE_PURGE_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "X-Auth-Email": process.env.CLOUDFLARE_PURGE_EMAIL,
+      "X-Auth-Key": process.env.CLOUDFLARE_PURGE_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prefixes,
+    }),
+  });
 }
