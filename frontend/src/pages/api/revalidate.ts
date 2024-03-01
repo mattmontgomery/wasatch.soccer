@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { getPost, getPosts } from "@/app/util/api";
 import { getGroupUrl, getPostUrl, getStreamUrl } from "@/app/util/urls";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -62,9 +63,7 @@ type RevalidatePromiseType = (event: Events) => Promise<string[]>;
 async function revalidate(res: NextApiResponse, path: string): Promise<number> {
   console.info(`[revalidate] ${path}`);
   try {
-    await res.revalidate(path).catch((reason) => {
-      console.info(`[revalidate] ${path} failure for ${reason}`);
-    });
+    revalidatePath(path);
     return 1;
   } catch (e) {
     console.info(`[revalidate] ${path} failure for ${e}`);
