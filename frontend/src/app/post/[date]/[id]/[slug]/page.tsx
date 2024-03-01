@@ -30,8 +30,8 @@ import Gallery from "./Gallery";
 import Commento from "./Commento";
 import Talk from "./Talk";
 import MarkdownText from "@/app/components/MarkdownText";
-import { PropsWithChildren } from "react";
-import { ReactElement } from "react-markdown/lib/react-markdown";
+import { PropsWithChildren, ReactElement } from "react";
+
 import LiveBlog from "./LiveBlog";
 
 type PageProps = {
@@ -159,10 +159,14 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
             <MarkdownText
               components={{
                 p({ node, children }) {
-                  const postModule = (node.position?.start.line ?? 0) + 1;
+                  const postModule = (node?.position?.start.line ?? 0) + 1;
                   const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
-                  const text = children?.[0]?.toString();
-                  const firstChild = children?.[0];
+                  const text = Array.isArray(children)
+                    ? children?.[0]?.toString()
+                    : "";
+                  const firstChild = Array.isArray(children)
+                    ? children?.[0]
+                    : undefined;
                   const firstChildHasText = (
                     (firstChild as ReactElement)?.props as PropsWithChildren
                   )?.children?.toString();
@@ -206,12 +210,14 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
                     return (
                       <>
                         <TextModule
-                          key={`${node.position?.start.line}-a`}
+                          key={`${node?.position?.start.line}-a`}
                           postModule={
                             data.attributes.postModules.data[postModuleIndex]
                           }
                         />
-                        <p key={`${node.position?.start.line}-b`}>{children}</p>
+                        <p key={`${node?.position?.start.line}-b`}>
+                          {children}
+                        </p>
                       </>
                     );
                   } else {
