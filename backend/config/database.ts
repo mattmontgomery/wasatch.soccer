@@ -14,6 +14,6 @@ export default ({ env }) => ({
     },
     runMigrations: false,
     forceMigration: false,
-    debug: true,
+    debug: false,
   },
 });
