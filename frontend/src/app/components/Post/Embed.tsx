@@ -5,7 +5,9 @@ import { extract } from "@extractus/oembed-extractor";
 
 export async function Embed({ url }: { url: string }) {
   const embedCode = url
-    ? await extract(url, { maxwidth: 720, maxheight: 480 })
+    ? await extract(url, { maxwidth: 720, maxheight: 480 }).catch((e) => {
+        console.error(e);
+      })
     : null;
 
   // if (isLoading || error || !data || data.errors?.length) {
