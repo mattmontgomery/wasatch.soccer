@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -119,6 +119,12 @@ export default async function RootLayout({
   );
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  themeColor: "#B30838",
+  colorScheme: "dark light",
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getConfig();
   return {
@@ -126,7 +132,6 @@ export async function generateMetadata(): Promise<Metadata> {
       default: `${config.siteName} | ${config.homepageTitleText}`,
       template: `%s | ${config.siteName}`,
     },
-    viewport: "width=device-width",
     description: config.siteDescription,
     openGraph: {
       type: "website",
