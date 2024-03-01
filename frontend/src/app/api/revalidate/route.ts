@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
     const collect = Object.keys(
       collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
     );
+    console.info("Paths", collect);
     const responses = await Promise.all(collect.map((p) => revalidate(p)));
 
     return NextResponse.json({
