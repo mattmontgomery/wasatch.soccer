@@ -1,5 +1,3 @@
-import path from "path";
-
 export default ({ env }) => ({
   connection: {
     client: "postgres",
@@ -14,6 +12,8 @@ export default ({ env }) => ({
         rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false),
       },
     },
-    debug: false,
+    runMigrations: false,
+    forceMigration: false,
+    debug: true,
   },
 });
