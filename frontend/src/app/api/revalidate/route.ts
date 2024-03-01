@@ -1,22 +1,23 @@
-import { revalidatePath } from "next/cache";
+import type { NextRequest } from "next/server";
 import { getPost, getPosts } from "@/app/util/api";
 import { getGroupUrl, getPostUrl, getStreamUrl } from "@/app/util/urls";
-import { NextApiRequest, NextApiResponse } from "next";
+import { revalidatePath } from "next/cache";
 
-export default async function RevalidateHandler(
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
+export async function POST(req: NextRequest) {
   const secret = process.env.REVALIDATE_SECRET;
-  const headerSecret = req.headers["x-secret"];
+  const headerSecret = req.headers.get("x-secret");
 
   if (secret !== headerSecret) {
-    res.status(401).json({
-      ok: 0,
-    });
-    return;
+    return Response.json(
+      {
+        ok: 0,
+      },
+      {
+        status: 401,
+      }
+    );
   }
-  const { event, model, entry } = req.body;
+  const { event, model, entry } = await req.json();
 
   if (model && typeof paths[model] !== "undefined") {
     const path = paths[model](entry);
@@ -32,15 +33,15 @@ export default async function RevalidateHandler(
     const collect = Object.keys(
       collectedPaths.reduce((acc, curr) => ({ ...acc, [curr]: 1 }), {})
     );
-    const responses = await Promise.all(collect.map((p) => revalidate(res, p)));
+    const responses = await Promise.all(collect.map((p) => revalidate(p)));
     console.info(responses);
-    res.json({
-      meta: collect,
+    return Response.json({
+      meta: responses,
       ok: 1,
     });
   } else {
-    res.json({
-      ok: 1,
+    return Response.json({
+      ok: -1,
     });
   }
 }
@@ -60,7 +61,7 @@ type RevalidateType =
 
 type RevalidatePromiseType = (event: Events) => Promise<string[]>;
 
-async function revalidate(res: NextApiResponse, path: string): Promise<number> {
+async function revalidate(path: string): Promise<number> {
   console.info(`[revalidate] ${path}`);
   try {
     revalidatePath(path);
