@@ -30,7 +30,7 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@types/node": "20.5.0",
+    "@types/node": "20.11.26",
     "@types/qs": "^6.9.7",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
