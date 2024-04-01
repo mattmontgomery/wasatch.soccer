@@ -14,7 +14,7 @@
   "dependencies": {
     "@mattie-bundle/strapi-plugin-search": "^1.0.0-alpha.3",
     "@mattie-bundle/strapi-provider-search-algolia": "^1.0.0-alpha.3",
-    "@strapi/admin": "4.12.1",
+    "@strapi/admin": "4.21.1",
     "@strapi/database": "4.12.1",
     "@strapi/plugin-i18n": "4.12.1",
     "@strapi/plugin-users-permissions": "4.12.1",
