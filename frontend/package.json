@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@extractus/oembed-extractor": "^4.0.1",
+    "@extractus/oembed-extractor": "^4.0.3",
     "algoliasearch": "^4.19.1",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
