@@ -22,7 +22,7 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.7",
     "react-social-icons": "^5.15.0",
-    "react-social-media-embed": "^2.3.5",
+    "react-social-media-embed": "^2.5.12",
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "swr": "^2.2.1",
