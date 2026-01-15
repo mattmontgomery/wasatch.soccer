@@ -40,13 +40,14 @@ type PageProps = {
 
 export default async function PostPage({ params: { id, slug } }: PageProps) {
 	const { data } = await getPost(id);
-	if (
-		!data ||
-		(!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED)
-	) {
+	if (!data) {
+		console.error("Could not load post", id);
+		notFound();
+	}
+	if (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED) {
 		console.error(
 			"Could not load unpublished post, ",
-			data.attributes?.publishedAt,
+			data.attributes.publishedAt,
 		);
 		notFound();
 	}
@@ -269,17 +270,17 @@ export async function generateStaticParams() {
 		},
 	});
 
-	return posts.data?.map(getPathnamePieces).filter((post) => !!post.slug);
+	return posts.data?.filter((post) => post && post.attributes)?.map(getPathnamePieces).filter((post) => !!post.slug);
 }
 
 export async function generateMetadata({
 	params: { id },
 }: PageProps): Promise<Metadata> {
 	const { data } = await getPost(id);
-	if (
-		!data ||
-		(!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED)
-	) {
+	if (!data) {
+		notFound();
+	}
+	if (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED) {
 		notFound();
 	}
 	const metadataPhoto = getMetadataPhoto(data);
