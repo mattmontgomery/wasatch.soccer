@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format } from "date-fns";
 
 export function getAuthorUrl(author: App.Author) {
   return `/authors/${author.id}/${author.attributes.slug}`;

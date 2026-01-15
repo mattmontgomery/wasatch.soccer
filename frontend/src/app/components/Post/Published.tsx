@@ -1,4 +1,4 @@
-import format from "date-fns-tz/format";
+import { format } from "date-fns-tz";
 import { differenceInHours, differenceInMinutes, isFuture } from "date-fns";
 
 export default function Published(props: App.Post): React.ReactElement {

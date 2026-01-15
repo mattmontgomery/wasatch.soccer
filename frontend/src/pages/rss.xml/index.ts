@@ -9,7 +9,9 @@ import { getConfig } from "@/app/util/config";
 import { getFullPathname, getPostUrl } from "@/app/util/urls";
 import { LRUCache } from "lru-cache";
 
-export default async function generateSitemap() {}
+export default async function generateSitemap() {
+  return null;
+}
 
 const cache = new LRUCache({
   max: 500,

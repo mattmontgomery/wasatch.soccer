@@ -6,7 +6,9 @@ import { format, subDays } from "date-fns";
 import { js2xml, Element } from "xml-js";
 import { getFullPathname } from "@/app/util/urls";
 
-export default async function generateSitemap() {}
+export default async function generateSitemap() {
+  return null;
+}
 
 export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   const date = format(subDays(new Date(), 2), "yyyy-MM-dd");

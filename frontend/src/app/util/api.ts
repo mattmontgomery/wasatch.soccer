@@ -1,5 +1,5 @@
 import qs from "qs";
-import format from "date-fns/format";
+import { format } from "date-fns";
 
 export function getPhoto(
   data: App.Post,
