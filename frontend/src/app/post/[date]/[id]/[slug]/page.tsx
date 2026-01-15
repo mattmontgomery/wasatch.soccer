@@ -92,10 +92,12 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
 				publisher={{
 					"@type": "Organization",
 					name: config.siteName,
-					logo: {
-						"@type": "ImageObject",
-						url: config.logo.light,
-					},
+					...(config.logo.light && {
+						logo: {
+							"@type": "ImageObject",
+							url: config.logo.light,
+						},
+					}),
 				}}
 			/>
 			<div className={pageStyles.post}>
