@@ -35,10 +35,11 @@ import type { ReactElement } from "react";
 import LiveBlog from "./LiveBlog";
 
 type PageProps = {
-	params: { id: number; slug: string };
+	params: Promise<{ id: number; slug: string }>;
 };
 
-export default async function PostPage({ params: { id, slug } }: PageProps) {
+export default async function PostPage({ params }: PageProps) {
+	const { id, slug } = await params;
 	const { data } = await getPost(id);
 	if (!data) {
 		console.error("Could not load post", id);
@@ -173,7 +174,9 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
 								p({ node, children }) {
 									const postModule = (node?.position?.start.line ?? 0) + 1;
 									const postModuleIndex = postModule / (moduleSpacing * 2) - 1;
-									const childArray = Array.isArray(children) ? children : [children];
+									const childArray = Array.isArray(children)
+										? children
+										: [children];
 									const text = childArray[0]?.toString();
 									const firstChild = childArray[0];
 									const firstChildHasText = (
@@ -224,7 +227,9 @@ export default async function PostPage({ params: { id, slug } }: PageProps) {
 														data.attributes.postModules.data[postModuleIndex]
 													}
 												/>
-												<p key={`${node?.position?.start.line}-b`}>{children}</p>
+												<p key={`${node?.position?.start.line}-b`}>
+													{children}
+												</p>
 											</>
 										);
 									} else {
@@ -270,12 +275,16 @@ export async function generateStaticParams() {
 		},
 	});
 
-	return posts.data?.filter((post) => post && post.attributes)?.map(getPathnamePieces).filter((post) => !!post.slug);
+	return posts.data
+		?.filter((post) => post && post.attributes)
+		?.map(getPathnamePieces)
+		.filter((post) => !!post.slug);
 }
 
 export async function generateMetadata({
-	params: { id },
+	params,
 }: PageProps): Promise<Metadata> {
+	const { id } = await params;
 	const { data } = await getPost(id);
 	if (!data) {
 		notFound();
