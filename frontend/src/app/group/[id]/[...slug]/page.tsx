@@ -7,12 +7,13 @@ import styles from "@/app/page.module.css";
 import { Metadata } from "next";
 
 type PageProps = {
-  params: { id: string; slug: string[] };
+  params: Promise<{ id: string; slug: string[] }>;
 };
 
 export default async function AuthorsPage({
-  params: { id, slug: _slug },
+  params,
 }: PageProps) {
+  const { id, slug: _slug } = await params;
   const [slug, _page] = _slug;
   const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const group = await getGroup(Number(id));
@@ -45,8 +46,9 @@ export default async function AuthorsPage({
 }
 
 export async function generateMetadata({
-  params: { id, slug: _slug },
+  params,
 }: PageProps): Promise<Metadata> {
+  const { id } = await params;
   const group = await getGroup(Number(id));
   if (!group.data) {
     notFound();

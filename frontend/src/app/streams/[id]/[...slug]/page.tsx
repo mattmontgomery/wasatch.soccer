@@ -10,12 +10,13 @@ import { getStreamUrl } from "@/app/util/urls";
 import { Metadata } from "next";
 
 type PageProps = {
-  params: { id: string; slug: string[] };
+  params: Promise<{ id: string; slug: string[] }>;
 };
 
 export default async function StreamPage({
-  params: { id, slug: _slug },
+  params,
 }: PageProps) {
+  const { id, slug: _slug } = await params;
   const [, _page] = _slug;
   const page = isNaN(Number(_page)) ? 1 : Number(_page);
   const stream = await getStream(Number(id));
@@ -54,8 +55,9 @@ export default async function StreamPage({
 }
 
 export async function generateMetadata({
-  params: { id, slug: _slug },
+  params,
 }: PageProps): Promise<Metadata> {
+  const { id } = await params;
   const stream = await getStream(Number(id));
   if (!stream.data) {
     notFound();

@@ -127,6 +127,7 @@ declare namespace App {
       photoGallery?: {
         data: Photo[];
       };
+      tags?: string[]; // Added for CMS articles
     };
   };
   type RelatedPost = {

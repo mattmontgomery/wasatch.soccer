@@ -27,14 +27,15 @@ const search = cache(async (query: string) => {
 });
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 };
 
 export default async function SearchPage({
-  params: { slug = [] },
+  params,
 }: PageProps): Promise<React.ReactElement> {
+  const { slug = [] } = await params;
   const query = decodeURI(slug[0] ? String(slug[0]) : "");
   const posts = await search(query);
   return (
@@ -48,8 +49,9 @@ export default async function SearchPage({
 }
 
 export async function generateMetadata({
-  params: { slug },
+  params,
 }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
   const query = decodeURI(slug[0] ? String(slug[0]) : "");
   const title = `${query} | Search Results`;
   return {

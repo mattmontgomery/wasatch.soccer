@@ -45,11 +45,10 @@ export default async function PostPage({ params }: PageProps) {
 		console.error("Could not load post", id);
 		notFound();
 	}
+
+	// For CMS posts (ID >= 1000), check published field differently
 	if (!data.attributes.publishedAt && !process.env.SHOW_UNPUBLISHED) {
-		console.error(
-			"Could not load unpublished post, ",
-			data.attributes.publishedAt,
-		);
+		console.error("Could not load unpublished CMS post", id);
 		notFound();
 	}
 	const config = await getConfig();
@@ -106,11 +105,15 @@ export default async function PostPage({ params }: PageProps) {
 				<Redirect slugFromPath={slug} post={data} />
 				<article className={pageStyles.section}>
 					<header>
-						{primaryGroup && (
+						{primaryGroup ? (
 							<h5 className={postStyles.groupTag}>
 								{primaryGroup.attributes.name}
 							</h5>
-						)}
+						) : data.attributes.tags?.find(() => true) ? (
+							<h5 className={postStyles.groupTag}>
+								{data.attributes.tags.find(() => true)}
+							</h5>
+						) : null}
 						<h2 className={pageStyles.headline}>{data.attributes.headline}</h2>
 						<p className={pageStyles.summary}>{data.attributes.summary}</p>
 					</header>
